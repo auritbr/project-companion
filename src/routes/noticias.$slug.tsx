@@ -1,6 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { Breadcrumbs } from "../components/site/Breadcrumbs";
 import { news } from "../lib/site-data";
 import { ArrowLeft, ArrowRight, Copy, Facebook, Linkedin, Mail, MessageCircle, Twitter, Calendar, Clock, User } from "lucide-react";
 
@@ -39,12 +38,7 @@ function NoticiaDetalhe() {
       <section className="relative overflow-hidden border-b border-border bg-black">
         <img src={item.image} alt="" className="absolute inset-0 h-full w-full object-cover opacity-70" />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-black/30" />
-        <div className="relative mx-auto max-w-[1280px] px-4 pt-6 md:pt-8">
-          <div className="text-white/90 [&_*]:!text-white/80">
-            <Breadcrumbs items={[{ label: "Notícias", to: "/noticias" }, { label: item.title }]} />
-          </div>
-        </div>
-        <div className="relative mx-auto max-w-[1280px] px-4 pb-12 pt-8 md:pb-16 md:pt-14">
+        <div className="relative mx-auto max-w-[1280px] px-4 pb-12 pt-10 md:pb-16 md:pt-16">
           <Link to="/noticias" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur hover:bg-white/20">
             <ArrowLeft className="h-3.5 w-3.5" /> Voltar para Notícias
           </Link>
