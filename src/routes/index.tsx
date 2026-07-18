@@ -323,50 +323,43 @@ function Home() {
         </div>
       </section>
 
-      {/* LEITURA EM MOVIMENTO */}
+      {/* LEITURA EM MOVIMENTO — mini capas de livros coloridas */}
       <section className="bg-[var(--surface)]">
         <div className="mx-auto max-w-[1280px] px-4 py-14">
-          <h2 className="font-display text-3xl font-bold">Leitura em movimento</h2>
-          <p className="mt-2 max-w-2xl text-muted-foreground">Atividades regulares que conectam livros e comunidade.</p>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="max-w-2xl">
+            <div className="text-xs font-semibold uppercase tracking-widest text-primary">Ações regulares</div>
+            <h2 className="mt-2 font-display text-3xl font-bold">Leitura em movimento</h2>
+            <p className="mt-2 text-muted-foreground">Atividades que colocam livros, pessoas e histórias em circulação.</p>
+          </div>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: MessagesSquare, title: "Rodas de leitura", desc: "Encontros para ler e conversar em conjunto." },
-              { icon: BookOpen, title: "Contação de histórias", desc: "Narrativas para crianças, jovens e adultos." },
-              { icon: BookMarked, title: "Empréstimo de livros", desc: "Acesso gratuito ao acervo comunitário." },
-              { icon: GraduationCap, title: "Oficinas literárias", desc: "Formação e criação em torno da palavra." },
-              { icon: Users, title: "Encontros com autores", desc: "Diálogos entre leitores e escritores." },
-              { icon: Library, title: "Ações em escolas", desc: "Atividades de leitura junto a educadores." },
-              { icon: Sparkles, title: "Formação de mediadores", desc: "Capacitação para novas mediações." },
-              { icon: Heart, title: "Campanhas de arrecadação", desc: "Doações que ampliam o acervo." },
-            ].map((a) => (
-              <div key={a.title} className="rounded-2xl border border-border bg-white p-5">
-                <div className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">
-                  <a.icon className="h-5 w-5" />
+              { icon: MessagesSquare, title: "Rodas de leitura", desc: "Encontros para ler e conversar em conjunto.", color: "var(--brand-blue)" },
+              { icon: Mic, title: "Contação de histórias", desc: "Narrativas para crianças, jovens e adultos.", color: "var(--brand-orange)" },
+              { icon: BookMarked, title: "Empréstimo de livros", desc: "Acesso gratuito ao acervo comunitário.", color: "var(--brand-green)" },
+              { icon: PenLine, title: "Oficinas literárias", desc: "Formação e criação em torno da palavra.", color: "var(--brand-red)" },
+              { icon: Feather, title: "Encontros com autores", desc: "Diálogos entre leitores e escritores.", color: "var(--brand-purple)" },
+              { icon: School, title: "Ações em escolas", desc: "Atividades de leitura junto a educadores.", color: "var(--brand-yellow)" },
+              { icon: GraduationCap, title: "Formação de mediadores", desc: "Capacitação para novas mediações.", color: "var(--brand-pink)" },
+              { icon: Heart, title: "Campanhas de doação", desc: "Doações que ampliam o acervo.", color: "var(--brand-blue)" },
+            ].map((a, i) => (
+              <div key={a.title} className="group relative flex overflow-hidden rounded-r-2xl rounded-l-md bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl" style={{ minHeight: 200 }}>
+                {/* lombada colorida */}
+                <div aria-hidden className="relative w-6 shrink-0" style={{ backgroundColor: a.color }}>
+                  <div className="absolute inset-y-4 left-1/2 w-px -translate-x-1/2 bg-white/40" />
+                  <div className="absolute inset-x-1 bottom-2 top-2 rounded-sm border border-white/20" />
                 </div>
-                <h3 className="mt-3 font-display text-base font-semibold">{a.title}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{a.desc}</p>
+                {/* capa */}
+                <div className="flex flex-1 flex-col p-5" style={{ background: `linear-gradient(160deg, ${a.color}12, transparent 60%)` }}>
+                  <div className="grid h-11 w-11 place-items-center rounded-xl text-white shadow-sm" style={{ backgroundColor: a.color }}>
+                    <a.icon className="h-5 w-5" />
+                  </div>
+                  <div className="mt-3 text-[10px] font-mono uppercase tracking-widest" style={{ color: a.color }}>Vol. {String(i + 1).padStart(2, "0")}</div>
+                  <h3 className="mt-1 font-display text-base font-bold leading-tight">{a.title}</h3>
+                  <p className="mt-2 flex-1 text-xs text-muted-foreground leading-relaxed">{a.desc}</p>
+                  <div aria-hidden className="mt-3 h-1 w-8 rounded-full" style={{ backgroundColor: a.color }} />
+                </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* DEPOIMENTO */}
-      <section className="bg-white">
-        <div className="mx-auto max-w-[1280px] px-4 py-14">
-          <div className="grid gap-8 rounded-3xl border border-border bg-[var(--surface)] p-6 md:grid-cols-[220px_1fr] md:p-10">
-            <div className="mx-auto grid h-40 w-40 place-items-center rounded-full text-white md:h-52 md:w-52" style={{ backgroundColor: "var(--brand-blue)" }}>
-              <Users className="h-16 w-16" />
-            </div>
-            <div>
-              <Quote className="h-10 w-10 text-primary" />
-              <p className="mt-2 font-display text-xl leading-relaxed text-foreground md:text-2xl">
-                “A biblioteca abriu portas para leituras, encontros e novas amizades. É um espaço
-                onde a comunidade se reconhece nas histórias.”
-              </p>
-              <div className="mt-4 text-sm font-semibold">Nome demonstrativo</div>
-              <div className="text-xs text-muted-foreground">Participante das atividades — depoimento demonstrativo</div>
-            </div>
           </div>
         </div>
       </section>
