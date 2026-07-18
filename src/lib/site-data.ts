@@ -180,6 +180,7 @@ export type NewsItem = {
   readingTime: string;
   author: string;
   body: string[];
+  image: string;
 };
 
 const baseBody = [
@@ -225,7 +226,7 @@ export const team = [
   { name: "Nome a cadastrar", role: "Comunicação", area: "Administrativo", bio: "Responsável pela comunicação institucional e divulgação." },
   { name: "Nome a cadastrar", role: "Voluntário(a)", area: "Voluntariado", bio: "Apoia a organização do acervo e as atividades comunitárias." },
   { name: "Nome a cadastrar", role: "Diretoria", area: "Diretoria", bio: "Compõe a diretoria da organização." },
-];
+].map((m, i) => ({ ...m, photo: U(teamPhotoPool[i % teamPhotoPool.length], 600) }));
 
 export const documents = [
   { name: "Estatuto Social", category: "Estatuto", year: "Ano a informar", format: "PDF", size: "—" },
