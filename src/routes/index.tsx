@@ -1,19 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import {
-  BookOpen,
-  Users,
-  Heart,
-  Sparkles,
-  Library,
-  BookMarked,
-  MessagesSquare,
-  GraduationCap,
-  Handshake,
-  Quote,
-  ArrowRight,
+  BookOpen, Users, Heart, Sparkles, Library, BookMarked,
+  MessagesSquare, GraduationCap, Handshake, Quote, ArrowRight,
+  ChevronLeft, ChevronRight,
 } from "lucide-react";
-import { projects, news, partners } from "../lib/site-data";
+import { projects, news, partners, heroImages, projectImages } from "../lib/site-data";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -31,52 +24,95 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const slides = [
+    {
+      badge: "Biblioteca Comunitária",
+      title: "Livros que aproximam pessoas",
+      highlight: "e transformam comunidades.",
+      desc: "Um espaço aberto de leitura, encontros e formação cultural, construído junto à comunidade.",
+      image: heroImages.quemSomos,
+      cta: { to: "/quem-somos" as const, label: "Conheça a Biblioteca" },
+      accent: "var(--brand-blue)",
+    },
+    {
+      badge: "Projetos e ações",
+      title: "Rodas de leitura, oficinas",
+      highlight: "e livros em movimento.",
+      desc: "Nossos projetos aproximam pessoas de todas as idades da experiência da leitura compartilhada.",
+      image: projectImages["leitura-em-comunidade"],
+      cta: { to: "/projetos/leitura-em-comunidade" as const, label: "Conheça os projetos" },
+      accent: "var(--brand-orange)",
+    },
+    {
+      badge: "Impacto comunitário",
+      title: "Uma biblioteca que se constrói",
+      highlight: "com a comunidade.",
+      desc: "Formação de leitores, valorização da memória local e fortalecimento do território pela leitura.",
+      image: heroImages.nossaHistoria,
+      cta: { to: "/quem-somos" as const, label: "Nossa história" },
+      accent: "var(--brand-green)",
+    },
+    {
+      badge: "Apoie a biblioteca",
+      title: "Some sua página",
+      highlight: "à nossa história.",
+      desc: "Com o seu apoio, mais livros circulam e mais histórias ganham espaço na comunidade.",
+      image: heroImages.comoDoar,
+      cta: { to: "/como-doar" as const, label: "Como apoiar" },
+      accent: "var(--brand-red)",
+    },
+  ];
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setI((v) => (v + 1) % slides.length), 6000);
+    return () => clearInterval(id);
+  }, [slides.length]);
+  const s = slides[i];
+
   return (
     <>
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-white">
-        <div className="mx-auto grid max-w-[1280px] gap-10 px-4 py-12 md:grid-cols-2 md:items-center md:py-16">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-[var(--surface)] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
-              <BookMarked className="h-3.5 w-3.5" /> Biblioteca Comunitária e Ponto de Cultura
-            </span>
-            <h1 className="mt-4 font-display text-4xl font-bold leading-tight text-foreground md:text-5xl">
-              Livros que aproximam pessoas e{" "}
-              <span className="text-primary">transformam comunidades.</span>
-            </h1>
-            <p className="mt-4 max-w-xl text-base text-muted-foreground md:text-lg">
-              Um espaço de acesso à leitura, encontros, formação e construção de novas
-              histórias junto à comunidade.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link to="/quem-somos" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:brightness-110">
-                Conheça a Biblioteca <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link to="/projetos" className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-semibold text-foreground hover:bg-muted">
-                Conheça nossos projetos
-              </Link>
-            </div>
-          </div>
-
-          {/* Book-shaped composition */}
-          <div className="relative">
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-md">
-              {/* Book-open shape */}
-              <div className="absolute inset-0 rounded-[40%_40%_20%_20%/30%_30%_15%_15%] bg-gradient-to-br from-[var(--brand-blue)] to-[var(--brand-purple)] shadow-xl" />
-              <div className="absolute inset-3 rounded-[40%_40%_20%_20%/30%_30%_15%_15%] bg-[var(--surface)] p-4">
-                <div className="grid h-full place-items-center rounded-[36%_36%_16%_16%/26%_26%_12%_12%] bg-[oklch(0.94_0.02_240)]">
-                  <div className="p-6 text-center">
-                    <Library className="mx-auto h-16 w-16 text-primary" />
-                    <div className="mt-3 font-display text-sm font-semibold text-foreground">
-                      Espaço aberto à leitura, à cultura e à comunidade.
-                    </div>
+      {/* HERO CARROSSEL — livro aberto */}
+      <section className="relative overflow-hidden bg-[var(--surface)]">
+        <div className="mx-auto max-w-[1280px] px-4 py-10 md:py-14">
+          <div className="relative overflow-hidden rounded-3xl border border-border bg-white shadow-sm">
+            {/* "Lombada" central do livro */}
+            <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-black/10 to-transparent md:block" />
+            <div className="grid gap-0 md:grid-cols-2 md:items-stretch">
+              {/* Página esquerda: texto */}
+              <div className="relative order-2 p-6 md:order-1 md:p-12">
+                <div aria-hidden className="absolute left-0 top-6 bottom-6 hidden w-1 rounded-r md:block" style={{ backgroundColor: s.accent }} />
+                <span className="inline-flex items-center gap-2 rounded-full border border-border bg-[var(--surface)] px-3 py-1 text-xs font-semibold uppercase tracking-wide" style={{ color: s.accent }}>
+                  <BookMarked className="h-3.5 w-3.5" /> {s.badge}
+                </span>
+                <h1 key={i} className="mt-4 font-display text-3xl font-bold leading-tight text-foreground md:text-5xl">
+                  {s.title} <span style={{ color: s.accent }}>{s.highlight}</span>
+                </h1>
+                <p className="mt-4 max-w-xl text-base text-muted-foreground md:text-lg">{s.desc}</p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link to={s.cta.to} className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-sm hover:brightness-110" style={{ backgroundColor: s.accent }}>
+                    {s.cta.label} <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link to="/como-doar" className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-semibold text-foreground hover:bg-muted">
+                    Apoie a biblioteca
+                  </Link>
+                </div>
+                {/* Controles */}
+                <div className="mt-8 flex items-center gap-3">
+                  <button aria-label="Slide anterior" onClick={() => setI((v) => (v - 1 + slides.length) % slides.length)} className="grid h-9 w-9 place-items-center rounded-full border border-border bg-white hover:bg-muted"><ChevronLeft className="h-4 w-4" /></button>
+                  <div className="flex gap-1.5">
+                    {slides.map((_, k) => (
+                      <button key={k} onClick={() => setI(k)} aria-label={`Ir para slide ${k + 1}`} className={`h-1.5 rounded-full transition-all ${k === i ? "w-8" : "w-3 opacity-40"}`} style={{ backgroundColor: s.accent }} />
+                    ))}
                   </div>
+                  <button aria-label="Próximo slide" onClick={() => setI((v) => (v + 1) % slides.length)} className="grid h-9 w-9 place-items-center rounded-full border border-border bg-white hover:bg-muted"><ChevronRight className="h-4 w-4" /></button>
                 </div>
               </div>
-              {/* Decorative bookmarks */}
-              <span className="absolute -right-2 top-6 h-16 w-6 rounded-b-md" style={{ backgroundColor: "var(--brand-red)" }} />
-              <span className="absolute -left-2 top-16 h-12 w-5 rounded-b-md" style={{ backgroundColor: "var(--brand-yellow)" }} />
-              <span className="absolute -bottom-3 right-10 h-6 w-24 rounded-md" style={{ backgroundColor: "var(--brand-green)" }} />
+              {/* Página direita: imagem */}
+              <div className="relative order-1 min-h-[280px] md:order-2 md:min-h-[520px]">
+                <img key={s.image} src={s.image} alt="" className="absolute inset-0 h-full w-full object-cover" />
+                <div aria-hidden className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-white/40" />
+                <span aria-hidden className="absolute right-6 top-6 h-16 w-6 rounded-b-md shadow-md" style={{ backgroundColor: s.accent }} />
+              </div>
             </div>
           </div>
         </div>
