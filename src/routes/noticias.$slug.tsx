@@ -36,7 +36,7 @@ function NoticiaDetalhe() {
 
   return (
     <>
-      <PageHero title={item.title} breadcrumbs={[{ label: "Notícias", to: "/noticias" }, { label: item.title }]} description={item.excerpt} />
+      <PageHero title={item.title} breadcrumbs={[{ label: "Notícias", to: "/noticias" }, { label: item.title }]} image={item.image} />
 
       <section className="bg-white">
         <div className="mx-auto max-w-[820px] px-4 py-10">
@@ -47,7 +47,9 @@ function NoticiaDetalhe() {
             <span className="text-muted-foreground">· {item.author}</span>
           </div>
 
-          <div className="mt-6 aspect-[16/9] w-full overflow-hidden rounded-2xl bg-[oklch(0.94_0.02_240)] grid place-items-center text-muted-foreground text-sm">Imagem de capa demonstrativa</div>
+          <div className="mt-6 aspect-[16/9] w-full overflow-hidden rounded-2xl bg-[oklch(0.94_0.02_240)]">
+            <img src={item.image} alt="" className="h-full w-full object-cover" />
+          </div>
 
           <article className="prose prose-slate mt-8 max-w-none">
             {item.body.map((p: string, i: number) => (
@@ -100,7 +102,9 @@ function NoticiaDetalhe() {
           <div className="mt-6 grid gap-6 md:grid-cols-3">
             {related.map((n) => (
               <article key={n.slug} className="overflow-hidden rounded-2xl border border-border bg-white">
-                <div className="aspect-[16/10] bg-[oklch(0.94_0.02_240)] grid place-items-center text-muted-foreground text-sm">Imagem demonstrativa</div>
+                <Link to={`/noticias/${n.slug}`} className="block aspect-[16/10] overflow-hidden bg-[oklch(0.94_0.02_240)]">
+                  <img src={n.image} alt="" loading="lazy" className="h-full w-full object-cover" />
+                </Link>
                 <div className="p-5">
                   <div className="text-xs text-muted-foreground">{n.tag} · {n.date}</div>
                   <h3 className="mt-2 font-display text-base font-semibold">{n.title}</h3>
