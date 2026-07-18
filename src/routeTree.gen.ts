@@ -13,6 +13,7 @@ import { Route as TransparenciaRouteImport } from './routes/transparencia'
 import { Route as QuemSomosRouteImport } from './routes/quem-somos'
 import { Route as ProjetosRouteImport } from './routes/projetos'
 import { Route as NoticiasRouteImport } from './routes/noticias'
+import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ComoDoarRouteImport } from './routes/como-doar'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as QuemSomosNossaHistoriaRouteImport } from './routes/quem-somos.nossa-historia'
@@ -40,6 +41,11 @@ const ProjetosRoute = ProjetosRouteImport.update({
 const NoticiasRoute = NoticiasRouteImport.update({
   id: '/noticias',
   path: '/noticias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComoDoarRoute = ComoDoarRouteImport.update({
@@ -88,6 +94,7 @@ const NoticiasSlugRoute = NoticiasSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/como-doar': typeof ComoDoarRoute
+  '/contato': typeof ContatoRoute
   '/noticias': typeof NoticiasRouteWithChildren
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
@@ -102,6 +109,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/como-doar': typeof ComoDoarRoute
+  '/contato': typeof ContatoRoute
   '/noticias': typeof NoticiasRouteWithChildren
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
@@ -117,6 +125,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/como-doar': typeof ComoDoarRoute
+  '/contato': typeof ContatoRoute
   '/noticias': typeof NoticiasRouteWithChildren
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
@@ -133,6 +142,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/como-doar'
+    | '/contato'
     | '/noticias'
     | '/projetos'
     | '/quem-somos'
@@ -147,6 +157,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/como-doar'
+    | '/contato'
     | '/noticias'
     | '/projetos'
     | '/quem-somos'
@@ -161,6 +172,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/como-doar'
+    | '/contato'
     | '/noticias'
     | '/projetos'
     | '/quem-somos'
@@ -176,6 +188,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ComoDoarRoute: typeof ComoDoarRoute
+  ContatoRoute: typeof ContatoRoute
   NoticiasRoute: typeof NoticiasRouteWithChildren
   ProjetosRoute: typeof ProjetosRouteWithChildren
   QuemSomosRoute: typeof QuemSomosRouteWithChildren
@@ -210,6 +223,13 @@ declare module '@tanstack/react-router' {
       path: '/noticias'
       fullPath: '/noticias'
       preLoaderRoute: typeof NoticiasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/como-doar': {
@@ -316,6 +336,7 @@ const QuemSomosRouteWithChildren = QuemSomosRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ComoDoarRoute: ComoDoarRoute,
+  ContatoRoute: ContatoRoute,
   NoticiasRoute: NoticiasRouteWithChildren,
   ProjetosRoute: ProjetosRouteWithChildren,
   QuemSomosRoute: QuemSomosRouteWithChildren,
