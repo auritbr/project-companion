@@ -3,8 +3,8 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
   BookOpen, Users, Heart, Sparkles, Library, BookMarked,
-  MessagesSquare, GraduationCap, Handshake, Quote, ArrowRight,
-  ChevronLeft, ChevronRight,
+  MessagesSquare, GraduationCap, Handshake, ArrowRight,
+  ChevronLeft, ChevronRight, Feather, Mic, PenLine, School, Bookmark,
 } from "lucide-react";
 import { projects, news, partners, heroImages, projectImages } from "../lib/site-data";
 
