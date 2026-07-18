@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHero } from "./PageHero";
-import { projects, news, type ProjectSlug } from "../../lib/site-data";
-import { ArrowRight, BookOpen, Users, MapPin, ChevronLeft, ChevronRight, X, Download, FileText, Quote } from "lucide-react";
+import { projects, projectImages, news, type ProjectSlug } from "../../lib/site-data";
+import { ArrowRight, Users, MapPin, ChevronLeft, ChevronRight, X, Download, FileText, Quote } from "lucide-react";
 
 export function ProjectDetail({ slug }: { slug: ProjectSlug }) {
   const project = projects.find((p) => p.slug === slug)!;
@@ -17,9 +17,9 @@ export function ProjectDetail({ slug }: { slug: ProjectSlug }) {
     <>
       <PageHero
         title={project.name}
-        description={project.summary}
         breadcrumbs={[{ label: "Projetos", to: "/projetos" }, { label: project.name }]}
         accent={project.accent}
+        image={projectImages[project.slug]}
       />
 
       <section className="bg-white">
@@ -27,7 +27,7 @@ export function ProjectDetail({ slug }: { slug: ProjectSlug }) {
           <div className="grid gap-8 md:grid-cols-[1fr_320px]">
             <div>
               <div className="aspect-[16/9] w-full overflow-hidden rounded-2xl" style={{ backgroundColor: project.accent }}>
-                <div className="grid h-full place-items-center text-white/90"><BookOpen className="h-16 w-16" /></div>
+                <img src={projectImages[project.slug]} alt="" className="h-full w-full object-cover" />
               </div>
 
               <div className="mt-8 space-y-8">

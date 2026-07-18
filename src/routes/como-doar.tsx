@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHero } from "../components/site/PageHero";
+import { heroImages } from "../lib/site-data";
 import { BookOpen, Building2, Copy, HandHeart, Heart, ShieldCheck, Users } from "lucide-react";
 
 export const Route = createFileRoute("/como-doar")({
@@ -28,7 +29,7 @@ function ComoDoar() {
 
   return (
     <>
-      <PageHero title="Como Doar" description="Sua contribuição fortalece o acesso à leitura, à formação e à cultura na comunidade. Todas as informações abaixo são demonstrativas e serão atualizadas com dados oficiais." breadcrumbs={[{ label: "Como Doar" }]} />
+      <PageHero title="Como Doar" breadcrumbs={[{ label: "Como Doar" }]} image={heroImages.comoDoar} />
 
       <section className="bg-white">
         <div className="mx-auto max-w-[1280px] px-4 py-12">

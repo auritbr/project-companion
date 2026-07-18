@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "../components/site/PageHero";
 import { BookOpen, Heart, Users, Sparkles, Handshake, GraduationCap, Library, MessagesSquare, ArrowRight } from "lucide-react";
+import { heroImages } from "../lib/site-data";
 
 export const Route = createFileRoute("/quem-somos")({
   component: QuemSomos,
@@ -16,11 +17,7 @@ export const Route = createFileRoute("/quem-somos")({
 function QuemSomos() {
   return (
     <>
-      <PageHero
-        title="Quem Somos"
-        description="Uma biblioteca comunitária dedicada ao acesso à leitura, à formação de leitores e à realização de atividades culturais junto à comunidade."
-        breadcrumbs={[{ label: "Quem Somos" }]}
-      />
+      <PageHero title="Quem Somos" breadcrumbs={[{ label: "Quem Somos" }]} image={heroImages.quemSomos} />
 
       <section className="bg-white">
         <div className="mx-auto grid max-w-[1280px] gap-10 px-4 py-12 md:grid-cols-2 md:items-center">

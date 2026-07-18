@@ -3,6 +3,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { PageHero } from "../components/site/PageHero";
 import { Mail, MapPin, Phone, Clock, CheckCircle2 } from "lucide-react";
+import { heroImages } from "../lib/site-data";
 
 export const Route = createFileRoute("/contato")({
   component: Contato,
@@ -50,7 +51,7 @@ function Contato() {
 
   return (
     <>
-      <PageHero title="Contato" description="Fale com a equipe da biblioteca para dúvidas, parcerias, doações e voluntariado." breadcrumbs={[{ label: "Contato" }]} />
+      <PageHero title="Contato" breadcrumbs={[{ label: "Contato" }]} image={heroImages.contato} />
 
       <section className="bg-white">
         <div className="mx-auto max-w-[1280px] px-4 py-12">

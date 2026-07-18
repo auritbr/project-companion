@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { PageHero } from "../components/site/PageHero";
-import { projects } from "../lib/site-data";
-import { BookOpen, ArrowRight } from "lucide-react";
+import { projects, projectImages, heroImages } from "../lib/site-data";
+import { ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/projetos")({
   component: Projetos,
@@ -28,7 +28,7 @@ function Projetos() {
 
   return (
     <>
-      <PageHero title="Nossos Projetos" description="Iniciativas que aproximam livros, pessoas e territórios por meio da leitura, da formação e da ação cultural." breadcrumbs={[{ label: "Projetos" }]} />
+      <PageHero title="Nossos Projetos" breadcrumbs={[{ label: "Projetos" }]} image={heroImages.projetos} />
 
       <section className="bg-white">
         <div className="mx-auto max-w-[1280px] px-4 py-10">
@@ -41,10 +41,10 @@ function Projetos() {
           <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {items.map((p) => (
               <article key={p.slug} className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
-                <div className="relative aspect-[4/3]" style={{ backgroundColor: p.accent }}>
-                  <div className="absolute inset-0 grid place-items-center text-white/90"><BookOpen className="h-14 w-14" /></div>
+                <div className="relative aspect-[4/3] overflow-hidden" style={{ backgroundColor: p.accent }}>
+                  <img src={projectImages[p.slug]} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
                   <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold">{p.category}</span>
-                  <span className="absolute right-4 top-4 rounded-full bg-black/40 px-3 py-1 text-xs font-semibold text-white">{p.status}</span>
+                  <span className="absolute right-4 top-4 rounded-full bg-black/60 px-3 py-1 text-xs font-semibold text-white">{p.status}</span>
                 </div>
                 <div className="p-5">
                   <h3 className="font-display text-xl font-bold">{p.name}</h3>

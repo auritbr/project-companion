@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { PageHero } from "../components/site/PageHero";
-import { news, newsTags } from "../lib/site-data";
+import { news, newsTags, heroImages } from "../lib/site-data";
 import { Search, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/noticias")({
@@ -36,7 +36,7 @@ function Noticias() {
 
   return (
     <>
-      <PageHero title="Notícias" description="Registros das atividades, projetos e ações culturais da biblioteca comunitária." breadcrumbs={[{ label: "Notícias" }]} />
+      <PageHero title="Notícias" breadcrumbs={[{ label: "Notícias" }]} image={heroImages.noticias} />
 
       <section className="bg-white">
         <div className="mx-auto max-w-[1280px] px-4 py-10">
@@ -62,7 +62,9 @@ function Noticias() {
             <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {pageItems.map((n) => (
                 <article key={n.slug} className="overflow-hidden rounded-2xl border border-border bg-white">
-                  <div className="aspect-[16/10] bg-[oklch(0.94_0.02_240)] grid place-items-center text-muted-foreground text-sm">Imagem demonstrativa</div>
+                  <Link to={`/noticias/${n.slug}`} className="block aspect-[16/10] overflow-hidden bg-[oklch(0.94_0.02_240)]">
+                    <img src={n.image} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
+                  </Link>
                   <div className="p-5">
                     <div className="flex items-center gap-2 text-xs">
                       <span className="rounded-full px-2 py-0.5 font-semibold text-white" style={{ backgroundColor: "var(--brand-blue)" }}>{n.tag}</span>

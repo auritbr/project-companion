@@ -1,8 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
 import { PageHero } from "../components/site/PageHero";
-import { team } from "../lib/site-data";
-import { User } from "lucide-react";
+import { team, heroImages } from "../lib/site-data";
 
 export const Route = createFileRoute("/quem-somos/equipe")({
   component: Equipe,
@@ -15,46 +13,69 @@ export const Route = createFileRoute("/quem-somos/equipe")({
   }),
 });
 
-const areas = ["Todos","Diretoria","Coordenação","Educadores","Mediação","Administrativo","Voluntariado"];
-const colors = ["var(--brand-blue)","var(--brand-green)","var(--brand-orange)","var(--brand-red)","var(--brand-pink)","var(--brand-purple)"];
+const spineColors = [
+  "var(--brand-blue)",
+  "var(--brand-green)",
+  "var(--brand-orange)",
+  "var(--brand-red)",
+  "var(--brand-pink)",
+  "var(--brand-purple)",
+  "var(--brand-yellow)",
+];
 
 function Equipe() {
-  const [area, setArea] = useState("Todos");
-  const filtered = useMemo(() => area === "Todos" ? team : team.filter((m) => m.area === area), [area]);
+  // Agrupamento por área — sem filtros, todos visíveis simultaneamente.
+  const grouped = team.reduce<Record<string, typeof team>>((acc, m) => {
+    (acc[m.area] ||= []).push(m);
+    return acc;
+  }, {});
+  const areasOrdered = ["Diretoria", "Coordenação", "Educadores", "Mediação", "Administrativo", "Voluntariado"].filter(
+    (a) => grouped[a]?.length,
+  );
 
   return (
     <>
-      <PageHero title="Nossa equipe" description="A atuação da biblioteca é realizada por pessoas comprometidas com a leitura, a educação e o desenvolvimento comunitário." breadcrumbs={[{ label: "Quem Somos", to: "/quem-somos" }, { label: "Equipe" }]} />
+      <PageHero title="Nossa equipe" breadcrumbs={[{ label: "Quem Somos", to: "/quem-somos" }, { label: "Equipe" }]} image={heroImages.equipe} />
 
       <section className="bg-white">
-        <div className="mx-auto max-w-[1280px] px-4 py-10">
-          <div className="flex flex-wrap gap-2">
-            {areas.map((a) => (
-              <button key={a} onClick={() => setArea(a)} className={`rounded-full border px-4 py-2 text-sm ${area === a ? "border-primary bg-primary text-primary-foreground" : "border-border bg-white hover:bg-muted"}`}>{a}</button>
-            ))}
-          </div>
+        <div className="mx-auto max-w-[1280px] px-4 py-12">
+          {areasOrdered.map((area, ai) => (
+            <div key={area} className="mt-12 first:mt-0">
+              <div className="flex items-center gap-3">
+                <span className="inline-block h-8 w-1.5 rounded-full" style={{ backgroundColor: spineColors[ai % spineColors.length] }} />
+                <h2 className="font-display text-2xl font-bold">{area}</h2>
+              </div>
 
-          {filtered.length === 0 ? (
-            <div className="mt-10 rounded-2xl border border-dashed border-border bg-[var(--surface)] p-10 text-center text-muted-foreground">
-              Nenhum integrante cadastrado nesta área.
+              <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {grouped[area].map((m, i) => {
+                  const spine = spineColors[(ai + i) % spineColors.length];
+                  return (
+                    <article
+                      key={i}
+                      className="group relative overflow-hidden rounded-r-2xl rounded-l-md border border-border bg-white shadow-[0_10px_30px_-15px_rgba(0,0,0,0.25)] transition-transform hover:-translate-y-1"
+                      style={{ borderLeft: `10px solid ${spine}` }}
+                    >
+                      {/* "lombada" com pequenas linhas decorativas */}
+                      <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 w-2.5" style={{ backgroundColor: spine }}>
+                        <div className="absolute left-1/2 top-4 h-1 w-1 -translate-x-1/2 rounded-full bg-white/60" />
+                        <div className="absolute left-1/2 bottom-4 h-1 w-1 -translate-x-1/2 rounded-full bg-white/60" />
+                      </div>
+
+                      <div className="aspect-[3/4] w-full overflow-hidden bg-[oklch(0.94_0.02_240)]">
+                        <img src={(m as { photo: string }).photo} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                      </div>
+
+                      <div className="px-4 py-4">
+                        <div className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: spine }}>{m.role}</div>
+                        <div className="mt-1 font-display text-base font-bold leading-snug">{m.name}</div>
+                        <div className="mt-2 h-px w-8" style={{ backgroundColor: spine }} />
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
             </div>
-          ) : (
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {filtered.map((m, i) => (
-                <article key={i} className="rounded-2xl border border-border bg-white p-5 shadow-sm">
-                  <div className="mx-auto grid h-32 w-32 place-items-center rounded-[45%_55%_45%_55%/55%_45%_55%_45%] text-white" style={{ backgroundColor: colors[i % colors.length] }}>
-                    <User className="h-14 w-14" />
-                  </div>
-                  <div className="mt-4 text-center">
-                    <div className="font-display text-lg font-semibold">{m.name}</div>
-                    <div className="text-sm text-primary">{m.role}</div>
-                    <p className="mt-2 text-sm text-muted-foreground">{m.bio}</p>
-                    <div className="mt-3 text-xs uppercase tracking-wide text-muted-foreground">{m.area}</div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
+          ))}
         </div>
       </section>
     </>
