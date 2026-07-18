@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TransparenciaRouteImport } from './routes/transparencia'
 import { Route as QuemSomosRouteImport } from './routes/quem-somos'
 import { Route as ProjetosRouteImport } from './routes/projetos'
 import { Route as NoticiasRouteImport } from './routes/noticias'
@@ -20,6 +21,11 @@ import { Route as ProjetosLeituraEmComunidadeRouteImport } from './routes/projet
 import { Route as ProjetosEstanteVivaRouteImport } from './routes/projetos.estante-viva'
 import { Route as NoticiasSlugRouteImport } from './routes/noticias.$slug'
 
+const TransparenciaRoute = TransparenciaRouteImport.update({
+  id: '/transparencia',
+  path: '/transparencia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const QuemSomosRoute = QuemSomosRouteImport.update({
   id: '/quem-somos',
   path: '/quem-somos',
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/noticias': typeof NoticiasRouteWithChildren
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
+  '/transparencia': typeof TransparenciaRoute
   '/noticias/$slug': typeof NoticiasSlugRoute
   '/projetos/estante-viva': typeof ProjetosEstanteVivaRoute
   '/projetos/leitura-em-comunidade': typeof ProjetosLeituraEmComunidadeRoute
@@ -90,6 +97,7 @@ export interface FileRoutesByTo {
   '/noticias': typeof NoticiasRouteWithChildren
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
+  '/transparencia': typeof TransparenciaRoute
   '/noticias/$slug': typeof NoticiasSlugRoute
   '/projetos/estante-viva': typeof ProjetosEstanteVivaRoute
   '/projetos/leitura-em-comunidade': typeof ProjetosLeituraEmComunidadeRoute
@@ -103,6 +111,7 @@ export interface FileRoutesById {
   '/noticias': typeof NoticiasRouteWithChildren
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
+  '/transparencia': typeof TransparenciaRoute
   '/noticias/$slug': typeof NoticiasSlugRoute
   '/projetos/estante-viva': typeof ProjetosEstanteVivaRoute
   '/projetos/leitura-em-comunidade': typeof ProjetosLeituraEmComunidadeRoute
@@ -117,6 +126,7 @@ export interface FileRouteTypes {
     | '/noticias'
     | '/projetos'
     | '/quem-somos'
+    | '/transparencia'
     | '/noticias/$slug'
     | '/projetos/estante-viva'
     | '/projetos/leitura-em-comunidade'
@@ -129,6 +139,7 @@ export interface FileRouteTypes {
     | '/noticias'
     | '/projetos'
     | '/quem-somos'
+    | '/transparencia'
     | '/noticias/$slug'
     | '/projetos/estante-viva'
     | '/projetos/leitura-em-comunidade'
@@ -141,6 +152,7 @@ export interface FileRouteTypes {
     | '/noticias'
     | '/projetos'
     | '/quem-somos'
+    | '/transparencia'
     | '/noticias/$slug'
     | '/projetos/estante-viva'
     | '/projetos/leitura-em-comunidade'
@@ -154,10 +166,18 @@ export interface RootRouteChildren {
   NoticiasRoute: typeof NoticiasRouteWithChildren
   ProjetosRoute: typeof ProjetosRouteWithChildren
   QuemSomosRoute: typeof QuemSomosRouteWithChildren
+  TransparenciaRoute: typeof TransparenciaRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/transparencia': {
+      id: '/transparencia'
+      path: '/transparencia'
+      fullPath: '/transparencia'
+      preLoaderRoute: typeof TransparenciaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/quem-somos': {
       id: '/quem-somos'
       path: '/quem-somos'
@@ -278,6 +298,7 @@ const rootRouteChildren: RootRouteChildren = {
   NoticiasRoute: NoticiasRouteWithChildren,
   ProjetosRoute: ProjetosRouteWithChildren,
   QuemSomosRoute: QuemSomosRouteWithChildren,
+  TransparenciaRoute: TransparenciaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
