@@ -20,7 +20,7 @@ const schema = z.object({
   email: z.string().trim().email("E-mail inválido.").max(255),
   subject: z.string().trim().min(2, "Selecione um assunto."),
   message: z.string().trim().min(10, "Mensagem muito curta.").max(1000),
-  consent: z.literal(true, { errorMap: () => ({ message: "É necessário concordar com a política." }) }),
+  consent: z.boolean().refine((v) => v === true, { message: "É necessário concordar com a política." }),
 });
 
 function Contato() {
