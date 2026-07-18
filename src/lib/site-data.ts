@@ -1,5 +1,54 @@
 export type ProjectSlug = "leitura-em-comunidade" | "estante-viva" | "palavras-que-transformam";
 
+// Imagens demonstrativas (Unsplash) — substituíveis pelo painel administrativo.
+const U = (id: string, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
+
+export const heroImages = {
+  quemSomos: U("photo-1521587760476-6c12a4b040da"),
+  nossaHistoria: U("photo-1524995997946-a1c2e315a42f"),
+  equipe: U("photo-1543002588-bfa74002ed7e"),
+  projetos: U("photo-1512820790803-83ca734da794"),
+  noticias: U("photo-1519682337058-a94d519337bc"),
+  transparencia: U("photo-1481627834876-b7833e8f5570"),
+  comoDoar: U("photo-1544716278-ca5e3f4abd8c"),
+  contato: U("photo-1507842217343-583bb7270b66"),
+  legal: U("photo-1456513080510-7bf3a84b82f8"),
+};
+
+export const projectImages: Record<ProjectSlug, string> = {
+  "leitura-em-comunidade": U("photo-1519682337058-a94d519337bc"),
+  "estante-viva": U("photo-1481627834876-b7833e8f5570"),
+  "palavras-que-transformam": U("photo-1455390582262-044cdead277a"),
+};
+
+const newsPhotoPool = [
+  "photo-1524995997946-a1c2e315a42f",
+  "photo-1507842217343-583bb7270b66",
+  "photo-1512820790803-83ca734da794",
+  "photo-1481627834876-b7833e8f5570",
+  "photo-1519682337058-a94d519337bc",
+  "photo-1543002588-bfa74002ed7e",
+  "photo-1495640388908-05fa85288e61",
+  "photo-1521587760476-6c12a4b040da",
+  "photo-1544716278-ca5e3f4abd8c",
+  "photo-1456513080510-7bf3a84b82f8",
+  "photo-1455390582262-044cdead277a",
+  "photo-1533327325824-76bc4e62d560",
+];
+
+const teamPhotoPool = [
+  "photo-1494790108377-be9c29b29330",
+  "photo-1500648767791-00dcc994a43e",
+  "photo-1544005313-94ddf0286df2",
+  "photo-1580489944761-15a19d654956",
+  "photo-1531123897727-8f129e1688ce",
+  "photo-1573497019940-1c28c88b4f3e",
+  "photo-1607746882042-944635dfe10e",
+  "photo-1508214751196-bcfd4ca60f91",
+  "photo-1519085360753-af0119f7cbe7",
+  "photo-1517841905240-472988babdf9",
+];
+
 export const projects: {
   slug: ProjectSlug;
   name: string;
