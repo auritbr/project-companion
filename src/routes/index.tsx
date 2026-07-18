@@ -71,48 +71,73 @@ function Home() {
 
   return (
     <>
-      {/* HERO CARROSSEL — livro aberto */}
-      <section className="relative overflow-hidden bg-[var(--surface)]">
-        <div className="mx-auto max-w-[1280px] px-4 py-10 md:py-14">
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-white shadow-sm">
-            {/* "Lombada" central do livro */}
-            <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-black/10 to-transparent md:block" />
-            <div className="grid gap-0 md:grid-cols-2 md:items-stretch">
-              {/* Página esquerda: texto */}
-              <div className="relative order-2 p-6 md:order-1 md:p-12">
-                <div aria-hidden className="absolute left-0 top-6 bottom-6 hidden w-1 rounded-r md:block" style={{ backgroundColor: s.accent }} />
-                <span className="inline-flex items-center gap-2 rounded-full border border-border bg-[var(--surface)] px-3 py-1 text-xs font-semibold uppercase tracking-wide" style={{ color: s.accent }}>
-                  <BookMarked className="h-3.5 w-3.5" /> {s.badge}
-                </span>
-                <h1 key={i} className="mt-4 font-display text-3xl font-bold leading-tight text-foreground md:text-5xl">
-                  {s.title} <span style={{ color: s.accent }}>{s.highlight}</span>
-                </h1>
-                <p className="mt-4 max-w-xl text-base text-muted-foreground md:text-lg">{s.desc}</p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Link to={s.cta.to} className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-sm hover:brightness-110" style={{ backgroundColor: s.accent }}>
-                    {s.cta.label} <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <Link to="/como-doar" className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-semibold text-foreground hover:bg-muted">
-                    Apoie a biblioteca
-                  </Link>
-                </div>
-                {/* Controles */}
-                <div className="mt-8 flex items-center gap-3">
-                  <button aria-label="Slide anterior" onClick={() => setI((v) => (v - 1 + slides.length) % slides.length)} className="grid h-9 w-9 place-items-center rounded-full border border-border bg-white hover:bg-muted"><ChevronLeft className="h-4 w-4" /></button>
-                  <div className="flex gap-1.5">
-                    {slides.map((_, k) => (
-                      <button key={k} onClick={() => setI(k)} aria-label={`Ir para slide ${k + 1}`} className={`h-1.5 rounded-full transition-all ${k === i ? "w-8" : "w-3 opacity-40"}`} style={{ backgroundColor: s.accent }} />
-                    ))}
+      {/* HERO — livro aberto */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[var(--surface)] to-white">
+        <div className="pointer-events-none absolute inset-0 opacity-40" aria-hidden style={{ backgroundImage: "radial-gradient(circle at 20% 20%, var(--brand-yellow) 0%, transparent 40%), radial-gradient(circle at 80% 80%, var(--brand-blue) 0%, transparent 40%)", opacity: 0.08 }} />
+        <div className="relative mx-auto max-w-[1320px] px-4 py-10 md:py-16">
+          {/* Livro aberto */}
+          <div className="relative mx-auto max-w-[1200px]">
+            {/* sombra sob o livro */}
+            <div aria-hidden className="absolute -bottom-4 left-6 right-6 h-8 rounded-full bg-black/20 blur-2xl" />
+            {/* capa/base do livro */}
+            <div className="relative rounded-[28px] p-2 md:p-3 shadow-2xl" style={{ background: `linear-gradient(135deg, ${s.accent} 0%, oklch(0.35 0.05 260) 100%)` }}>
+              {/* Miolo — duas páginas */}
+              <div className="relative overflow-hidden rounded-[20px] bg-[oklch(0.985_0.005_85)]">
+                {/* Textura de páginas */}
+                <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "repeating-linear-gradient(0deg, #000 0 1px, transparent 1px 24px)" }} />
+                {/* Lombada central */}
+                <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-8 -translate-x-1/2 md:block" style={{ background: "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.12) 45%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.12) 55%, transparent 100%)" }} />
+                {/* Curva das páginas (bordas) */}
+                <div aria-hidden className="pointer-events-none absolute inset-y-3 left-3 w-1 rounded-full bg-gradient-to-b from-transparent via-black/10 to-transparent" />
+                <div aria-hidden className="pointer-events-none absolute inset-y-3 right-3 w-1 rounded-full bg-gradient-to-b from-transparent via-black/10 to-transparent" />
+
+                <div key={i} className="grid md:grid-cols-2">
+                  {/* Página esquerda — texto */}
+                  <div className="relative p-6 md:p-12 md:pr-14">
+                    <span className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm" style={{ backgroundColor: s.accent }}>
+                      <BookMarked className="h-3.5 w-3.5" /> {s.badge}
+                    </span>
+                    <h1 className="mt-5 font-display text-3xl font-black leading-[1.05] text-foreground md:text-5xl">
+                      {s.title}
+                      <span className="block" style={{ color: s.accent }}>{s.highlight}</span>
+                    </h1>
+                    <div aria-hidden className="mt-4 h-1 w-16 rounded-full" style={{ backgroundColor: s.accent }} />
+                    <p className="mt-5 max-w-md text-base text-muted-foreground md:text-lg leading-relaxed">{s.desc}</p>
+                    <div className="mt-7 flex flex-wrap gap-3">
+                      <Link to={s.cta.to} className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-md hover:brightness-110" style={{ backgroundColor: s.accent }}>
+                        {s.cta.label} <ArrowRight className="h-4 w-4" />
+                      </Link>
+                      <Link to="/como-doar" className="inline-flex items-center gap-2 rounded-full border-2 bg-white px-5 py-3 text-sm font-semibold text-foreground hover:bg-muted" style={{ borderColor: s.accent }}>
+                        Apoie a biblioteca
+                      </Link>
+                    </div>
+                    {/* número de página */}
+                    <div aria-hidden className="mt-10 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/60">— página {String((i * 2) + 2).padStart(2, "0")} —</div>
                   </div>
-                  <button aria-label="Próximo slide" onClick={() => setI((v) => (v + 1) % slides.length)} className="grid h-9 w-9 place-items-center rounded-full border border-border bg-white hover:bg-muted"><ChevronRight className="h-4 w-4" /></button>
+
+                  {/* Página direita — imagem */}
+                  <div className="relative min-h-[280px] md:min-h-[520px]">
+                    <div className="absolute inset-4 overflow-hidden rounded-2xl shadow-inner md:inset-6">
+                      <img src={s.image} alt="" className="h-full w-full object-cover" />
+                      <div aria-hidden className="absolute inset-0 bg-gradient-to-tr from-black/30 via-transparent to-transparent" />
+                      {/* marcador */}
+                      <div aria-hidden className="absolute right-4 -top-2 h-16 w-8 shadow-md" style={{ backgroundColor: s.accent, clipPath: "polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%)" }} />
+                    </div>
+                    <div aria-hidden className="absolute bottom-4 right-6 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/60">— página {String((i * 2) + 3).padStart(2, "0")} —</div>
+                  </div>
                 </div>
               </div>
-              {/* Página direita: imagem */}
-              <div className="relative order-1 min-h-[280px] md:order-2 md:min-h-[520px]">
-                <img key={s.image} src={s.image} alt="" className="absolute inset-0 h-full w-full object-cover" />
-                <div aria-hidden className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-white/40" />
-                <span aria-hidden className="absolute right-6 top-6 h-16 w-6 rounded-b-md shadow-md" style={{ backgroundColor: s.accent }} />
+            </div>
+
+            {/* Controles do carrossel */}
+            <div className="mt-6 flex items-center justify-center gap-4">
+              <button aria-label="Slide anterior" onClick={() => setI((v) => (v - 1 + slides.length) % slides.length)} className="grid h-10 w-10 place-items-center rounded-full border border-border bg-white shadow-sm hover:bg-muted"><ChevronLeft className="h-4 w-4" /></button>
+              <div className="flex gap-1.5">
+                {slides.map((sl, k) => (
+                  <button key={k} onClick={() => setI(k)} aria-label={`Ir para slide ${k + 1}`} className={`h-2 rounded-full transition-all ${k === i ? "w-10" : "w-2 opacity-30"}`} style={{ backgroundColor: sl.accent }} />
+                ))}
               </div>
+              <button aria-label="Próximo slide" onClick={() => setI((v) => (v + 1) % slides.length)} className="grid h-10 w-10 place-items-center rounded-full border border-border bg-white shadow-sm hover:bg-muted"><ChevronRight className="h-4 w-4" /></button>
             </div>
           </div>
         </div>
