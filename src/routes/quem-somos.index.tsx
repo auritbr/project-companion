@@ -305,18 +305,64 @@ function QuemSomos() {
             </p>
           </div>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {bookTypes.map((t) => (
-              <div key={t.label} className="group relative overflow-hidden rounded-xl border border-border bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-md">
-                <div aria-hidden className="absolute left-0 top-0 h-full w-1" style={{ backgroundColor: t.color }} />
-                <div className="flex items-center gap-3 pl-2">
-                  <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg text-white" style={{ backgroundColor: t.color }}>
-                    <t.icon className="h-4 w-4" />
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {bookTypes.map((t, i) => {
+              // 4 formatos alternados
+              const style = i % 4;
+              if (style === 0) {
+                // mini capa de livro
+                return (
+                  <div key={t.label} className="group relative flex h-32 flex-col justify-between overflow-hidden rounded-md p-4 text-white shadow-lg transition hover:-translate-y-1 hover:shadow-xl" style={{ background: `linear-gradient(160deg, ${t.color} 0%, oklch(0.30 0.05 260) 100%)` }}>
+                    <div className="flex items-center justify-between text-[9px] font-mono uppercase tracking-widest text-white/70">
+                      <span>Vol. {String(i + 1).padStart(2, "0")}</span>
+                      <t.icon className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <div className="font-display text-base font-black leading-tight">{t.label}</div>
+                      <div aria-hidden className="mt-1.5 h-0.5 w-8 bg-white/60" />
+                    </div>
                   </div>
-                  <span className="text-sm font-semibold">{t.label}</span>
+                );
+              }
+              if (style === 1) {
+                // ficha de biblioteca
+                return (
+                  <div key={t.label} className="group relative overflow-hidden rounded-lg bg-white p-4 shadow-md transition hover:-translate-y-1 hover:shadow-xl" style={{ borderTop: `4px solid ${t.color}` }}>
+                    <div className="flex items-center justify-between text-[9px] font-mono uppercase tracking-widest text-muted-foreground">
+                      <span>Ficha</span>
+                      <span>#{String(i + 1).padStart(3, "0")}</span>
+                    </div>
+                    <div aria-hidden className="mt-2 h-px border-t border-dashed" style={{ borderColor: t.color }} />
+                    <t.icon className="mt-3 h-6 w-6" style={{ color: t.color }} />
+                    <div className="mt-2 font-display text-sm font-bold">{t.label}</div>
+                  </div>
+                );
+              }
+              if (style === 2) {
+                // aba lateral colorida
+                return (
+                  <div key={t.label} className="group relative flex h-32 overflow-hidden rounded-r-xl rounded-l-md bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+                    <div aria-hidden className="relative w-4 shrink-0" style={{ backgroundColor: t.color }}>
+                      <div className="absolute inset-y-3 left-1/2 w-px -translate-x-1/2 bg-white/40" />
+                    </div>
+                    <div className="flex flex-1 flex-col justify-between p-4">
+                      <div className="grid h-9 w-9 place-items-center rounded-lg text-white" style={{ backgroundColor: t.color }}>
+                        <t.icon className="h-4 w-4" />
+                      </div>
+                      <div className="font-display text-sm font-bold">{t.label}</div>
+                    </div>
+                  </div>
+                );
+              }
+              // orelha de página / canto dobrado
+              return (
+                <div key={t.label} className="group relative flex h-32 flex-col justify-between overflow-hidden rounded-xl bg-white p-4 shadow-md transition hover:-translate-y-1 hover:shadow-xl" style={{ border: `2px solid ${t.color}` }}>
+                  <div aria-hidden className="absolute right-0 top-0 h-0 w-0 border-b-[28px] border-l-[28px] border-b-transparent" style={{ borderLeftColor: t.color }} />
+                  <t.icon className="h-6 w-6" style={{ color: t.color }} />
+                  <div className="font-display text-sm font-bold leading-tight" style={{ color: t.color }}>{t.label}</div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
