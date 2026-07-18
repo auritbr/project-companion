@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TransparenciaRouteImport } from './routes/transparencia'
 import { Route as QuemSomosRouteImport } from './routes/quem-somos'
 import { Route as ProjetosRouteImport } from './routes/projetos'
+import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as NoticiasRouteImport } from './routes/noticias'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ComoDoarRouteImport } from './routes/como-doar'
@@ -36,6 +37,11 @@ const QuemSomosRoute = QuemSomosRouteImport.update({
 const ProjetosRoute = ProjetosRouteImport.update({
   id: '/projetos',
   path: '/projetos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
+  id: '/politica-de-privacidade',
+  path: '/politica-de-privacidade',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NoticiasRoute = NoticiasRouteImport.update({
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/como-doar': typeof ComoDoarRoute
   '/contato': typeof ContatoRoute
   '/noticias': typeof NoticiasRouteWithChildren
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
   '/transparencia': typeof TransparenciaRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/como-doar': typeof ComoDoarRoute
   '/contato': typeof ContatoRoute
   '/noticias': typeof NoticiasRouteWithChildren
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
   '/transparencia': typeof TransparenciaRoute
@@ -127,6 +135,7 @@ export interface FileRoutesById {
   '/como-doar': typeof ComoDoarRoute
   '/contato': typeof ContatoRoute
   '/noticias': typeof NoticiasRouteWithChildren
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
   '/transparencia': typeof TransparenciaRoute
@@ -144,6 +153,7 @@ export interface FileRouteTypes {
     | '/como-doar'
     | '/contato'
     | '/noticias'
+    | '/politica-de-privacidade'
     | '/projetos'
     | '/quem-somos'
     | '/transparencia'
@@ -159,6 +169,7 @@ export interface FileRouteTypes {
     | '/como-doar'
     | '/contato'
     | '/noticias'
+    | '/politica-de-privacidade'
     | '/projetos'
     | '/quem-somos'
     | '/transparencia'
@@ -174,6 +185,7 @@ export interface FileRouteTypes {
     | '/como-doar'
     | '/contato'
     | '/noticias'
+    | '/politica-de-privacidade'
     | '/projetos'
     | '/quem-somos'
     | '/transparencia'
@@ -190,6 +202,7 @@ export interface RootRouteChildren {
   ComoDoarRoute: typeof ComoDoarRoute
   ContatoRoute: typeof ContatoRoute
   NoticiasRoute: typeof NoticiasRouteWithChildren
+  PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   ProjetosRoute: typeof ProjetosRouteWithChildren
   QuemSomosRoute: typeof QuemSomosRouteWithChildren
   TransparenciaRoute: typeof TransparenciaRoute
@@ -216,6 +229,13 @@ declare module '@tanstack/react-router' {
       path: '/projetos'
       fullPath: '/projetos'
       preLoaderRoute: typeof ProjetosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politica-de-privacidade': {
+      id: '/politica-de-privacidade'
+      path: '/politica-de-privacidade'
+      fullPath: '/politica-de-privacidade'
+      preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/noticias': {
@@ -338,6 +358,7 @@ const rootRouteChildren: RootRouteChildren = {
   ComoDoarRoute: ComoDoarRoute,
   ContatoRoute: ContatoRoute,
   NoticiasRoute: NoticiasRouteWithChildren,
+  PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   ProjetosRoute: ProjetosRouteWithChildren,
   QuemSomosRoute: QuemSomosRouteWithChildren,
   TransparenciaRoute: TransparenciaRoute,
