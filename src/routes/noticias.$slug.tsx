@@ -50,7 +50,7 @@ function NoticiaDetalhe() {
           <div className="mt-6 aspect-[16/9] w-full overflow-hidden rounded-2xl bg-[oklch(0.94_0.02_240)] grid place-items-center text-muted-foreground text-sm">Imagem de capa demonstrativa</div>
 
           <article className="prose prose-slate mt-8 max-w-none">
-            {item.body.map((p, i) => (
+            {item.body.map((p: string, i: number) => (
               <p key={i} className="mt-4 text-foreground/85 leading-relaxed">{p}</p>
             ))}
 
