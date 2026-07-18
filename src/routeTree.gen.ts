@@ -16,6 +16,7 @@ import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-
 import { Route as PoliticaDeCookiesRouteImport } from './routes/politica-de-cookies'
 import { Route as NoticiasRouteImport } from './routes/noticias'
 import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as ComoDoarRouteImport } from './routes/como-doar'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as QuemSomosIndexRouteImport } from './routes/quem-somos.index'
 import { Route as ProjetosIndexRouteImport } from './routes/projetos.index'
@@ -61,6 +62,11 @@ const NoticiasRoute = NoticiasRouteImport.update({
 const ContatoRoute = ContatoRouteImport.update({
   id: '/contato',
   path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComoDoarRoute = ComoDoarRouteImport.update({
+  id: '/como-doar',
+  path: '/como-doar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -123,6 +129,7 @@ const NoticiasSlugRoute = NoticiasSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/como-doar': typeof ComoDoarRoute
   '/contato': typeof ContatoRoute
   '/noticias': typeof NoticiasRouteWithChildren
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
@@ -143,6 +150,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/como-doar': typeof ComoDoarRoute
   '/contato': typeof ContatoRoute
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
@@ -161,6 +169,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/como-doar': typeof ComoDoarRoute
   '/contato': typeof ContatoRoute
   '/noticias': typeof NoticiasRouteWithChildren
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
@@ -183,6 +192,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/como-doar'
     | '/contato'
     | '/noticias'
     | '/politica-de-cookies'
@@ -203,6 +213,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/como-doar'
     | '/contato'
     | '/politica-de-cookies'
     | '/politica-de-privacidade'
@@ -220,6 +231,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/como-doar'
     | '/contato'
     | '/noticias'
     | '/politica-de-cookies'
@@ -241,6 +253,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ComoDoarRoute: typeof ComoDoarRoute
   ContatoRoute: typeof ContatoRoute
   NoticiasRoute: typeof NoticiasRouteWithChildren
   PoliticaDeCookiesRoute: typeof PoliticaDeCookiesRoute
@@ -299,6 +312,13 @@ declare module '@tanstack/react-router' {
       path: '/contato'
       fullPath: '/contato'
       preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/como-doar': {
+      id: '/como-doar'
+      path: '/como-doar'
+      fullPath: '/como-doar'
+      preLoaderRoute: typeof ComoDoarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -433,6 +453,7 @@ const QuemSomosRouteWithChildren = QuemSomosRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ComoDoarRoute: ComoDoarRoute,
   ContatoRoute: ContatoRoute,
   NoticiasRoute: NoticiasRouteWithChildren,
   PoliticaDeCookiesRoute: PoliticaDeCookiesRoute,
