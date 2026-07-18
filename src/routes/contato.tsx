@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
 import { PageHero } from "../components/site/PageHero";
-import { Mail, MapPin, Phone, Clock, CheckCircle2, MessageCircle, Instagram, Facebook, Youtube, BookMarked, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Clock, CheckCircle2, MessageCircle, Instagram, Facebook, Youtube, Send } from "lucide-react";
 import { heroImages } from "../lib/site-data";
 
 export const Route = createFileRoute("/contato")({
@@ -145,11 +145,7 @@ function Contato() {
                 <div aria-hidden className="absolute left-0 top-0 h-full w-1.5" style={{ backgroundColor: "var(--brand-blue)" }} />
                 <div aria-hidden className="absolute left-1.5 top-0 h-full w-px bg-white/60" />
                 <div className="p-6 pl-7">
-                  <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary">
-                    <BookMarked className="h-3.5 w-3.5" /> Ficha de contato
-                  </div>
-                  <h3 className="mt-2 font-display text-xl font-bold">Informações da biblioteca</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">Venha visitar, conversar ou apenas folhear um livro.</p>
+                  <h3 className="font-display text-xl font-bold">Informações da biblioteca</h3>
 
                   <ul className="mt-5 space-y-4 text-sm">
                     {[
@@ -193,7 +189,13 @@ function Contato() {
               </div>
 
               <div className="overflow-hidden rounded-2xl border border-border bg-[var(--surface)]">
-                <div className="aspect-[4/3] grid place-items-center text-sm text-muted-foreground">Mapa demonstrativo — a integrar</div>
+                <iframe
+                  title="Mapa da biblioteca"
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=-46.6600%2C-23.5600%2C-46.6200%2C-23.5300&layer=mapnik"
+                  loading="lazy"
+                  className="block h-[300px] w-full border-0"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
             </aside>
           </div>
