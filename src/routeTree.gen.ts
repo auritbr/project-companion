@@ -18,6 +18,7 @@ import { Route as QuemSomosEquipeRouteImport } from './routes/quem-somos.equipe'
 import { Route as ProjetosPalavrasQueTransformamRouteImport } from './routes/projetos.palavras-que-transformam'
 import { Route as ProjetosLeituraEmComunidadeRouteImport } from './routes/projetos.leitura-em-comunidade'
 import { Route as ProjetosEstanteVivaRouteImport } from './routes/projetos.estante-viva'
+import { Route as NoticiasSlugRouteImport } from './routes/noticias.$slug'
 
 const QuemSomosRoute = QuemSomosRouteImport.update({
   id: '/quem-somos',
@@ -66,12 +67,18 @@ const ProjetosEstanteVivaRoute = ProjetosEstanteVivaRouteImport.update({
   path: '/estante-viva',
   getParentRoute: () => ProjetosRoute,
 } as any)
+const NoticiasSlugRoute = NoticiasSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => NoticiasRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/noticias': typeof NoticiasRoute
+  '/noticias': typeof NoticiasRouteWithChildren
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
+  '/noticias/$slug': typeof NoticiasSlugRoute
   '/projetos/estante-viva': typeof ProjetosEstanteVivaRoute
   '/projetos/leitura-em-comunidade': typeof ProjetosLeituraEmComunidadeRoute
   '/projetos/palavras-que-transformam': typeof ProjetosPalavrasQueTransformamRoute
@@ -80,9 +87,10 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/noticias': typeof NoticiasRoute
+  '/noticias': typeof NoticiasRouteWithChildren
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
+  '/noticias/$slug': typeof NoticiasSlugRoute
   '/projetos/estante-viva': typeof ProjetosEstanteVivaRoute
   '/projetos/leitura-em-comunidade': typeof ProjetosLeituraEmComunidadeRoute
   '/projetos/palavras-que-transformam': typeof ProjetosPalavrasQueTransformamRoute
@@ -92,9 +100,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/noticias': typeof NoticiasRoute
+  '/noticias': typeof NoticiasRouteWithChildren
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
+  '/noticias/$slug': typeof NoticiasSlugRoute
   '/projetos/estante-viva': typeof ProjetosEstanteVivaRoute
   '/projetos/leitura-em-comunidade': typeof ProjetosLeituraEmComunidadeRoute
   '/projetos/palavras-que-transformam': typeof ProjetosPalavrasQueTransformamRoute
@@ -108,6 +117,7 @@ export interface FileRouteTypes {
     | '/noticias'
     | '/projetos'
     | '/quem-somos'
+    | '/noticias/$slug'
     | '/projetos/estante-viva'
     | '/projetos/leitura-em-comunidade'
     | '/projetos/palavras-que-transformam'
@@ -119,6 +129,7 @@ export interface FileRouteTypes {
     | '/noticias'
     | '/projetos'
     | '/quem-somos'
+    | '/noticias/$slug'
     | '/projetos/estante-viva'
     | '/projetos/leitura-em-comunidade'
     | '/projetos/palavras-que-transformam'
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/noticias'
     | '/projetos'
     | '/quem-somos'
+    | '/noticias/$slug'
     | '/projetos/estante-viva'
     | '/projetos/leitura-em-comunidade'
     | '/projetos/palavras-que-transformam'
@@ -139,7 +151,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  NoticiasRoute: typeof NoticiasRoute
+  NoticiasRoute: typeof NoticiasRouteWithChildren
   ProjetosRoute: typeof ProjetosRouteWithChildren
   QuemSomosRoute: typeof QuemSomosRouteWithChildren
 }
@@ -209,8 +221,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjetosEstanteVivaRouteImport
       parentRoute: typeof ProjetosRoute
     }
+    '/noticias/$slug': {
+      id: '/noticias/$slug'
+      path: '/$slug'
+      fullPath: '/noticias/$slug'
+      preLoaderRoute: typeof NoticiasSlugRouteImport
+      parentRoute: typeof NoticiasRoute
+    }
   }
 }
+
+interface NoticiasRouteChildren {
+  NoticiasSlugRoute: typeof NoticiasSlugRoute
+}
+
+const NoticiasRouteChildren: NoticiasRouteChildren = {
+  NoticiasSlugRoute: NoticiasSlugRoute,
+}
+
+const NoticiasRouteWithChildren = NoticiasRoute._addFileChildren(
+  NoticiasRouteChildren,
+)
 
 interface ProjetosRouteChildren {
   ProjetosEstanteVivaRoute: typeof ProjetosEstanteVivaRoute
@@ -244,7 +275,7 @@ const QuemSomosRouteWithChildren = QuemSomosRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  NoticiasRoute: NoticiasRoute,
+  NoticiasRoute: NoticiasRouteWithChildren,
   ProjetosRoute: ProjetosRouteWithChildren,
   QuemSomosRoute: QuemSomosRouteWithChildren,
 }
