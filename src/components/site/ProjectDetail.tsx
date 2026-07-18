@@ -3,7 +3,7 @@ import { useState } from "react";
 import { PageHero } from "./PageHero";
 import { projects, projectImages, news, type ProjectSlug } from "../../lib/site-data";
 import {
-  ArrowRight, Users, MapPin, ChevronLeft, ChevronRight, X, Quote,
+  ArrowRight, Users, MapPin, ChevronLeft, ChevronRight, X,
   BookOpen, Target, Sparkles, Compass, BookMarked, Heart, MessageCircle,
 } from "lucide-react";
 
@@ -212,25 +212,15 @@ export function ProjectDetail({ slug }: { slug: ProjectSlug }) {
             })}
           </div>
 
-          {/* Galeria + Depoimento */}
-          <div className="mt-12 grid gap-6 md:grid-cols-[1.4fr_1fr]">
-            <div>
-              <h3 className="font-display text-2xl font-bold">Galeria de fotos</h3>
-              <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {gallery.map((i) => (
-                  <button key={i} onClick={() => setLightbox(i)} className="aspect-[4/3] overflow-hidden rounded-xl border border-border bg-[var(--surface)] text-xs text-muted-foreground transition hover:shadow-md">
-                    <div className="grid h-full place-items-center">Imagem {i + 1}</div>
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div className="rounded-2xl border border-border bg-[var(--surface)] p-6">
-              <Quote className="h-6 w-6" style={{ color: project.accent }} />
-              <p className="mt-2 text-muted-foreground leading-relaxed">
-                "Depoimento demonstrativo sobre a participação no projeto — conteúdo editável pelo painel administrativo."
-              </p>
-              <div className="mt-3 text-sm font-semibold">Nome demonstrativo</div>
-              <div className="text-xs text-muted-foreground">Participante</div>
+          {/* Galeria */}
+          <div className="mt-12">
+            <h3 className="font-display text-2xl font-bold">Galeria de fotos</h3>
+            <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+              {gallery.map((i) => (
+                <button key={i} onClick={() => setLightbox(i)} className="aspect-[4/3] overflow-hidden rounded-xl border border-border bg-[var(--surface)] text-xs text-muted-foreground transition hover:shadow-md">
+                  <div className="grid h-full place-items-center">Imagem {i + 1}</div>
+                </button>
+              ))}
             </div>
           </div>
         </div>
