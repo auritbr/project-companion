@@ -3,7 +3,7 @@ import { useState } from "react";
 import { PageHero } from "./PageHero";
 import { projects, projectImages, news, type ProjectSlug } from "../../lib/site-data";
 import {
-  ArrowRight, Users, MapPin, ChevronLeft, ChevronRight, X, Quote,
+  ArrowRight, Users, MapPin, ChevronLeft, ChevronRight, X,
   BookOpen, Target, Sparkles, Compass, BookMarked, Heart, MessageCircle,
 } from "lucide-react";
 
@@ -109,18 +109,22 @@ export function ProjectDetail({ slug }: { slug: ProjectSlug }) {
             </div>
           </div>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {project.objectives.map((o, i) => (
-              <div key={o} className="group relative overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-                <div aria-hidden className="absolute left-0 top-0 h-full w-1.5" style={{ backgroundColor: project.accent }} />
-                <div className="pl-2">
-                  <div className="grid h-9 w-9 place-items-center rounded-lg text-white" style={{ backgroundColor: project.accent }}>
-                    <Target className="h-4 w-4" />
+            {project.objectives.map((o, i) => {
+              const pool = ["var(--brand-blue)","var(--brand-orange)","var(--brand-green)","var(--brand-red)","var(--brand-purple)","var(--brand-pink)"];
+              const c = pool[i % pool.length];
+              return (
+                <div key={o} className="group relative overflow-hidden rounded-2xl bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-lg" style={{ border: `2px solid ${c}` }}>
+                  {/* canto de página dobrado */}
+                  <div aria-hidden className="absolute right-0 top-0 h-0 w-0 border-b-[28px] border-l-[28px] border-b-transparent" style={{ borderLeftColor: c }} />
+                  <div className="grid h-10 w-10 place-items-center rounded-lg text-white shadow-sm" style={{ backgroundColor: c }}>
+                    <Target className="h-5 w-5" />
                   </div>
-                  <div className="mt-3 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Objetivo {i + 1}</div>
-                  <p className="mt-1 text-sm font-medium leading-relaxed">{o}</p>
+                  <div className="mt-3 font-display text-xl font-black" style={{ color: c }}>{String(i + 1).padStart(2, "0")}</div>
+                  <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Objetivo</div>
+                  <p className="mt-2 text-sm font-medium leading-relaxed">{o}</p>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -132,20 +136,53 @@ export function ProjectDetail({ slug }: { slug: ProjectSlug }) {
             <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: project.accent }}>Atividades</div>
             <h2 className="mt-2 font-display text-3xl font-bold">Ações que colocam livros em movimento</h2>
           </div>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {project.activities.map((a, i) => {
               const pool = ["var(--brand-blue)","var(--brand-orange)","var(--brand-green)","var(--brand-red)","var(--brand-purple)","var(--brand-yellow)","var(--brand-pink)"];
               const c = pool[i % pool.length];
-              return (
-                <div key={a} className="group relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-                  <div aria-hidden className="h-2" style={{ backgroundColor: c }} />
-                  <div className="p-5">
-                    <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                      <BookOpen className="h-3.5 w-3.5" style={{ color: c }} /> Ficha {String(i + 1).padStart(2, "0")}
+              // alterna 3 estilos de card
+              const style = i % 3;
+              if (style === 0) {
+                // Mini livro em pé — lombada colorida à esquerda
+                return (
+                  <div key={a} className="group relative flex overflow-hidden rounded-r-2xl rounded-l-md bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+                    <div aria-hidden className="relative w-4 shrink-0" style={{ backgroundColor: c }}>
+                      <div className="absolute inset-y-3 left-1/2 w-px -translate-x-1/2 bg-white/40" />
                     </div>
-                    <p className="mt-2 font-display text-base font-bold leading-snug">{a}</p>
-                    <div aria-hidden className="mt-4 h-px w-full" style={{ backgroundColor: c, opacity: 0.3 }} />
+                    <div className="flex-1 p-5">
+                      <div className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: c }}>Livro {String(i + 1).padStart(2, "0")}</div>
+                      <p className="mt-2 font-display text-base font-bold leading-snug">{a}</p>
+                      <div className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-semibold text-muted-foreground"><BookOpen className="h-3 w-3" style={{ color: c }} /> Atividade contínua</div>
+                    </div>
                   </div>
+                );
+              }
+              if (style === 1) {
+                // Ficha catalográfica
+                return (
+                  <div key={a} className="group relative overflow-hidden rounded-lg bg-[var(--surface)] shadow-md transition hover:-translate-y-1 hover:shadow-xl" style={{ borderTop: `4px solid ${c}` }}>
+                    <div className="p-5">
+                      <div className="flex items-center justify-between text-[10px] font-mono font-semibold uppercase tracking-widest text-muted-foreground">
+                        <span>Ficha nº {String(i + 1).padStart(3, "0")}</span>
+                        <span className="rounded px-1.5 py-0.5 text-white" style={{ backgroundColor: c }}>ACERVO</span>
+                      </div>
+                      <div aria-hidden className="mt-3 h-px w-full border-t border-dashed" style={{ borderColor: c }} />
+                      <p className="mt-3 font-display text-base font-bold leading-snug">{a}</p>
+                      <div aria-hidden className="mt-4 h-px w-2/3 bg-muted" />
+                      <div aria-hidden className="mt-1.5 h-px w-1/2 bg-muted" />
+                    </div>
+                  </div>
+                );
+              }
+              // Card com marcador (bookmark) no topo
+              return (
+                <div key={a} className="group relative overflow-hidden rounded-2xl border-2 bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-xl" style={{ borderColor: c }}>
+                  <div aria-hidden className="absolute right-6 -top-1 h-10 w-6" style={{ backgroundColor: c, clipPath: "polygon(0 0, 100% 0, 100% 100%, 50% 75%, 0 100%)" }} />
+                  <div className="grid h-11 w-11 place-items-center rounded-full text-white shadow-sm" style={{ backgroundColor: c }}>
+                    <Sparkles className="h-5 w-5" />
+                  </div>
+                  <div className="mt-3 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Ação {String(i + 1).padStart(2, "0")}</div>
+                  <p className="mt-1 font-display text-base font-bold leading-snug">{a}</p>
                 </div>
               );
             })}
@@ -212,25 +249,15 @@ export function ProjectDetail({ slug }: { slug: ProjectSlug }) {
             })}
           </div>
 
-          {/* Galeria + Depoimento */}
-          <div className="mt-12 grid gap-6 md:grid-cols-[1.4fr_1fr]">
-            <div>
-              <h3 className="font-display text-2xl font-bold">Galeria de fotos</h3>
-              <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {gallery.map((i) => (
-                  <button key={i} onClick={() => setLightbox(i)} className="aspect-[4/3] overflow-hidden rounded-xl border border-border bg-[var(--surface)] text-xs text-muted-foreground transition hover:shadow-md">
-                    <div className="grid h-full place-items-center">Imagem {i + 1}</div>
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div className="rounded-2xl border border-border bg-[var(--surface)] p-6">
-              <Quote className="h-6 w-6" style={{ color: project.accent }} />
-              <p className="mt-2 text-muted-foreground leading-relaxed">
-                "Depoimento demonstrativo sobre a participação no projeto — conteúdo editável pelo painel administrativo."
-              </p>
-              <div className="mt-3 text-sm font-semibold">Nome demonstrativo</div>
-              <div className="text-xs text-muted-foreground">Participante</div>
+          {/* Galeria */}
+          <div className="mt-12">
+            <h3 className="font-display text-2xl font-bold">Galeria de fotos</h3>
+            <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+              {gallery.map((i) => (
+                <button key={i} onClick={() => setLightbox(i)} className="aspect-[4/3] overflow-hidden rounded-xl border border-border bg-[var(--surface)] text-xs text-muted-foreground transition hover:shadow-md">
+                  <div className="grid h-full place-items-center">Imagem {i + 1}</div>
+                </button>
+              ))}
             </div>
           </div>
         </div>

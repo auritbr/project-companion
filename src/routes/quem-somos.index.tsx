@@ -101,12 +101,12 @@ function QuemSomos() {
                 </a>
               </div>
             </div>
-            <div className="relative">
-              <div aria-hidden className="absolute -left-4 -top-4 h-24 w-24 rounded-2xl" style={{ backgroundColor: "var(--brand-orange)", opacity: 0.15 }} />
-              <div aria-hidden className="absolute -bottom-4 -right-4 h-28 w-28 rounded-2xl" style={{ backgroundColor: "var(--brand-blue)", opacity: 0.15 }} />
-              <div className="relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
-                <img src={heroImages.nossaHistoria} alt="Livros e leitores da biblioteca comunitária" className="aspect-[4/5] w-full object-cover" />
-                <div className="absolute bottom-4 left-4 rounded-lg bg-white/95 px-3 py-2 text-xs shadow">
+            <div className="relative mx-auto w-full max-w-[320px]">
+              <div aria-hidden className="absolute -left-3 -top-3 h-16 w-16 rounded-2xl" style={{ backgroundColor: "var(--brand-orange)", opacity: 0.2 }} />
+              <div aria-hidden className="absolute -bottom-3 -right-3 h-20 w-20 rounded-2xl" style={{ backgroundColor: "var(--brand-blue)", opacity: 0.2 }} />
+              <div className="relative overflow-hidden rounded-2xl border-2 bg-white shadow-lg" style={{ borderColor: "var(--brand-blue)" }}>
+                <img src={heroImages.nossaHistoria} alt="Livros e leitores da biblioteca comunitária" className="aspect-[3/4] w-full object-cover" />
+                <div className="absolute bottom-3 left-3 rounded-lg bg-white/95 px-2.5 py-1.5 text-[10px] shadow">
                   <div className="font-semibold text-primary">Ponto de Cultura</div>
                   <div className="text-muted-foreground">Biblioteca comunitária</div>
                 </div>
@@ -124,19 +124,60 @@ function QuemSomos() {
             <h2 className="mt-2 font-display text-3xl font-bold">Indicadores de impacto</h2>
             <p className="mt-2 text-muted-foreground">Números demonstrativos — serão atualizados pelo painel administrativo.</p>
           </div>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {indicators.map((k) => (
-              <div key={k.label} className="relative overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm">
-                <div aria-hidden className="absolute -right-6 -top-6 h-20 w-20 rounded-full" style={{ backgroundColor: k.color, opacity: 0.12 }} />
-                <div className="relative">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl text-white" style={{ backgroundColor: k.color }}>
-                    <k.icon className="h-6 w-6" />
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {indicators.map((k, i) => {
+              // 4 formatos diferentes
+              if (i === 0) {
+                // Página com canto dobrado
+                return (
+                  <div key={k.label} className="relative overflow-hidden rounded-2xl bg-white p-5 shadow-md" style={{ border: `2px solid ${k.color}` }}>
+                    <div aria-hidden className="absolute right-0 top-0 h-0 w-0 border-b-[36px] border-l-[36px] border-b-transparent" style={{ borderLeftColor: k.color }} />
+                    <k.icon className="h-8 w-8" style={{ color: k.color }} />
+                    <div className="mt-3 font-display text-xl font-black" style={{ color: k.color }}>{k.value}</div>
+                    <div className="text-sm font-semibold">{k.label}</div>
                   </div>
-                  <div className="mt-3 font-display text-2xl font-bold">{k.value}</div>
-                  <div className="text-sm font-semibold text-foreground">{k.label}</div>
+                );
+              }
+              if (i === 1) {
+                // Marcador grande
+                return (
+                  <div key={k.label} className="relative flex overflow-hidden rounded-2xl bg-white shadow-md border border-border">
+                    <div aria-hidden className="relative w-14 shrink-0" style={{ backgroundColor: k.color }}>
+                      <div className="absolute inset-x-0 bottom-0 h-6" style={{ backgroundColor: k.color, clipPath: "polygon(0 0, 100% 0, 100% 100%, 50% 60%, 0 100%)" }} />
+                      <k.icon className="absolute top-4 left-1/2 h-6 w-6 -translate-x-1/2 text-white" />
+                    </div>
+                    <div className="flex-1 p-5">
+                      <div className="font-display text-xl font-black" style={{ color: k.color }}>{k.value}</div>
+                      <div className="mt-1 text-sm font-semibold">{k.label}</div>
+                    </div>
+                  </div>
+                );
+              }
+              if (i === 2) {
+                // Moldura de livro (top/bottom)
+                return (
+                  <div key={k.label} className="relative bg-white p-5 shadow-md" style={{ borderTop: `8px solid ${k.color}`, borderBottom: `8px solid ${k.color}` }}>
+                    <k.icon className="h-8 w-8" style={{ color: k.color }} />
+                    <div className="mt-3 font-display text-xl font-black" style={{ color: k.color }}>{k.value}</div>
+                    <div className="text-sm font-semibold">{k.label}</div>
+                    <div className="mt-3 h-px border-t border-dashed" style={{ borderColor: k.color }} />
+                  </div>
+                );
+              }
+              // Círculo + bloco sobreposto
+              return (
+                <div key={k.label} className="relative overflow-hidden rounded-2xl bg-white p-5 shadow-md border border-border">
+                  <div aria-hidden className="absolute -right-8 -top-8 h-28 w-28 rounded-full" style={{ backgroundColor: k.color, opacity: 0.18 }} />
+                  <div className="relative">
+                    <div className="grid h-12 w-12 place-items-center rounded-2xl text-white shadow-md" style={{ backgroundColor: k.color }}>
+                      <k.icon className="h-6 w-6" />
+                    </div>
+                    <div className="mt-4 font-display text-xl font-black" style={{ color: k.color }}>{k.value}</div>
+                    <div className="text-sm font-semibold">{k.label}</div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -149,21 +190,31 @@ function QuemSomos() {
             <p className="mt-3 text-muted-foreground">Os princípios que orientam nossa atuação como biblioteca comunitária.</p>
           </div>
 
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
             {[
-              { icon: BookOpen, title: "Missão", color: "var(--brand-blue)", desc: "Promover o acesso democrático à leitura, à cultura e ao conhecimento por meio de um espaço comunitário acolhedor, formativo e conectado à realidade do território." },
-              { icon: Sparkles, title: "Visão", color: "var(--brand-orange)", desc: "Ser referência local na formação de leitores, no fortalecimento comunitário e na valorização da biblioteca como espaço vivo de encontro, imaginação e transformação social." },
-              { icon: Heart, title: "Valores", color: "var(--brand-red)", desc: "Acesso à leitura, acolhimento, diversidade, participação comunitária, respeito, educação, cultura, transparência e cuidado com a memória." },
+              { icon: BookOpen, title: "Missão", color: "var(--brand-blue)", label: "Vol. I", desc: "Promover o acesso democrático à leitura, à cultura e ao conhecimento por meio de um espaço comunitário acolhedor, formativo e conectado à realidade do território." },
+              { icon: Sparkles, title: "Visão", color: "var(--brand-orange)", label: "Vol. II", desc: "Ser referência local na formação de leitores, no fortalecimento comunitário e na valorização da biblioteca como espaço vivo de encontro, imaginação e transformação social." },
+              { icon: Heart, title: "Valores", color: "var(--brand-red)", label: "Vol. III", desc: "Acesso à leitura, acolhimento, diversidade, participação comunitária, respeito, educação, cultura, transparência e cuidado com a memória." },
             ].map((v) => (
-              <div key={v.title} className="group relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-                <div aria-hidden className="absolute left-0 top-0 h-full w-2" style={{ backgroundColor: v.color }} />
-                <div aria-hidden className="absolute left-2 top-0 h-full w-px bg-white/60" />
-                <div className="p-6 pl-7">
-                  <div className="grid h-11 w-11 place-items-center rounded-xl text-white" style={{ backgroundColor: v.color }}>
-                    <v.icon className="h-5 w-5" />
+              // Cada um como capa de livro editorial
+              <div key={v.title} className="group relative flex flex-col overflow-hidden rounded-lg shadow-xl transition hover:-translate-y-2 hover:shadow-2xl" style={{ background: `linear-gradient(160deg, ${v.color} 0%, oklch(0.30 0.05 260) 100%)` }}>
+                {/* moldura interna estilo capa */}
+                <div className="m-3 flex flex-1 flex-col rounded-md border-2 border-white/30 p-6 text-white">
+                  <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-white/70">
+                    <span>{v.label}</span>
+                    <span>Biblioteca</span>
                   </div>
-                  <h3 className="mt-4 font-display text-xl font-bold">{v.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{v.desc}</p>
+                  <div className="mt-6 grid h-14 w-14 place-items-center rounded-full bg-white/15 backdrop-blur">
+                    <v.icon className="h-7 w-7" />
+                  </div>
+                  <h3 className="mt-6 font-display text-3xl font-black tracking-tight">{v.title}</h3>
+                  <div aria-hidden className="mt-3 h-1 w-16 rounded-full bg-white/60" />
+                  <p className="mt-4 flex-1 text-sm leading-relaxed text-white/90">{v.desc}</p>
+                  <div aria-hidden className="mt-6 flex gap-1.5">
+                    <span className="h-1 w-8 rounded-full bg-white/40" />
+                    <span className="h-1 w-4 rounded-full bg-white/40" />
+                    <span className="h-1 w-2 rounded-full bg-white/40" />
+                  </div>
                 </div>
               </div>
             ))}
@@ -191,21 +242,53 @@ function QuemSomos() {
             <h2 className="mt-2 font-display text-3xl font-bold">Páginas da nossa história</h2>
             <p className="mt-2 text-muted-foreground">Marcos que registram a trajetória da biblioteca comunitária.</p>
           </div>
-          <ol className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {timeline.map((m, i) => (
-              <li key={i} className="group relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-                <div aria-hidden className="absolute left-0 top-0 h-full w-1.5" style={{ backgroundColor: m.color }} />
-                <div aria-hidden className="absolute left-1.5 top-0 h-full w-px bg-white/70" />
-                <div className="p-5 pl-7">
-                  <div className="flex items-center gap-2">
-                    <span className="inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-semibold text-white" style={{ backgroundColor: m.color }}>Página {String(i + 1).padStart(2, "0")}</span>
-                    <span className="text-xs font-semibold text-muted-foreground">{m.year}</span>
-                  </div>
+          <ol className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {timeline.map((m, i) => {
+              // 3 formatos alternados: livro em pé, ficha e página com canto dobrado
+              const style = i % 3;
+              if (style === 0) {
+                return (
+                  <li key={i} className="group relative flex overflow-hidden rounded-r-2xl rounded-l bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+                    <div aria-hidden className="relative w-14 shrink-0 text-white" style={{ backgroundColor: m.color }}>
+                      <div className="absolute inset-y-3 left-1/2 w-px -translate-x-1/2 bg-white/40" />
+                      <div className="absolute inset-x-0 top-4 text-center font-display text-2xl font-black">{String(i + 1).padStart(2, "0")}</div>
+                      <div className="absolute inset-x-0 bottom-3 text-center text-[8px] font-mono uppercase tracking-widest opacity-80">Cap.</div>
+                    </div>
+                    <div className="flex-1 p-5">
+                      <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">{m.year}</div>
+                      <h3 className="mt-1 font-display text-lg font-bold" style={{ color: m.color }}>{m.title}</h3>
+                      <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
+                    </div>
+                  </li>
+                );
+              }
+              if (style === 1) {
+                return (
+                  <li key={i} className="group relative overflow-hidden rounded-lg bg-[var(--surface)] shadow-md transition hover:-translate-y-1 hover:shadow-xl" style={{ borderTop: `6px solid ${m.color}` }}>
+                    <div className="p-5">
+                      <div className="flex items-center justify-between text-[10px] font-mono font-semibold uppercase tracking-widest text-muted-foreground">
+                        <span>Ficha nº {String(i + 1).padStart(3, "0")}</span>
+                        <span className="rounded px-1.5 py-0.5 text-white" style={{ backgroundColor: m.color }}>{m.year}</span>
+                      </div>
+                      <div aria-hidden className="mt-3 h-px border-t border-dashed" style={{ borderColor: m.color }} />
+                      <h3 className="mt-3 font-display text-lg font-bold">{m.title}</h3>
+                      <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
+                      <div aria-hidden className="mt-4 h-px w-2/3 bg-muted" />
+                      <div aria-hidden className="mt-1.5 h-px w-1/2 bg-muted" />
+                    </div>
+                  </li>
+                );
+              }
+              return (
+                <li key={i} className="group relative overflow-hidden rounded-2xl bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-xl" style={{ border: `2px solid ${m.color}` }}>
+                  <div aria-hidden className="absolute right-0 top-0 h-0 w-0 border-b-[36px] border-l-[36px] border-b-transparent" style={{ borderLeftColor: m.color }} />
+                  <div className="font-display text-3xl font-black" style={{ color: m.color }}>{String(i + 1).padStart(2, "0")}</div>
+                  <div className="mt-1 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">{m.year}</div>
                   <h3 className="mt-3 font-display text-lg font-bold">{m.title}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{m.desc}</p>
-                </div>
-              </li>
-            ))}
+                  <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
+                </li>
+              );
+            })}
           </ol>
         </div>
       </section>
@@ -222,57 +305,127 @@ function QuemSomos() {
             </p>
           </div>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {bookTypes.map((t) => (
-              <div key={t.label} className="group relative overflow-hidden rounded-xl border border-border bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-md">
-                <div aria-hidden className="absolute left-0 top-0 h-full w-1" style={{ backgroundColor: t.color }} />
-                <div className="flex items-center gap-3 pl-2">
-                  <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg text-white" style={{ backgroundColor: t.color }}>
-                    <t.icon className="h-4 w-4" />
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {bookTypes.map((t, i) => {
+              // 4 formatos alternados
+              const style = i % 4;
+              if (style === 0) {
+                // mini capa de livro
+                return (
+                  <div key={t.label} className="group relative flex h-32 flex-col justify-between overflow-hidden rounded-md p-4 text-white shadow-lg transition hover:-translate-y-1 hover:shadow-xl" style={{ background: `linear-gradient(160deg, ${t.color} 0%, oklch(0.30 0.05 260) 100%)` }}>
+                    <div className="flex items-center justify-between text-[9px] font-mono uppercase tracking-widest text-white/70">
+                      <span>Vol. {String(i + 1).padStart(2, "0")}</span>
+                      <t.icon className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <div className="font-display text-base font-black leading-tight">{t.label}</div>
+                      <div aria-hidden className="mt-1.5 h-0.5 w-8 bg-white/60" />
+                    </div>
                   </div>
-                  <span className="text-sm font-semibold">{t.label}</span>
+                );
+              }
+              if (style === 1) {
+                // ficha de biblioteca
+                return (
+                  <div key={t.label} className="group relative overflow-hidden rounded-lg bg-white p-4 shadow-md transition hover:-translate-y-1 hover:shadow-xl" style={{ borderTop: `4px solid ${t.color}` }}>
+                    <div className="flex items-center justify-between text-[9px] font-mono uppercase tracking-widest text-muted-foreground">
+                      <span>Ficha</span>
+                      <span>#{String(i + 1).padStart(3, "0")}</span>
+                    </div>
+                    <div aria-hidden className="mt-2 h-px border-t border-dashed" style={{ borderColor: t.color }} />
+                    <t.icon className="mt-3 h-6 w-6" style={{ color: t.color }} />
+                    <div className="mt-2 font-display text-sm font-bold">{t.label}</div>
+                  </div>
+                );
+              }
+              if (style === 2) {
+                // aba lateral colorida
+                return (
+                  <div key={t.label} className="group relative flex h-32 overflow-hidden rounded-r-xl rounded-l-md bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+                    <div aria-hidden className="relative w-4 shrink-0" style={{ backgroundColor: t.color }}>
+                      <div className="absolute inset-y-3 left-1/2 w-px -translate-x-1/2 bg-white/40" />
+                    </div>
+                    <div className="flex flex-1 flex-col justify-between p-4">
+                      <div className="grid h-9 w-9 place-items-center rounded-lg text-white" style={{ backgroundColor: t.color }}>
+                        <t.icon className="h-4 w-4" />
+                      </div>
+                      <div className="font-display text-sm font-bold">{t.label}</div>
+                    </div>
+                  </div>
+                );
+              }
+              // orelha de página / canto dobrado
+              return (
+                <div key={t.label} className="group relative flex h-32 flex-col justify-between overflow-hidden rounded-xl bg-white p-4 shadow-md transition hover:-translate-y-1 hover:shadow-xl" style={{ border: `2px solid ${t.color}` }}>
+                  <div aria-hidden className="absolute right-0 top-0 h-0 w-0 border-b-[28px] border-l-[28px] border-b-transparent" style={{ borderLeftColor: t.color }} />
+                  <t.icon className="h-6 w-6" style={{ color: t.color }} />
+                  <div className="font-display text-sm font-bold leading-tight" style={{ color: t.color }}>{t.label}</div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
+      {/* CTA final — livro aberto encerrando a leitura */}
       <section className="bg-white">
-        <div className="mx-auto max-w-[1280px] px-4 py-14">
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-[var(--surface)] to-white p-8 md:p-12">
-            <div aria-hidden className="absolute -right-16 -top-16 h-64 w-64 rounded-full" style={{ backgroundColor: "var(--brand-orange)", opacity: 0.1 }} />
-            <div aria-hidden className="absolute -bottom-20 -left-10 h-56 w-56 rounded-full" style={{ backgroundColor: "var(--brand-blue)", opacity: 0.1 }} />
-            <div className="relative grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-semibold text-primary shadow-sm">
-                  <BookMarked className="h-3.5 w-3.5" /> Faça parte
+        <div className="mx-auto max-w-[1280px] px-4 py-16">
+          <div className="relative">
+            <div aria-hidden className="absolute -bottom-3 left-6 right-6 h-6 rounded-full bg-black/15 blur-2xl" />
+            <div className="relative rounded-[28px] p-2 shadow-2xl" style={{ background: "linear-gradient(135deg, var(--brand-blue) 0%, oklch(0.30 0.05 260) 100%)" }}>
+              <div className="relative overflow-hidden rounded-[20px] bg-[oklch(0.985_0.005_85)]">
+                <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "repeating-linear-gradient(0deg, #000 0 1px, transparent 1px 24px)" }} />
+                <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-8 -translate-x-1/2 md:block" style={{ background: "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.12) 45%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.12) 55%, transparent 100%)" }} />
+                <div className="grid md:grid-cols-2">
+                  {/* Página esquerda — mensagem */}
+                  <div className="p-8 md:p-12 md:pr-14">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] shadow-sm" style={{ color: "var(--brand-blue)" }}>
+                      <BookMarked className="h-3.5 w-3.5" /> Última página
+                    </div>
+                    <h2 className="mt-4 font-display text-3xl font-black leading-tight md:text-4xl">
+                      Cada página desta história continua sendo escrita <span style={{ color: "var(--brand-red)" }}>com a comunidade</span>
+                    </h2>
+                    <div aria-hidden className="mt-4 h-1 w-16 rounded-full" style={{ backgroundColor: "var(--brand-blue)" }} />
+                    <p className="mt-5 max-w-md text-muted-foreground leading-relaxed">
+                      A biblioteca segue viva por meio de leitores, parceiros, projetos e encontros que fortalecem
+                      o território.
+                    </p>
+                    <div className="mt-7 flex flex-wrap gap-3">
+                      <Link to="/projetos" className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-md hover:brightness-110" style={{ backgroundColor: "var(--brand-blue)" }}>
+                        Conheça os projetos <ArrowRight className="h-4 w-4" />
+                      </Link>
+                      <Link to="/como-doar" className="inline-flex items-center gap-2 rounded-full border-2 bg-white px-5 py-3 text-sm font-semibold hover:bg-muted" style={{ borderColor: "var(--brand-red)", color: "var(--brand-red)" }}>
+                        <Heart className="h-4 w-4" /> Apoie a biblioteca
+                      </Link>
+                    </div>
+                    <div aria-hidden className="mt-10 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/60">— fim do capítulo —</div>
+                  </div>
+                  {/* Página direita — estante */}
+                  <div className="relative min-h-[300px] md:min-h-[440px] p-6 md:p-10">
+                    <div className="absolute inset-4 md:inset-6 overflow-hidden rounded-xl bg-gradient-to-br from-[var(--surface)] to-white">
+                      {/* estante */}
+                      <div className="flex h-full flex-col justify-end gap-3 p-5">
+                        {[
+                          [{ c: "var(--brand-blue)", w: 30, h: 100 }, { c: "var(--brand-orange)", w: 22, h: 120 }, { c: "var(--brand-green)", w: 26, h: 90 }, { c: "var(--brand-red)", w: 20, h: 130 }, { c: "var(--brand-yellow)", w: 28, h: 110 }, { c: "var(--brand-purple)", w: 24, h: 105 }],
+                          [{ c: "var(--brand-red)", w: 26, h: 110 }, { c: "var(--brand-blue)", w: 22, h: 130 }, { c: "var(--brand-pink)", w: 30, h: 95 }, { c: "var(--brand-green)", w: 24, h: 120 }, { c: "var(--brand-orange)", w: 28, h: 100 }],
+                        ].map((row, r) => (
+                          <div key={r}>
+                            <div className="flex items-end gap-1.5">
+                              {row.map((b, i) => (
+                                <div key={i} className="relative rounded-t-md shadow-md" style={{ backgroundColor: b.c, width: b.w, height: b.h }}>
+                                  <div className="absolute inset-x-1 top-2 h-0.5 rounded-full bg-white/40" />
+                                  <div className="absolute inset-x-1 top-4 h-0.5 rounded-full bg-white/30" />
+                                </div>
+                              ))}
+                            </div>
+                            <div aria-hidden className="mt-0 h-2 rounded-sm shadow-inner" style={{ backgroundColor: "oklch(0.55 0.08 40)" }} />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div aria-hidden className="absolute bottom-4 right-6 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/60">— estante viva —</div>
+                  </div>
                 </div>
-                <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">Uma biblioteca viva se constrói com a comunidade</h2>
-                <p className="mt-4 max-w-xl text-muted-foreground">
-                  Conheça nossos projetos, acompanhe nossas ações e descubra como apoiar este espaço de leitura,
-                  cultura e encontro.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Link to="/projetos/leitura-em-comunidade" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-sm hover:brightness-110">
-                    Conheça os projetos <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <Link to="/como-doar" className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-semibold hover:bg-muted">
-                    Como apoiar
-                  </Link>
-                </div>
-              </div>
-              <div aria-hidden className="hidden items-end justify-center gap-1 md:flex">
-                {[
-                  { c: "var(--brand-blue)", h: 120 },
-                  { c: "var(--brand-orange)", h: 150 },
-                  { c: "var(--brand-green)", h: 110 },
-                  { c: "var(--brand-red)", h: 160 },
-                  { c: "var(--brand-yellow)", h: 130 },
-                  { c: "var(--brand-purple)", h: 145 },
-                ].map((b, i) => (
-                  <div key={i} className="rounded-t-md shadow-sm" style={{ backgroundColor: b.c, height: b.h, width: 22 }} />
-                ))}
               </div>
             </div>
           </div>
