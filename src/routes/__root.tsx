@@ -11,26 +11,40 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Header } from "../components/site/Header";
+import { Footer } from "../components/site/Footer";
+import { FloatingButtons } from "../components/site/FloatingButtons";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+    <>
+      <Header />
+      <main className="mx-auto flex min-h-[60vh] max-w-[1280px] flex-col items-center justify-center px-4 py-20 text-center">
+        <div className="text-6xl font-display font-bold text-primary">404</div>
+        <h1 className="mt-3 font-display text-2xl font-bold text-foreground">
+          Esta página não foi encontrada em nossa estante.
+        </h1>
+        <p className="mt-2 max-w-md text-muted-foreground">
+          O endereço acessado pode ter sido movido ou não existe mais. Você pode voltar
+          ao início ou pesquisar outros conteúdos.
         </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
-      </div>
-    </div>
+        <form className="mt-6 flex w-full max-w-md gap-2" onSubmit={(e) => e.preventDefault()}>
+          <input
+            type="search"
+            placeholder="Pesquisar no site"
+            aria-label="Pesquisar"
+            className="flex-1 rounded-full border border-border bg-white px-4 py-2 text-sm"
+          />
+          <button type="submit" className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
+            Buscar
+          </button>
+        </form>
+        <Link to="/" className="mt-6 inline-flex rounded-full border border-border bg-white px-5 py-2 text-sm font-medium hover:bg-muted">
+          Voltar ao início
+        </Link>
+      </main>
+      <Footer />
+    </>
   );
 }
 
@@ -77,14 +91,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Biblioteca Comunitária — Ponto de Cultura" },
+      {
+        name: "description",
+        content:
+          "Biblioteca comunitária e Ponto de Cultura dedicada ao acesso gratuito à leitura, mediação literária, formação de leitores e ações culturais junto à comunidade.",
+      },
+      { property: "og:title", content: "Biblioteca Comunitária — Ponto de Cultura" },
+      {
+        property: "og:description",
+        content:
+          "Livros que aproximam pessoas e transformam comunidades. Acesso à leitura, formação e cultura para toda a comunidade.",
+      },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Biblioteca Comunitária" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -92,6 +113,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" as any },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -102,11 +129,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="font-sans bg-background text-foreground antialiased">
         {children}
         <Scripts />
       </body>
@@ -119,8 +146,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <Header />
+      <main id="conteudo">
+        <Outlet />
+      </main>
+      <Footer />
+      <FloatingButtons />
     </QueryClientProvider>
   );
 }
