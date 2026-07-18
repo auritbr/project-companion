@@ -13,6 +13,7 @@ import { Route as TransparenciaRouteImport } from './routes/transparencia'
 import { Route as QuemSomosRouteImport } from './routes/quem-somos'
 import { Route as ProjetosRouteImport } from './routes/projetos'
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
+import { Route as PoliticaDeCookiesRouteImport } from './routes/politica-de-cookies'
 import { Route as NoticiasRouteImport } from './routes/noticias'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ComoDoarRouteImport } from './routes/como-doar'
@@ -42,6 +43,11 @@ const ProjetosRoute = ProjetosRouteImport.update({
 const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
   id: '/politica-de-privacidade',
   path: '/politica-de-privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliticaDeCookiesRoute = PoliticaDeCookiesRouteImport.update({
+  id: '/politica-de-cookies',
+  path: '/politica-de-cookies',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NoticiasRoute = NoticiasRouteImport.update({
@@ -102,6 +108,7 @@ export interface FileRoutesByFullPath {
   '/como-doar': typeof ComoDoarRoute
   '/contato': typeof ContatoRoute
   '/noticias': typeof NoticiasRouteWithChildren
+  '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   '/como-doar': typeof ComoDoarRoute
   '/contato': typeof ContatoRoute
   '/noticias': typeof NoticiasRouteWithChildren
+  '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
@@ -135,6 +143,7 @@ export interface FileRoutesById {
   '/como-doar': typeof ComoDoarRoute
   '/contato': typeof ContatoRoute
   '/noticias': typeof NoticiasRouteWithChildren
+  '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
@@ -153,6 +162,7 @@ export interface FileRouteTypes {
     | '/como-doar'
     | '/contato'
     | '/noticias'
+    | '/politica-de-cookies'
     | '/politica-de-privacidade'
     | '/projetos'
     | '/quem-somos'
@@ -169,6 +179,7 @@ export interface FileRouteTypes {
     | '/como-doar'
     | '/contato'
     | '/noticias'
+    | '/politica-de-cookies'
     | '/politica-de-privacidade'
     | '/projetos'
     | '/quem-somos'
@@ -185,6 +196,7 @@ export interface FileRouteTypes {
     | '/como-doar'
     | '/contato'
     | '/noticias'
+    | '/politica-de-cookies'
     | '/politica-de-privacidade'
     | '/projetos'
     | '/quem-somos'
@@ -202,6 +214,7 @@ export interface RootRouteChildren {
   ComoDoarRoute: typeof ComoDoarRoute
   ContatoRoute: typeof ContatoRoute
   NoticiasRoute: typeof NoticiasRouteWithChildren
+  PoliticaDeCookiesRoute: typeof PoliticaDeCookiesRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   ProjetosRoute: typeof ProjetosRouteWithChildren
   QuemSomosRoute: typeof QuemSomosRouteWithChildren
@@ -236,6 +249,13 @@ declare module '@tanstack/react-router' {
       path: '/politica-de-privacidade'
       fullPath: '/politica-de-privacidade'
       preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politica-de-cookies': {
+      id: '/politica-de-cookies'
+      path: '/politica-de-cookies'
+      fullPath: '/politica-de-cookies'
+      preLoaderRoute: typeof PoliticaDeCookiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/noticias': {
@@ -358,6 +378,7 @@ const rootRouteChildren: RootRouteChildren = {
   ComoDoarRoute: ComoDoarRoute,
   ContatoRoute: ContatoRoute,
   NoticiasRoute: NoticiasRouteWithChildren,
+  PoliticaDeCookiesRoute: PoliticaDeCookiesRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   ProjetosRoute: ProjetosRouteWithChildren,
   QuemSomosRoute: QuemSomosRouteWithChildren,
