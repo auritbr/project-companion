@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "../components/site/PageHero";
 import { BookOpen, Heart, Users, Sparkles, Handshake, GraduationCap, Library, MessagesSquare, ArrowRight } from "lucide-react";
 
-export const Route = createFileRoute("/quem-somos/")({
+export const Route = createFileRoute("/quem-somos")({
   component: QuemSomos,
   head: () => ({
     meta: [
