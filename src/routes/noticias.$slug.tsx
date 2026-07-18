@@ -1,8 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { PageHero } from "../components/site/PageHero";
+import { Breadcrumbs } from "../components/site/Breadcrumbs";
 import { news } from "../lib/site-data";
-import { ArrowLeft, ArrowRight, Copy, Facebook, Linkedin, Mail, MessageCircle, Twitter } from "lucide-react";
+import { ArrowLeft, ArrowRight, Copy, Facebook, Linkedin, Mail, MessageCircle, Twitter, Calendar, Clock, User } from "lucide-react";
 
 export const Route = createFileRoute("/noticias/$slug")({
   loader: ({ params }) => {
@@ -36,22 +36,37 @@ function NoticiaDetalhe() {
 
   return (
     <>
-      <PageHero title={item.title} breadcrumbs={[{ label: "Notícias", to: "/noticias" }, { label: item.title }]} image={item.image} />
+      <section className="border-b border-border bg-[var(--surface)]">
+        <div className="mx-auto max-w-[1280px] px-4 pt-6 md:pt-8">
+          <Breadcrumbs items={[{ label: "Notícias", to: "/noticias" }, { label: item.title }]} />
+        </div>
+        <div className="mx-auto grid max-w-[1280px] gap-8 px-4 py-8 md:grid-cols-[1.15fr_1fr] md:items-center md:py-12">
+          <div className="order-2 md:order-1">
+            <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold text-white" style={{ backgroundColor: "var(--brand-blue)" }}>
+              {item.tag}
+            </span>
+            <h1 className="mt-4 font-display text-3xl font-bold leading-tight md:text-4xl">{item.title}</h1>
+            <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5"><Calendar className="h-4 w-4" /> {item.date}</span>
+              <span className="inline-flex items-center gap-1.5"><User className="h-4 w-4" /> {item.author}</span>
+              <span className="inline-flex items-center gap-1.5"><Clock className="h-4 w-4" /> {item.readingTime}</span>
+            </div>
+          </div>
+          <div className="order-1 md:order-2">
+            <div className="relative">
+              <div aria-hidden className="absolute -left-3 -top-3 h-16 w-16 rounded-2xl" style={{ backgroundColor: "var(--brand-orange)", opacity: 0.2 }} />
+              <div aria-hidden className="absolute -bottom-3 -right-3 h-20 w-20 rounded-2xl" style={{ backgroundColor: "var(--brand-blue)", opacity: 0.2 }} />
+              <div className="relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+                <img src={item.image} alt="" className="aspect-[16/10] w-full object-cover" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="bg-white">
         <div className="mx-auto max-w-[820px] px-4 py-10">
-          <div className="flex flex-wrap items-center gap-2 text-xs">
-            <span className="rounded-full px-2 py-0.5 font-semibold text-white" style={{ backgroundColor: "var(--brand-blue)" }}>{item.tag}</span>
-            <span className="text-muted-foreground">{item.date}</span>
-            <span className="text-muted-foreground">· {item.readingTime}</span>
-            <span className="text-muted-foreground">· {item.author}</span>
-          </div>
-
-          <div className="mt-6 aspect-[16/9] w-full overflow-hidden rounded-2xl bg-[oklch(0.94_0.02_240)]">
-            <img src={item.image} alt="" className="h-full w-full object-cover" />
-          </div>
-
-          <article className="prose prose-slate mt-8 max-w-none">
+          <article className="prose prose-slate max-w-none">
             {item.body.map((p: string, i: number) => (
               <p key={i} className="mt-4 text-foreground/85 leading-relaxed">{p}</p>
             ))}

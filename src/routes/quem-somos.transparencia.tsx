@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { PageHero } from "../components/site/PageHero";
 import { documents } from "../lib/site-data";
-import { ChevronDown, Download, Eye, FileText, X } from "lucide-react";
+import { ChevronDown, Download, Eye, FileText, X, Archive, ArrowRight, MessageCircle } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/quem-somos/transparencia")({
   component: Transparencia,
@@ -67,11 +68,18 @@ function Transparencia() {
       />
 
       <section className="bg-white">
-        <div className="mx-auto max-w-[1080px] px-4 py-12">
-          <p className="max-w-3xl text-muted-foreground">
-            Documentos institucionais e prestações de contas disponíveis para consulta pública. Clique em uma
-            categoria para expandir e visualize os documentos diretamente no navegador ou faça o download.
+        <div className="mx-auto max-w-[900px] px-4 py-12 text-center">
+          <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-border bg-[var(--surface)] px-3 py-1 text-xs font-semibold text-primary">
+            <Archive className="h-3.5 w-3.5" /> Consulta pública
+          </div>
+          <h2 className="mt-4 font-display text-3xl font-bold md:text-4xl">Acervo institucional</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+            Acesse documentos, certificados, reconhecimentos, portfólios e registros da organização,
+            organizados por categoria para facilitar a consulta pública.
           </p>
+        </div>
+
+        <div className="mx-auto max-w-[1080px] px-4 pb-12">
 
           <div className="mt-8 space-y-3">
             {categories.map((category, i) => {
@@ -133,6 +141,51 @@ function Transparencia() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[var(--surface)]">
+        <div className="mx-auto max-w-[1280px] px-4 py-14">
+          <div className="relative overflow-hidden rounded-3xl border border-border bg-white p-8 md:p-12">
+            <div aria-hidden className="absolute -right-16 -top-16 h-56 w-56 rounded-full" style={{ backgroundColor: "var(--brand-blue)", opacity: 0.08 }} />
+            <div aria-hidden className="absolute -bottom-20 -left-10 h-56 w-56 rounded-full" style={{ backgroundColor: "var(--brand-orange)", opacity: 0.08 }} />
+            <div className="relative grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-border bg-[var(--surface)] px-3 py-1 text-xs font-semibold text-primary">
+                  <FileText className="h-3.5 w-3.5" /> Fale com a equipe
+                </div>
+                <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">Não encontrou o que procurava?</h2>
+                <p className="mt-4 max-w-xl text-muted-foreground">
+                  Se precisar de mais informações, documentos complementares ou esclarecimentos sobre a atuação
+                  da organização, entre em contato com nossa equipe.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link to="/contato" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-sm hover:brightness-110">
+                    Entrar em contato <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <a
+                    href="https://wa.me/5500000000000"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-semibold hover:bg-muted"
+                  >
+                    <MessageCircle className="h-4 w-4" /> Falar no WhatsApp
+                  </a>
+                </div>
+              </div>
+              <div aria-hidden className="hidden items-end justify-center gap-1 md:flex">
+                {[
+                  { c: "var(--brand-blue)", h: 130 },
+                  { c: "var(--brand-orange)", h: 160 },
+                  { c: "var(--brand-green)", h: 120 },
+                  { c: "var(--brand-red)", h: 150 },
+                  { c: "var(--brand-yellow)", h: 135 },
+                ].map((b, i) => (
+                  <div key={i} className="rounded-t-md shadow-sm" style={{ backgroundColor: b.c, height: b.h, width: 22 }} />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

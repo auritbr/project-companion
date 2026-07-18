@@ -1,6 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "../components/site/PageHero";
-import { BookOpen, Heart, Users, Sparkles, Handshake, GraduationCap, Library, MessagesSquare, ArrowRight } from "lucide-react";
+import {
+  BookOpen, Heart, Sparkles, ArrowRight, Library, BookMarked, Feather,
+  Baby, GraduationCap, Landmark, Users, ScrollText, Bookmark, NotebookPen,
+  BookHeart, BookText, Scroll,
+} from "lucide-react";
 import { heroImages } from "../lib/site-data";
 
 export const Route = createFileRoute("/quem-somos/")({
@@ -8,11 +12,31 @@ export const Route = createFileRoute("/quem-somos/")({
   head: () => ({
     meta: [
       { title: "Quem Somos — Biblioteca Comunitária" },
-      { name: "description", content: "Conheça a biblioteca comunitária, sua missão, valores e atuação como Ponto de Cultura." },
+      { name: "description", content: "Conheça a biblioteca comunitária: história, missão, visão, valores e acervo." },
     ],
     links: [{ rel: "canonical", href: "/quem-somos" }],
   }),
 });
+
+const bookTypes = [
+  { icon: Baby, label: "Literatura infantil", color: "var(--brand-yellow)" },
+  { icon: BookOpen, label: "Literatura juvenil", color: "var(--brand-orange)" },
+  { icon: BookHeart, label: "Romances", color: "var(--brand-red)" },
+  { icon: Feather, label: "Poesia", color: "var(--brand-pink)" },
+  { icon: BookText, label: "Contos", color: "var(--brand-purple)" },
+  { icon: Users, label: "Biografias", color: "var(--brand-blue)" },
+  { icon: GraduationCap, label: "Livros educativos", color: "var(--brand-green)" },
+  { icon: ScrollText, label: "Obras de pesquisa", color: "var(--brand-blue)" },
+  { icon: Landmark, label: "Cultura popular", color: "var(--brand-orange)" },
+  { icon: Scroll, label: "História e memória", color: "var(--brand-red)" },
+  { icon: NotebookPen, label: "Livros de formação", color: "var(--brand-green)" },
+  { icon: Bookmark, label: "Materiais paradidáticos", color: "var(--brand-purple)" },
+];
+
+const valuesList = [
+  "Acesso à leitura", "Acolhimento", "Diversidade", "Participação comunitária",
+  "Respeito", "Educação", "Cultura", "Transparência", "Cuidado com a memória",
+];
 
 function QuemSomos() {
   return (
@@ -20,90 +44,169 @@ function QuemSomos() {
       <PageHero title="Quem Somos" breadcrumbs={[{ label: "Quem Somos" }]} image={heroImages.quemSomos} />
 
       <section className="bg-white">
-        <div className="mx-auto grid max-w-[1280px] gap-10 px-4 py-12 md:grid-cols-2 md:items-center">
-          <div>
-            <h2 className="font-display text-3xl font-bold">Uma biblioteca próxima da comunidade</h2>
-            <p className="mt-4 text-muted-foreground">
-              Atuamos como um espaço de convivência, acesso aos livros e formação cultural. Nossas
-              ações reúnem crianças, jovens, adultos, famílias e educadores em torno da leitura e
-              da experiência de contar e criar histórias.
-            </p>
-            <p className="mt-3 text-muted-foreground">
-              Como Ponto de Cultura, articulamos leitura, educação e cidadania para fortalecer o
-              vínculo entre a comunidade e o universo dos livros.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link to="/quem-somos/nossa-historia" className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">Nossa história <ArrowRight className="h-4 w-4" /></Link>
-              <Link to="/quem-somos/equipe" className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold">Equipe</Link>
-            </div>
+        <div className="mx-auto max-w-[1080px] px-4 py-12 text-center">
+          <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-border bg-[var(--surface)] px-3 py-1 text-xs font-semibold text-primary">
+            <Library className="h-3.5 w-3.5" /> Ponto de Cultura
           </div>
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              { label: "Território de atuação", value: "Comunidade e bairros da região" },
-              { label: "Comunidade atendida", value: "Crianças, jovens, adultos, famílias e educadores" },
-              { label: "Atuação", value: "Biblioteca comunitária e Ponto de Cultura" },
-              { label: "Formato das ações", value: "Presenciais, comunitárias e em rede" },
-            ].map((c) => (
-              <div key={c.label} className="rounded-2xl border border-border bg-[var(--surface)] p-4">
-                <div className="text-xs font-semibold uppercase text-primary">{c.label}</div>
-                <div className="mt-1 text-sm text-foreground">{c.value}</div>
-              </div>
-            ))}
-          </div>
+          <h2 className="mt-4 font-display text-3xl font-bold md:text-4xl">Uma biblioteca viva, feita com a comunidade</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+            Somos um espaço comunitário de leitura, encontro e formação cultural. Reunimos livros, pessoas
+            e histórias em torno do direito ao acesso à cultura e à imaginação.
+          </p>
         </div>
       </section>
 
       <section className="bg-[var(--surface)]">
-        <div className="mx-auto max-w-[1280px] px-4 py-12">
-          <h2 className="font-display text-3xl font-bold">Missão, visão e valores</h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {[
-              { icon: BookOpen, title: "Missão", desc: "Ampliar o acesso à leitura, promover a formação de leitores e fortalecer a vida cultural da comunidade.", color: "var(--brand-blue)" },
-              { icon: Sparkles, title: "Visão", desc: "Ser referência comunitária de leitura, mediação cultural e educação como direito coletivo.", color: "var(--brand-orange)" },
-              { icon: Heart, title: "Valores", desc: "Acesso democrático, diversidade, participação, respeito, acolhimento, educação, cultura e transparência.", color: "var(--brand-red)" },
-            ].map((v) => (
-              <div key={v.title} className="rounded-2xl border border-border bg-white p-6">
-                <div className="grid h-11 w-11 place-items-center rounded-xl text-white" style={{ backgroundColor: v.color }}>
-                  <v.icon className="h-5 w-5" />
-                </div>
-                <h3 className="mt-3 font-display text-xl font-bold">{v.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{v.desc}</p>
+        <div className="mx-auto max-w-[1280px] px-4 py-14">
+          <div className="grid gap-10 md:grid-cols-[1.1fr_1fr] md:items-center">
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-wider text-primary">Nossa trajetória</div>
+              <h2 className="mt-2 font-display text-3xl font-bold">Uma história tecida entre livros e pessoas</h2>
+              <div className="mt-6 space-y-4 text-muted-foreground leading-relaxed">
+                <p>
+                  A biblioteca nasceu do desejo coletivo de aproximar moradores da região do universo dos livros.
+                  Começou pequena, com poucas estantes e muitos sonhos, reunindo crianças em rodas de leitura
+                  improvisadas e educadores voluntários dispostos a compartilhar histórias.
+                </p>
+                <p>
+                  Com o tempo, a iniciativa cresceu com o apoio da comunidade. Doações de vizinhos, escolas e coletivos
+                  fortaleceram o acervo, e novas atividades surgiram: oficinas, encontros com autores, contação de
+                  histórias e projetos que levam livros a diferentes territórios.
+                </p>
+                <p>
+                  Hoje, atuamos como Ponto de Cultura reconhecido pela comunidade, comprometidos com o acesso ao livro,
+                  a formação de leitores e o cuidado com a memória do bairro. Cada ação é uma nova página de uma
+                  história que continua sendo escrita a muitas mãos.
+                </p>
               </div>
-            ))}
-          </div>
-
-          <div className="mt-10">
-            <h3 className="font-display text-2xl font-bold">Valores que orientam a atuação</h3>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {["Acesso democrático","Diversidade","Participação comunitária","Educação","Cultura","Respeito","Acolhimento","Transparência"].map((v, i) => (
-                <span key={v} className="rounded-full border border-border bg-white px-3 py-1 text-sm" style={{ color: ["var(--brand-blue)","var(--brand-green)","var(--brand-orange)","var(--brand-red)","var(--brand-pink)","var(--brand-purple)","var(--brand-yellow)","var(--brand-blue)"][i % 8] }}>{v}</span>
-              ))}
+              <div className="mt-6">
+                <Link to="/quem-somos/nossa-historia" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+                  Ver linha do tempo completa <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+            <div className="relative">
+              <div aria-hidden className="absolute -left-4 -top-4 h-24 w-24 rounded-2xl" style={{ backgroundColor: "var(--brand-orange)", opacity: 0.15 }} />
+              <div aria-hidden className="absolute -bottom-4 -right-4 h-28 w-28 rounded-2xl" style={{ backgroundColor: "var(--brand-blue)", opacity: 0.15 }} />
+              <div className="relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+                <img src={heroImages.nossaHistoria} alt="Livros e leitores da biblioteca comunitária" className="aspect-[4/5] w-full object-cover" />
+                <div className="absolute bottom-4 left-4 rounded-lg bg-white/95 px-3 py-2 text-xs shadow">
+                  <div className="font-semibold text-primary">Ponto de Cultura</div>
+                  <div className="text-muted-foreground">Biblioteca comunitária</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <section className="bg-white">
-        <div className="mx-auto max-w-[1280px] px-4 py-12">
-          <h2 className="font-display text-3xl font-bold">Como atuamos</h2>
-          <p className="mt-2 max-w-2xl text-muted-foreground">Etapas que orientam o trabalho da biblioteca em diálogo com a comunidade.</p>
-          <div className="mt-8 grid gap-4 md:grid-cols-3 lg:grid-cols-6">
+        <div className="mx-auto max-w-[1280px] px-4 py-14">
+          <div className="max-w-2xl">
+            <div className="text-xs font-semibold uppercase tracking-wider text-primary">Fundamentos</div>
+            <h2 className="mt-2 font-display text-3xl font-bold">Missão, visão e valores</h2>
+            <p className="mt-3 text-muted-foreground">Os princípios que orientam nossa atuação como biblioteca comunitária.</p>
+          </div>
+
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
             {[
-              { icon: MessagesSquare, title: "Escuta da comunidade", color: "var(--brand-blue)" },
-              { icon: Library, title: "Organização do acervo", color: "var(--brand-green)" },
-              { icon: BookOpen, title: "Acesso aos livros", color: "var(--brand-yellow)" },
-              { icon: Users, title: "Mediação cultural", color: "var(--brand-orange)" },
-              { icon: GraduationCap, title: "Formação", color: "var(--brand-red)" },
-              { icon: Handshake, title: "Acompanhamento", color: "var(--brand-purple)" },
-            ].map((s, i) => (
-              <div key={s.title} className="rounded-2xl border border-border bg-white p-5">
-                <div className="grid h-10 w-10 place-items-center rounded-lg text-white" style={{ backgroundColor: s.color }}>
-                  <s.icon className="h-5 w-5" />
+              { icon: BookOpen, title: "Missão", color: "var(--brand-blue)", desc: "Promover o acesso democrático à leitura, à cultura e ao conhecimento por meio de um espaço comunitário acolhedor, formativo e conectado à realidade do território." },
+              { icon: Sparkles, title: "Visão", color: "var(--brand-orange)", desc: "Ser referência local na formação de leitores, no fortalecimento comunitário e na valorização da biblioteca como espaço vivo de encontro, imaginação e transformação social." },
+              { icon: Heart, title: "Valores", color: "var(--brand-red)", desc: "Acesso à leitura, acolhimento, diversidade, participação comunitária, respeito, educação, cultura, transparência e cuidado com a memória." },
+            ].map((v) => (
+              <div key={v.title} className="group relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                <div aria-hidden className="absolute left-0 top-0 h-full w-2" style={{ backgroundColor: v.color }} />
+                <div aria-hidden className="absolute left-2 top-0 h-full w-px bg-white/60" />
+                <div className="p-6 pl-7">
+                  <div className="grid h-11 w-11 place-items-center rounded-xl text-white" style={{ backgroundColor: v.color }}>
+                    <v.icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-4 font-display text-xl font-bold">{v.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{v.desc}</p>
                 </div>
-                <div className="mt-3 text-xs font-semibold uppercase text-muted-foreground">Etapa {i + 1}</div>
-                <h3 className="mt-1 font-display text-base font-semibold">{s.title}</h3>
               </div>
             ))}
+          </div>
+
+          <div className="mt-8 flex flex-wrap gap-2">
+            {valuesList.map((v, i) => {
+              const pool = ["var(--brand-blue)","var(--brand-green)","var(--brand-orange)","var(--brand-red)","var(--brand-pink)","var(--brand-purple)","var(--brand-yellow)"];
+              const c = pool[i % pool.length];
+              return (
+                <span key={v} className="inline-flex items-center gap-1.5 rounded-full border bg-white px-3 py-1 text-xs font-medium" style={{ borderColor: c, color: c }}>
+                  <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: c }} /> {v}
+                </span>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[var(--surface)]">
+        <div className="mx-auto max-w-[1280px] px-4 py-14">
+          <div className="max-w-2xl">
+            <div className="text-xs font-semibold uppercase tracking-wider text-primary">Nosso acervo</div>
+            <h2 className="mt-2 font-display text-3xl font-bold">Um acervo diverso, aberto a todas as idades</h2>
+            <p className="mt-3 text-muted-foreground">
+              A biblioteca reúne obras de gêneros e temas variados, com títulos voltados para crianças, jovens
+              e adultos. Da poesia à pesquisa, do conto à memória do território — há sempre uma página esperando
+              cada leitor.
+            </p>
+          </div>
+
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {bookTypes.map((t) => (
+              <div key={t.label} className="group relative overflow-hidden rounded-xl border border-border bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-md">
+                <div aria-hidden className="absolute left-0 top-0 h-full w-1" style={{ backgroundColor: t.color }} />
+                <div className="flex items-center gap-3 pl-2">
+                  <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg text-white" style={{ backgroundColor: t.color }}>
+                    <t.icon className="h-4 w-4" />
+                  </div>
+                  <span className="text-sm font-semibold">{t.label}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white">
+        <div className="mx-auto max-w-[1280px] px-4 py-14">
+          <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-[var(--surface)] to-white p-8 md:p-12">
+            <div aria-hidden className="absolute -right-16 -top-16 h-64 w-64 rounded-full" style={{ backgroundColor: "var(--brand-orange)", opacity: 0.1 }} />
+            <div aria-hidden className="absolute -bottom-20 -left-10 h-56 w-56 rounded-full" style={{ backgroundColor: "var(--brand-blue)", opacity: 0.1 }} />
+            <div className="relative grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-semibold text-primary shadow-sm">
+                  <BookMarked className="h-3.5 w-3.5" /> Faça parte
+                </div>
+                <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">Uma biblioteca viva se constrói com a comunidade</h2>
+                <p className="mt-4 max-w-xl text-muted-foreground">
+                  Conheça nossos projetos, acompanhe nossas ações e descubra como apoiar este espaço de leitura,
+                  cultura e encontro.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link to="/projetos/leitura-em-comunidade" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-sm hover:brightness-110">
+                    Conheça os projetos <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link to="/como-doar" className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-semibold hover:bg-muted">
+                    Como apoiar
+                  </Link>
+                </div>
+              </div>
+              <div aria-hidden className="hidden items-end justify-center gap-1 md:flex">
+                {[
+                  { c: "var(--brand-blue)", h: 120 },
+                  { c: "var(--brand-orange)", h: 150 },
+                  { c: "var(--brand-green)", h: 110 },
+                  { c: "var(--brand-red)", h: 160 },
+                  { c: "var(--brand-yellow)", h: 130 },
+                  { c: "var(--brand-purple)", h: 145 },
+                ].map((b, i) => (
+                  <div key={i} className="rounded-t-md shadow-sm" style={{ backgroundColor: b.c, height: b.h, width: 22 }} />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

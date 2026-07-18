@@ -21,7 +21,6 @@ const mainNav: Array<{
     label: "Projetos",
     to: "/projetos",
     children: [
-      { label: "Todos os Projetos", to: "/projetos" },
       { label: "Leitura em Comunidade", to: "/projetos/leitura-em-comunidade" },
       { label: "Estante Viva", to: "/projetos/estante-viva" },
       { label: "Palavras que Transformam", to: "/projetos/palavras-que-transformam" },
