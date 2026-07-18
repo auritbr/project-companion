@@ -45,7 +45,7 @@ export function Footer() {
               <li><Link to="/quem-somos" className="hover:text-white">Quem Somos</Link></li>
               <li><Link to="/quem-somos/nossa-historia" className="hover:text-white">Nossa História</Link></li>
               <li><Link to="/quem-somos/equipe" className="hover:text-white">Equipe</Link></li>
-              <li><Link to="/transparencia" className="hover:text-white">Transparência</Link></li>
+              <li><Link to="/quem-somos/transparencia" className="hover:text-white">Transparência</Link></li>
               <li><Link to="/noticias" className="hover:text-white">Notícias</Link></li>
             </ul>
           </div>

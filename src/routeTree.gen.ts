@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TransparenciaRouteImport } from './routes/transparencia'
 import { Route as TermosDeUsoRouteImport } from './routes/termos-de-uso'
 import { Route as QuemSomosRouteImport } from './routes/quem-somos'
 import { Route as ProjetosRouteImport } from './routes/projetos'
@@ -19,6 +18,7 @@ import { Route as NoticiasRouteImport } from './routes/noticias'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ComoDoarRouteImport } from './routes/como-doar'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as QuemSomosTransparenciaRouteImport } from './routes/quem-somos.transparencia'
 import { Route as QuemSomosNossaHistoriaRouteImport } from './routes/quem-somos.nossa-historia'
 import { Route as QuemSomosEquipeRouteImport } from './routes/quem-somos.equipe'
 import { Route as ProjetosPalavrasQueTransformamRouteImport } from './routes/projetos.palavras-que-transformam'
@@ -26,11 +26,6 @@ import { Route as ProjetosLeituraEmComunidadeRouteImport } from './routes/projet
 import { Route as ProjetosEstanteVivaRouteImport } from './routes/projetos.estante-viva'
 import { Route as NoticiasSlugRouteImport } from './routes/noticias.$slug'
 
-const TransparenciaRoute = TransparenciaRouteImport.update({
-  id: '/transparencia',
-  path: '/transparencia',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
   id: '/termos-de-uso',
   path: '/termos-de-uso',
@@ -76,6 +71,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QuemSomosTransparenciaRoute = QuemSomosTransparenciaRouteImport.update({
+  id: '/transparencia',
+  path: '/transparencia',
+  getParentRoute: () => QuemSomosRoute,
+} as any)
 const QuemSomosNossaHistoriaRoute = QuemSomosNossaHistoriaRouteImport.update({
   id: '/nossa-historia',
   path: '/nossa-historia',
@@ -119,13 +119,13 @@ export interface FileRoutesByFullPath {
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
-  '/transparencia': typeof TransparenciaRoute
   '/noticias/$slug': typeof NoticiasSlugRoute
   '/projetos/estante-viva': typeof ProjetosEstanteVivaRoute
   '/projetos/leitura-em-comunidade': typeof ProjetosLeituraEmComunidadeRoute
   '/projetos/palavras-que-transformam': typeof ProjetosPalavrasQueTransformamRoute
   '/quem-somos/equipe': typeof QuemSomosEquipeRoute
   '/quem-somos/nossa-historia': typeof QuemSomosNossaHistoriaRoute
+  '/quem-somos/transparencia': typeof QuemSomosTransparenciaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -137,13 +137,13 @@ export interface FileRoutesByTo {
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
-  '/transparencia': typeof TransparenciaRoute
   '/noticias/$slug': typeof NoticiasSlugRoute
   '/projetos/estante-viva': typeof ProjetosEstanteVivaRoute
   '/projetos/leitura-em-comunidade': typeof ProjetosLeituraEmComunidadeRoute
   '/projetos/palavras-que-transformam': typeof ProjetosPalavrasQueTransformamRoute
   '/quem-somos/equipe': typeof QuemSomosEquipeRoute
   '/quem-somos/nossa-historia': typeof QuemSomosNossaHistoriaRoute
+  '/quem-somos/transparencia': typeof QuemSomosTransparenciaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -156,13 +156,13 @@ export interface FileRoutesById {
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
   '/termos-de-uso': typeof TermosDeUsoRoute
-  '/transparencia': typeof TransparenciaRoute
   '/noticias/$slug': typeof NoticiasSlugRoute
   '/projetos/estante-viva': typeof ProjetosEstanteVivaRoute
   '/projetos/leitura-em-comunidade': typeof ProjetosLeituraEmComunidadeRoute
   '/projetos/palavras-que-transformam': typeof ProjetosPalavrasQueTransformamRoute
   '/quem-somos/equipe': typeof QuemSomosEquipeRoute
   '/quem-somos/nossa-historia': typeof QuemSomosNossaHistoriaRoute
+  '/quem-somos/transparencia': typeof QuemSomosTransparenciaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -176,13 +176,13 @@ export interface FileRouteTypes {
     | '/projetos'
     | '/quem-somos'
     | '/termos-de-uso'
-    | '/transparencia'
     | '/noticias/$slug'
     | '/projetos/estante-viva'
     | '/projetos/leitura-em-comunidade'
     | '/projetos/palavras-que-transformam'
     | '/quem-somos/equipe'
     | '/quem-somos/nossa-historia'
+    | '/quem-somos/transparencia'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -194,13 +194,13 @@ export interface FileRouteTypes {
     | '/projetos'
     | '/quem-somos'
     | '/termos-de-uso'
-    | '/transparencia'
     | '/noticias/$slug'
     | '/projetos/estante-viva'
     | '/projetos/leitura-em-comunidade'
     | '/projetos/palavras-que-transformam'
     | '/quem-somos/equipe'
     | '/quem-somos/nossa-historia'
+    | '/quem-somos/transparencia'
   id:
     | '__root__'
     | '/'
@@ -212,13 +212,13 @@ export interface FileRouteTypes {
     | '/projetos'
     | '/quem-somos'
     | '/termos-de-uso'
-    | '/transparencia'
     | '/noticias/$slug'
     | '/projetos/estante-viva'
     | '/projetos/leitura-em-comunidade'
     | '/projetos/palavras-que-transformam'
     | '/quem-somos/equipe'
     | '/quem-somos/nossa-historia'
+    | '/quem-somos/transparencia'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -231,18 +231,10 @@ export interface RootRouteChildren {
   ProjetosRoute: typeof ProjetosRouteWithChildren
   QuemSomosRoute: typeof QuemSomosRouteWithChildren
   TermosDeUsoRoute: typeof TermosDeUsoRoute
-  TransparenciaRoute: typeof TransparenciaRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/transparencia': {
-      id: '/transparencia'
-      path: '/transparencia'
-      fullPath: '/transparencia'
-      preLoaderRoute: typeof TransparenciaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/termos-de-uso': {
       id: '/termos-de-uso'
       path: '/termos-de-uso'
@@ -305,6 +297,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/quem-somos/transparencia': {
+      id: '/quem-somos/transparencia'
+      path: '/transparencia'
+      fullPath: '/quem-somos/transparencia'
+      preLoaderRoute: typeof QuemSomosTransparenciaRouteImport
+      parentRoute: typeof QuemSomosRoute
     }
     '/quem-somos/nossa-historia': {
       id: '/quem-somos/nossa-historia'
@@ -382,11 +381,13 @@ const ProjetosRouteWithChildren = ProjetosRoute._addFileChildren(
 interface QuemSomosRouteChildren {
   QuemSomosEquipeRoute: typeof QuemSomosEquipeRoute
   QuemSomosNossaHistoriaRoute: typeof QuemSomosNossaHistoriaRoute
+  QuemSomosTransparenciaRoute: typeof QuemSomosTransparenciaRoute
 }
 
 const QuemSomosRouteChildren: QuemSomosRouteChildren = {
   QuemSomosEquipeRoute: QuemSomosEquipeRoute,
   QuemSomosNossaHistoriaRoute: QuemSomosNossaHistoriaRoute,
+  QuemSomosTransparenciaRoute: QuemSomosTransparenciaRoute,
 }
 
 const QuemSomosRouteWithChildren = QuemSomosRoute._addFileChildren(
@@ -403,7 +404,6 @@ const rootRouteChildren: RootRouteChildren = {
   ProjetosRoute: ProjetosRouteWithChildren,
   QuemSomosRoute: QuemSomosRouteWithChildren,
   TermosDeUsoRoute: TermosDeUsoRoute,
-  TransparenciaRoute: TransparenciaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
