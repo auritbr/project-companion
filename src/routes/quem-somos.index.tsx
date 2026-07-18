@@ -190,21 +190,31 @@ function QuemSomos() {
             <p className="mt-3 text-muted-foreground">Os princípios que orientam nossa atuação como biblioteca comunitária.</p>
           </div>
 
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
             {[
-              { icon: BookOpen, title: "Missão", color: "var(--brand-blue)", desc: "Promover o acesso democrático à leitura, à cultura e ao conhecimento por meio de um espaço comunitário acolhedor, formativo e conectado à realidade do território." },
-              { icon: Sparkles, title: "Visão", color: "var(--brand-orange)", desc: "Ser referência local na formação de leitores, no fortalecimento comunitário e na valorização da biblioteca como espaço vivo de encontro, imaginação e transformação social." },
-              { icon: Heart, title: "Valores", color: "var(--brand-red)", desc: "Acesso à leitura, acolhimento, diversidade, participação comunitária, respeito, educação, cultura, transparência e cuidado com a memória." },
+              { icon: BookOpen, title: "Missão", color: "var(--brand-blue)", label: "Vol. I", desc: "Promover o acesso democrático à leitura, à cultura e ao conhecimento por meio de um espaço comunitário acolhedor, formativo e conectado à realidade do território." },
+              { icon: Sparkles, title: "Visão", color: "var(--brand-orange)", label: "Vol. II", desc: "Ser referência local na formação de leitores, no fortalecimento comunitário e na valorização da biblioteca como espaço vivo de encontro, imaginação e transformação social." },
+              { icon: Heart, title: "Valores", color: "var(--brand-red)", label: "Vol. III", desc: "Acesso à leitura, acolhimento, diversidade, participação comunitária, respeito, educação, cultura, transparência e cuidado com a memória." },
             ].map((v) => (
-              <div key={v.title} className="group relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-                <div aria-hidden className="absolute left-0 top-0 h-full w-2" style={{ backgroundColor: v.color }} />
-                <div aria-hidden className="absolute left-2 top-0 h-full w-px bg-white/60" />
-                <div className="p-6 pl-7">
-                  <div className="grid h-11 w-11 place-items-center rounded-xl text-white" style={{ backgroundColor: v.color }}>
-                    <v.icon className="h-5 w-5" />
+              // Cada um como capa de livro editorial
+              <div key={v.title} className="group relative flex flex-col overflow-hidden rounded-lg shadow-xl transition hover:-translate-y-2 hover:shadow-2xl" style={{ background: `linear-gradient(160deg, ${v.color} 0%, oklch(0.30 0.05 260) 100%)` }}>
+                {/* moldura interna estilo capa */}
+                <div className="m-3 flex flex-1 flex-col rounded-md border-2 border-white/30 p-6 text-white">
+                  <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-white/70">
+                    <span>{v.label}</span>
+                    <span>Biblioteca</span>
                   </div>
-                  <h3 className="mt-4 font-display text-xl font-bold">{v.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{v.desc}</p>
+                  <div className="mt-6 grid h-14 w-14 place-items-center rounded-full bg-white/15 backdrop-blur">
+                    <v.icon className="h-7 w-7" />
+                  </div>
+                  <h3 className="mt-6 font-display text-3xl font-black tracking-tight">{v.title}</h3>
+                  <div aria-hidden className="mt-3 h-1 w-16 rounded-full bg-white/60" />
+                  <p className="mt-4 flex-1 text-sm leading-relaxed text-white/90">{v.desc}</p>
+                  <div aria-hidden className="mt-6 flex gap-1.5">
+                    <span className="h-1 w-8 rounded-full bg-white/40" />
+                    <span className="h-1 w-4 rounded-full bg-white/40" />
+                    <span className="h-1 w-2 rounded-full bg-white/40" />
+                  </div>
                 </div>
               </div>
             ))}
