@@ -14,6 +14,7 @@ import { Route as ProjetosRouteImport } from './routes/projetos'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as QuemSomosNossaHistoriaRouteImport } from './routes/quem-somos.nossa-historia'
 import { Route as QuemSomosEquipeRouteImport } from './routes/quem-somos.equipe'
+import { Route as ProjetosPalavrasQueTransformamRouteImport } from './routes/projetos.palavras-que-transformam'
 import { Route as ProjetosLeituraEmComunidadeRouteImport } from './routes/projetos.leitura-em-comunidade'
 import { Route as ProjetosEstanteVivaRouteImport } from './routes/projetos.estante-viva'
 
@@ -42,6 +43,12 @@ const QuemSomosEquipeRoute = QuemSomosEquipeRouteImport.update({
   path: '/equipe',
   getParentRoute: () => QuemSomosRoute,
 } as any)
+const ProjetosPalavrasQueTransformamRoute =
+  ProjetosPalavrasQueTransformamRouteImport.update({
+    id: '/palavras-que-transformam',
+    path: '/palavras-que-transformam',
+    getParentRoute: () => ProjetosRoute,
+  } as any)
 const ProjetosLeituraEmComunidadeRoute =
   ProjetosLeituraEmComunidadeRouteImport.update({
     id: '/leitura-em-comunidade',
@@ -60,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/quem-somos': typeof QuemSomosRouteWithChildren
   '/projetos/estante-viva': typeof ProjetosEstanteVivaRoute
   '/projetos/leitura-em-comunidade': typeof ProjetosLeituraEmComunidadeRoute
+  '/projetos/palavras-que-transformam': typeof ProjetosPalavrasQueTransformamRoute
   '/quem-somos/equipe': typeof QuemSomosEquipeRoute
   '/quem-somos/nossa-historia': typeof QuemSomosNossaHistoriaRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesByTo {
   '/quem-somos': typeof QuemSomosRouteWithChildren
   '/projetos/estante-viva': typeof ProjetosEstanteVivaRoute
   '/projetos/leitura-em-comunidade': typeof ProjetosLeituraEmComunidadeRoute
+  '/projetos/palavras-que-transformam': typeof ProjetosPalavrasQueTransformamRoute
   '/quem-somos/equipe': typeof QuemSomosEquipeRoute
   '/quem-somos/nossa-historia': typeof QuemSomosNossaHistoriaRoute
 }
@@ -79,6 +88,7 @@ export interface FileRoutesById {
   '/quem-somos': typeof QuemSomosRouteWithChildren
   '/projetos/estante-viva': typeof ProjetosEstanteVivaRoute
   '/projetos/leitura-em-comunidade': typeof ProjetosLeituraEmComunidadeRoute
+  '/projetos/palavras-que-transformam': typeof ProjetosPalavrasQueTransformamRoute
   '/quem-somos/equipe': typeof QuemSomosEquipeRoute
   '/quem-somos/nossa-historia': typeof QuemSomosNossaHistoriaRoute
 }
@@ -90,6 +100,7 @@ export interface FileRouteTypes {
     | '/quem-somos'
     | '/projetos/estante-viva'
     | '/projetos/leitura-em-comunidade'
+    | '/projetos/palavras-que-transformam'
     | '/quem-somos/equipe'
     | '/quem-somos/nossa-historia'
   fileRoutesByTo: FileRoutesByTo
@@ -99,6 +110,7 @@ export interface FileRouteTypes {
     | '/quem-somos'
     | '/projetos/estante-viva'
     | '/projetos/leitura-em-comunidade'
+    | '/projetos/palavras-que-transformam'
     | '/quem-somos/equipe'
     | '/quem-somos/nossa-historia'
   id:
@@ -108,6 +120,7 @@ export interface FileRouteTypes {
     | '/quem-somos'
     | '/projetos/estante-viva'
     | '/projetos/leitura-em-comunidade'
+    | '/projetos/palavras-que-transformam'
     | '/quem-somos/equipe'
     | '/quem-somos/nossa-historia'
   fileRoutesById: FileRoutesById
@@ -155,6 +168,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuemSomosEquipeRouteImport
       parentRoute: typeof QuemSomosRoute
     }
+    '/projetos/palavras-que-transformam': {
+      id: '/projetos/palavras-que-transformam'
+      path: '/palavras-que-transformam'
+      fullPath: '/projetos/palavras-que-transformam'
+      preLoaderRoute: typeof ProjetosPalavrasQueTransformamRouteImport
+      parentRoute: typeof ProjetosRoute
+    }
     '/projetos/leitura-em-comunidade': {
       id: '/projetos/leitura-em-comunidade'
       path: '/leitura-em-comunidade'
@@ -175,11 +195,13 @@ declare module '@tanstack/react-router' {
 interface ProjetosRouteChildren {
   ProjetosEstanteVivaRoute: typeof ProjetosEstanteVivaRoute
   ProjetosLeituraEmComunidadeRoute: typeof ProjetosLeituraEmComunidadeRoute
+  ProjetosPalavrasQueTransformamRoute: typeof ProjetosPalavrasQueTransformamRoute
 }
 
 const ProjetosRouteChildren: ProjetosRouteChildren = {
   ProjetosEstanteVivaRoute: ProjetosEstanteVivaRoute,
   ProjetosLeituraEmComunidadeRoute: ProjetosLeituraEmComunidadeRoute,
+  ProjetosPalavrasQueTransformamRoute: ProjetosPalavrasQueTransformamRoute,
 }
 
 const ProjetosRouteWithChildren = ProjetosRoute._addFileChildren(
