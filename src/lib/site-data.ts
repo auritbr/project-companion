@@ -211,6 +211,7 @@ export const news: NewsItem[] = [
   readingTime: `${3 + (i % 4)} min de leitura`,
   author: "Equipe da Biblioteca",
   body: baseBody,
+  image: U(newsPhotoPool[i % newsPhotoPool.length]),
 }));
 
 export const team = [
