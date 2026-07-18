@@ -4,7 +4,7 @@ import { PageHero } from "../components/site/PageHero";
 import { projects, projectImages, heroImages } from "../lib/site-data";
 import { ArrowRight } from "lucide-react";
 
-export const Route = createFileRoute("/projetos")({
+export const Route = createFileRoute("/projetos/")({
   component: Projetos,
   head: () => ({
     meta: [

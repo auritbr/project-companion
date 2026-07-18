@@ -3,7 +3,7 @@ import { PageHero } from "../components/site/PageHero";
 import { BookOpen, Heart, Users, Sparkles, Handshake, GraduationCap, Library, MessagesSquare, ArrowRight } from "lucide-react";
 import { heroImages } from "../lib/site-data";
 
-export const Route = createFileRoute("/quem-somos")({
+export const Route = createFileRoute("/quem-somos/")({
   component: QuemSomos,
   head: () => ({
     meta: [

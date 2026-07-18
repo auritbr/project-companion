@@ -4,7 +4,7 @@ import { PageHero } from "../components/site/PageHero";
 import { news, newsTags, heroImages } from "../lib/site-data";
 import { Search, ArrowRight } from "lucide-react";
 
-export const Route = createFileRoute("/noticias")({
+export const Route = createFileRoute("/noticias/")({
   component: Noticias,
   head: () => ({
     meta: [
