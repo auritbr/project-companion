@@ -15,6 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as QuemSomosNossaHistoriaRouteImport } from './routes/quem-somos.nossa-historia'
 import { Route as QuemSomosEquipeRouteImport } from './routes/quem-somos.equipe'
 import { Route as ProjetosLeituraEmComunidadeRouteImport } from './routes/projetos.leitura-em-comunidade'
+import { Route as ProjetosEstanteVivaRouteImport } from './routes/projetos.estante-viva'
 
 const QuemSomosRoute = QuemSomosRouteImport.update({
   id: '/quem-somos',
@@ -47,11 +48,17 @@ const ProjetosLeituraEmComunidadeRoute =
     path: '/leitura-em-comunidade',
     getParentRoute: () => ProjetosRoute,
   } as any)
+const ProjetosEstanteVivaRoute = ProjetosEstanteVivaRouteImport.update({
+  id: '/estante-viva',
+  path: '/estante-viva',
+  getParentRoute: () => ProjetosRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
+  '/projetos/estante-viva': typeof ProjetosEstanteVivaRoute
   '/projetos/leitura-em-comunidade': typeof ProjetosLeituraEmComunidadeRoute
   '/quem-somos/equipe': typeof QuemSomosEquipeRoute
   '/quem-somos/nossa-historia': typeof QuemSomosNossaHistoriaRoute
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
+  '/projetos/estante-viva': typeof ProjetosEstanteVivaRoute
   '/projetos/leitura-em-comunidade': typeof ProjetosLeituraEmComunidadeRoute
   '/quem-somos/equipe': typeof QuemSomosEquipeRoute
   '/quem-somos/nossa-historia': typeof QuemSomosNossaHistoriaRoute
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/projetos': typeof ProjetosRouteWithChildren
   '/quem-somos': typeof QuemSomosRouteWithChildren
+  '/projetos/estante-viva': typeof ProjetosEstanteVivaRoute
   '/projetos/leitura-em-comunidade': typeof ProjetosLeituraEmComunidadeRoute
   '/quem-somos/equipe': typeof QuemSomosEquipeRoute
   '/quem-somos/nossa-historia': typeof QuemSomosNossaHistoriaRoute
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
     | '/'
     | '/projetos'
     | '/quem-somos'
+    | '/projetos/estante-viva'
     | '/projetos/leitura-em-comunidade'
     | '/quem-somos/equipe'
     | '/quem-somos/nossa-historia'
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/'
     | '/projetos'
     | '/quem-somos'
+    | '/projetos/estante-viva'
     | '/projetos/leitura-em-comunidade'
     | '/quem-somos/equipe'
     | '/quem-somos/nossa-historia'
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/projetos'
     | '/quem-somos'
+    | '/projetos/estante-viva'
     | '/projetos/leitura-em-comunidade'
     | '/quem-somos/equipe'
     | '/quem-somos/nossa-historia'
@@ -150,14 +162,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjetosLeituraEmComunidadeRouteImport
       parentRoute: typeof ProjetosRoute
     }
+    '/projetos/estante-viva': {
+      id: '/projetos/estante-viva'
+      path: '/estante-viva'
+      fullPath: '/projetos/estante-viva'
+      preLoaderRoute: typeof ProjetosEstanteVivaRouteImport
+      parentRoute: typeof ProjetosRoute
+    }
   }
 }
 
 interface ProjetosRouteChildren {
+  ProjetosEstanteVivaRoute: typeof ProjetosEstanteVivaRoute
   ProjetosLeituraEmComunidadeRoute: typeof ProjetosLeituraEmComunidadeRoute
 }
 
 const ProjetosRouteChildren: ProjetosRouteChildren = {
+  ProjetosEstanteVivaRoute: ProjetosEstanteVivaRoute,
   ProjetosLeituraEmComunidadeRoute: ProjetosLeituraEmComunidadeRoute,
 }
 
