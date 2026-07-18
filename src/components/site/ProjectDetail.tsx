@@ -215,7 +215,7 @@ export function ProjectDetail({ slug }: { slug: ProjectSlug }) {
           {/* Galeria + Depoimento */}
           <div className="mt-12 grid gap-6 md:grid-cols-[1.4fr_1fr]">
             <div>
-              <h3 className="font-display text-2xl font-bold">Galeria</h3>
+              <h3 className="font-display text-2xl font-bold">Galeria de fotos</h3>
               <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {gallery.map((i) => (
                   <button key={i} onClick={() => setLightbox(i)} className="aspect-[4/3] overflow-hidden rounded-xl border border-border bg-[var(--surface)] text-xs text-muted-foreground transition hover:shadow-md">

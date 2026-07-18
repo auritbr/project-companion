@@ -3,7 +3,7 @@ import { PageHero } from "../components/site/PageHero";
 import {
   BookOpen, Heart, Sparkles, ArrowRight, Library, BookMarked, Feather,
   Baby, GraduationCap, Landmark, Users, ScrollText, Bookmark, NotebookPen,
-  BookHeart, BookText, Scroll,
+  BookHeart, BookText, Scroll, School, Activity,
 } from "lucide-react";
 import { heroImages } from "../lib/site-data";
 
@@ -36,6 +36,22 @@ const bookTypes = [
 const valuesList = [
   "Acesso à leitura", "Acolhimento", "Diversidade", "Participação comunitária",
   "Respeito", "Educação", "Cultura", "Transparência", "Cuidado com a memória",
+];
+
+const indicators = [
+  { icon: BookOpen, label: "Livros no acervo", value: "A cadastrar", color: "var(--brand-blue)" },
+  { icon: Users, label: "Leitores atendidos", value: "A cadastrar", color: "var(--brand-orange)" },
+  { icon: School, label: "Escolas alcançadas", value: "A cadastrar", color: "var(--brand-green)" },
+  { icon: Activity, label: "Atividades realizadas", value: "A cadastrar", color: "var(--brand-red)" },
+];
+
+const timeline = [
+  { year: "Fundação", title: "Início da biblioteca", desc: "Mobilização comunitária e doação dos primeiros livros.", color: "var(--brand-blue)" },
+  { year: "Primeiro acervo", title: "Organização do espaço", desc: "Primeiras estantes montadas em parceria com moradores.", color: "var(--brand-green)" },
+  { year: "Primeiras ações", title: "Rodas de leitura", desc: "Início das atividades de mediação literária e contação.", color: "var(--brand-yellow)" },
+  { year: "Ampliação", title: "Novos projetos e parcerias", desc: "Chegada de oficinas, encontros com autores e ampliação do acervo.", color: "var(--brand-orange)" },
+  { year: "Reconhecimento", title: "Ponto de Cultura", desc: "Consolidação como referência cultural do território.", color: "var(--brand-red)" },
+  { year: "Atuação atual", title: "Uma biblioteca viva", desc: "Ações contínuas de leitura, formação e cuidado com a memória.", color: "var(--brand-purple)" },
 ];
 
 function QuemSomos() {
@@ -80,9 +96,9 @@ function QuemSomos() {
                 </p>
               </div>
               <div className="mt-6">
-                <Link to="/quem-somos/nossa-historia" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
-                  Ver linha do tempo completa <ArrowRight className="h-4 w-4" />
-                </Link>
+                <a href="#linha-do-tempo" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+                  Ver linha do tempo <ArrowRight className="h-4 w-4" />
+                </a>
               </div>
             </div>
             <div className="relative">
@@ -96,6 +112,31 @@ function QuemSomos() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* INDICADORES */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-[1280px] px-4 py-14">
+          <div className="max-w-2xl">
+            <div className="text-xs font-semibold uppercase tracking-wider text-primary">Nosso alcance</div>
+            <h2 className="mt-2 font-display text-3xl font-bold">Indicadores de impacto</h2>
+            <p className="mt-2 text-muted-foreground">Números demonstrativos — serão atualizados pelo painel administrativo.</p>
+          </div>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {indicators.map((k) => (
+              <div key={k.label} className="relative overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm">
+                <div aria-hidden className="absolute -right-6 -top-6 h-20 w-20 rounded-full" style={{ backgroundColor: k.color, opacity: 0.12 }} />
+                <div className="relative">
+                  <div className="grid h-12 w-12 place-items-center rounded-xl text-white" style={{ backgroundColor: k.color }}>
+                    <k.icon className="h-6 w-6" />
+                  </div>
+                  <div className="mt-3 font-display text-2xl font-bold">{k.value}</div>
+                  <div className="text-sm font-semibold text-foreground">{k.label}</div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -139,6 +180,33 @@ function QuemSomos() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* LINHA DO TEMPO */}
+      <section id="linha-do-tempo" className="bg-[var(--surface)]">
+        <div className="mx-auto max-w-[1280px] px-4 py-14">
+          <div className="max-w-2xl">
+            <div className="text-xs font-semibold uppercase tracking-wider text-primary">Linha do tempo</div>
+            <h2 className="mt-2 font-display text-3xl font-bold">Páginas da nossa história</h2>
+            <p className="mt-2 text-muted-foreground">Marcos que registram a trajetória da biblioteca comunitária.</p>
+          </div>
+          <ol className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {timeline.map((m, i) => (
+              <li key={i} className="group relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+                <div aria-hidden className="absolute left-0 top-0 h-full w-1.5" style={{ backgroundColor: m.color }} />
+                <div aria-hidden className="absolute left-1.5 top-0 h-full w-px bg-white/70" />
+                <div className="p-5 pl-7">
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-semibold text-white" style={{ backgroundColor: m.color }}>Página {String(i + 1).padStart(2, "0")}</span>
+                    <span className="text-xs font-semibold text-muted-foreground">{m.year}</span>
+                  </div>
+                  <h3 className="mt-3 font-display text-lg font-bold">{m.title}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{m.desc}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 

@@ -36,30 +36,26 @@ function NoticiaDetalhe() {
 
   return (
     <>
-      <section className="border-b border-border bg-[var(--surface)]">
-        <div className="mx-auto max-w-[1280px] px-4 pt-6 md:pt-8">
-          <Breadcrumbs items={[{ label: "Notícias", to: "/noticias" }, { label: item.title }]} />
-        </div>
-        <div className="mx-auto grid max-w-[1280px] gap-8 px-4 py-8 md:grid-cols-[1.15fr_1fr] md:items-center md:py-12">
-          <div className="order-2 md:order-1">
-            <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold text-white" style={{ backgroundColor: "var(--brand-blue)" }}>
-              {item.tag}
-            </span>
-            <h1 className="mt-4 font-display text-3xl font-bold leading-tight md:text-4xl">{item.title}</h1>
-            <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
-              <span className="inline-flex items-center gap-1.5"><Calendar className="h-4 w-4" /> {item.date}</span>
-              <span className="inline-flex items-center gap-1.5"><User className="h-4 w-4" /> {item.author}</span>
-              <span className="inline-flex items-center gap-1.5"><Clock className="h-4 w-4" /> {item.readingTime}</span>
-            </div>
+      <section className="relative overflow-hidden border-b border-border bg-black">
+        <img src={item.image} alt="" className="absolute inset-0 h-full w-full object-cover opacity-70" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-black/30" />
+        <div className="relative mx-auto max-w-[1280px] px-4 pt-6 md:pt-8">
+          <div className="text-white/90 [&_*]:!text-white/80">
+            <Breadcrumbs items={[{ label: "Notícias", to: "/noticias" }, { label: item.title }]} />
           </div>
-          <div className="order-1 md:order-2">
-            <div className="relative">
-              <div aria-hidden className="absolute -left-3 -top-3 h-16 w-16 rounded-2xl" style={{ backgroundColor: "var(--brand-orange)", opacity: 0.2 }} />
-              <div aria-hidden className="absolute -bottom-3 -right-3 h-20 w-20 rounded-2xl" style={{ backgroundColor: "var(--brand-blue)", opacity: 0.2 }} />
-              <div className="relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
-                <img src={item.image} alt="" className="aspect-[16/10] w-full object-cover" />
-              </div>
-            </div>
+        </div>
+        <div className="relative mx-auto max-w-[1280px] px-4 pb-12 pt-8 md:pb-16 md:pt-14">
+          <Link to="/noticias" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur hover:bg-white/20">
+            <ArrowLeft className="h-3.5 w-3.5" /> Voltar para Notícias
+          </Link>
+          <div className="mt-5 flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold text-white" style={{ backgroundColor: "var(--brand-blue)" }}>{item.tag}</span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-xs font-medium text-white backdrop-blur"><Calendar className="h-3.5 w-3.5" /> {item.date}</span>
+          </div>
+          <h1 className="mt-4 max-w-3xl font-display text-3xl font-bold leading-tight text-white md:text-5xl">{item.title}</h1>
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/85">
+            <span className="inline-flex items-center gap-1.5"><User className="h-4 w-4" /> {item.author}</span>
+            <span className="inline-flex items-center gap-1.5"><Clock className="h-4 w-4" /> {item.readingTime}</span>
           </div>
         </div>
       </section>
@@ -97,7 +93,7 @@ function NoticiaDetalhe() {
 
           {/* Galeria */}
           <div className="mt-10">
-            <h2 className="font-display text-2xl font-bold">Galeria da atividade</h2>
+            <h2 className="font-display text-2xl font-bold">Galeria de fotos</h2>
             <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
               {Array.from({ length: 6 }).map((_, i) => (
                 <div key={i} className="aspect-[4/3] rounded-xl bg-[oklch(0.94_0.02_240)] grid place-items-center text-xs text-muted-foreground">Imagem {i + 1}</div>
