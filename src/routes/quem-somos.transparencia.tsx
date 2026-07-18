@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { PageHero } from "../components/site/PageHero";
 import { documents } from "../lib/site-data";
-import { ChevronDown, Download, Eye, FileText, X } from "lucide-react";
+import { ChevronDown, Download, Eye, FileText, X, Archive, ArrowRight, MessageCircle } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/quem-somos/transparencia")({
   component: Transparencia,
@@ -67,11 +68,18 @@ function Transparencia() {
       />
 
       <section className="bg-white">
-        <div className="mx-auto max-w-[1080px] px-4 py-12">
-          <p className="max-w-3xl text-muted-foreground">
-            Documentos institucionais e prestações de contas disponíveis para consulta pública. Clique em uma
-            categoria para expandir e visualize os documentos diretamente no navegador ou faça o download.
+        <div className="mx-auto max-w-[900px] px-4 py-12 text-center">
+          <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-border bg-[var(--surface)] px-3 py-1 text-xs font-semibold text-primary">
+            <Archive className="h-3.5 w-3.5" /> Consulta pública
+          </div>
+          <h2 className="mt-4 font-display text-3xl font-bold md:text-4xl">Acervo institucional</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+            Acesse documentos, certificados, reconhecimentos, portfólios e registros da organização,
+            organizados por categoria para facilitar a consulta pública.
           </p>
+        </div>
+
+        <div className="mx-auto max-w-[1080px] px-4 pb-12">
 
           <div className="mt-8 space-y-3">
             {categories.map((category, i) => {
