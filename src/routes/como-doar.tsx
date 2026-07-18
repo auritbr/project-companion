@@ -91,7 +91,7 @@ function ComoDoar() {
 
           <div className="mt-12 rounded-3xl border border-border bg-[var(--surface)] p-8">
             <h2 className="font-display text-2xl font-bold">Transparência no uso dos recursos</h2>
-            <p className="mt-2 max-w-3xl text-muted-foreground">Todos os recursos recebidos são aplicados nos projetos, no acervo e nas ações culturais da biblioteca. A prestação de contas está disponível na página de <Link to="/transparencia" className="font-semibold text-primary hover:underline">Transparência</Link>.</p>
+            <p className="mt-2 max-w-3xl text-muted-foreground">Todos os recursos recebidos são aplicados nos projetos, no acervo e nas ações culturais da biblioteca. A prestação de contas está disponível na página de <Link to="/quem-somos/transparencia" className="font-semibold text-primary hover:underline">Transparência</Link>.</p>
           </div>
         </div>
       </section>
