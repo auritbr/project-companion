@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "../components/site/PageHero";
+import { heroImages } from "../lib/site-data";
 
 export const Route = createFileRoute("/quem-somos/nossa-historia")({
   component: NossaHistoria,
@@ -24,7 +25,7 @@ const timeline = [
 function NossaHistoria() {
   return (
     <>
-      <PageHero title="Nossa História" description="Uma trajetória construída coletivamente, ligada à leitura, à educação e à vida cultural da comunidade." breadcrumbs={[{ label: "Quem Somos", to: "/quem-somos" }, { label: "Nossa História" }]} />
+      <PageHero title="Nossa História" breadcrumbs={[{ label: "Quem Somos", to: "/quem-somos" }, { label: "Nossa História" }]} image={heroImages.nossaHistoria} />
 
       <section className="bg-white">
         <div className="mx-auto max-w-[900px] px-4 py-12">
