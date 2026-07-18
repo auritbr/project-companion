@@ -242,21 +242,53 @@ function QuemSomos() {
             <h2 className="mt-2 font-display text-3xl font-bold">Páginas da nossa história</h2>
             <p className="mt-2 text-muted-foreground">Marcos que registram a trajetória da biblioteca comunitária.</p>
           </div>
-          <ol className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {timeline.map((m, i) => (
-              <li key={i} className="group relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-                <div aria-hidden className="absolute left-0 top-0 h-full w-1.5" style={{ backgroundColor: m.color }} />
-                <div aria-hidden className="absolute left-1.5 top-0 h-full w-px bg-white/70" />
-                <div className="p-5 pl-7">
-                  <div className="flex items-center gap-2">
-                    <span className="inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-semibold text-white" style={{ backgroundColor: m.color }}>Página {String(i + 1).padStart(2, "0")}</span>
-                    <span className="text-xs font-semibold text-muted-foreground">{m.year}</span>
-                  </div>
+          <ol className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {timeline.map((m, i) => {
+              // 3 formatos alternados: livro em pé, ficha e página com canto dobrado
+              const style = i % 3;
+              if (style === 0) {
+                return (
+                  <li key={i} className="group relative flex overflow-hidden rounded-r-2xl rounded-l bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+                    <div aria-hidden className="relative w-14 shrink-0 text-white" style={{ backgroundColor: m.color }}>
+                      <div className="absolute inset-y-3 left-1/2 w-px -translate-x-1/2 bg-white/40" />
+                      <div className="absolute inset-x-0 top-4 text-center font-display text-2xl font-black">{String(i + 1).padStart(2, "0")}</div>
+                      <div className="absolute inset-x-0 bottom-3 text-center text-[8px] font-mono uppercase tracking-widest opacity-80">Cap.</div>
+                    </div>
+                    <div className="flex-1 p-5">
+                      <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">{m.year}</div>
+                      <h3 className="mt-1 font-display text-lg font-bold" style={{ color: m.color }}>{m.title}</h3>
+                      <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
+                    </div>
+                  </li>
+                );
+              }
+              if (style === 1) {
+                return (
+                  <li key={i} className="group relative overflow-hidden rounded-lg bg-[var(--surface)] shadow-md transition hover:-translate-y-1 hover:shadow-xl" style={{ borderTop: `6px solid ${m.color}` }}>
+                    <div className="p-5">
+                      <div className="flex items-center justify-between text-[10px] font-mono font-semibold uppercase tracking-widest text-muted-foreground">
+                        <span>Ficha nº {String(i + 1).padStart(3, "0")}</span>
+                        <span className="rounded px-1.5 py-0.5 text-white" style={{ backgroundColor: m.color }}>{m.year}</span>
+                      </div>
+                      <div aria-hidden className="mt-3 h-px border-t border-dashed" style={{ borderColor: m.color }} />
+                      <h3 className="mt-3 font-display text-lg font-bold">{m.title}</h3>
+                      <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
+                      <div aria-hidden className="mt-4 h-px w-2/3 bg-muted" />
+                      <div aria-hidden className="mt-1.5 h-px w-1/2 bg-muted" />
+                    </div>
+                  </li>
+                );
+              }
+              return (
+                <li key={i} className="group relative overflow-hidden rounded-2xl bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-xl" style={{ border: `2px solid ${m.color}` }}>
+                  <div aria-hidden className="absolute right-0 top-0 h-0 w-0 border-b-[36px] border-l-[36px] border-b-transparent" style={{ borderLeftColor: m.color }} />
+                  <div className="font-display text-3xl font-black" style={{ color: m.color }}>{String(i + 1).padStart(2, "0")}</div>
+                  <div className="mt-1 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">{m.year}</div>
                   <h3 className="mt-3 font-display text-lg font-bold">{m.title}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{m.desc}</p>
-                </div>
-              </li>
-            ))}
+                  <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
+                </li>
+              );
+            })}
           </ol>
         </div>
       </section>
