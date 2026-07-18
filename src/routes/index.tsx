@@ -145,18 +145,13 @@ function Home() {
 
       {/* APRESENTAÇÃO */}
       <section className="bg-[var(--surface)]">
-        <div className="mx-auto grid max-w-[1280px] gap-10 px-4 py-14 md:grid-cols-2 md:items-center">
-          <div className="relative">
-            <div className="aspect-[5/4] w-full overflow-hidden rounded-[28px] bg-[oklch(0.94_0.02_240)]">
-              <div className="grid h-full place-items-center text-muted-foreground">
-                <div className="text-center">
-                  <BookOpen className="mx-auto h-12 w-12 text-primary" />
-                  <div className="mt-2 text-sm">Fotografia demonstrativa do espaço</div>
-                </div>
-              </div>
+        <div className="mx-auto grid max-w-[1200px] gap-10 px-4 py-14 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:items-center">
+          <div className="relative mx-auto w-full max-w-[360px]">
+            <div className="aspect-[3/4] w-full overflow-hidden rounded-2xl border-2 border-border bg-white shadow-lg" style={{ borderColor: "var(--brand-blue)" }}>
+              <img src={heroImages.quemSomos} alt="Biblioteca comunitária" className="h-full w-full object-cover" />
             </div>
-            <span className="absolute -bottom-3 -left-3 h-16 w-16 rounded-2xl" style={{ backgroundColor: "var(--brand-pink)" }} />
-            <span className="absolute -top-3 right-6 h-10 w-10 rounded-full" style={{ backgroundColor: "var(--brand-yellow)" }} />
+            <span aria-hidden className="absolute -bottom-3 -left-3 h-14 w-14 rounded-2xl" style={{ backgroundColor: "var(--brand-pink)" }} />
+            <span aria-hidden className="absolute -top-3 right-6 h-10 w-10 rounded-full" style={{ backgroundColor: "var(--brand-yellow)" }} />
           </div>
           <div>
             <h2 className="font-display text-3xl font-bold text-foreground">
@@ -171,65 +166,120 @@ function Home() {
               Nossas ações reúnem crianças, jovens, adultos, famílias, educadores e voluntários
               em torno da experiência de ler, escutar, contar e criar histórias.
             </p>
-            <Link to="/quem-somos/nossa-historia" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+            <Link to="/quem-somos" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
               Conheça nossa história <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* INDICADORES */}
+      {/* INDICADORES — cada um com formato diferente */}
       <section className="bg-white">
         <div className="mx-auto max-w-[1280px] px-4 py-14">
           <div className="max-w-2xl">
-            <h2 className="font-display text-3xl font-bold">Nosso alcance</h2>
-            <p className="mt-2 text-muted-foreground">Indicadores demonstrativos, editáveis pelo painel administrativo.</p>
+            <div className="text-xs font-semibold uppercase tracking-widest text-primary">Nosso alcance</div>
+            <h2 className="mt-2 font-display text-3xl font-bold">Indicadores em páginas soltas</h2>
+            <p className="mt-2 text-muted-foreground">Números demonstrativos, editáveis pelo painel administrativo.</p>
           </div>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              { icon: BookOpen, label: "Livros disponíveis", value: "Indicador editável", color: "var(--brand-blue)" },
-              { icon: Users, label: "Leitores cadastrados", value: "Indicador editável", color: "var(--brand-green)" },
-              { icon: BookMarked, label: "Empréstimos realizados", value: "Indicador editável", color: "var(--brand-orange)" },
-              { icon: Sparkles, label: "Atividades culturais", value: "Indicador editável", color: "var(--brand-red)" },
-              { icon: Heart, label: "Pessoas atendidas", value: "Indicador editável", color: "var(--brand-pink)" },
-              { icon: Handshake, label: "Comunidades alcançadas", value: "Indicador editável", color: "var(--brand-purple)" },
-            ].map(({ icon: Icon, label, value, color }) => (
-              <div key={label} className="rounded-2xl border border-border bg-white p-5 shadow-sm">
-                <div className="grid h-10 w-10 place-items-center rounded-xl text-white" style={{ backgroundColor: color }}>
-                  <Icon className="h-5 w-5" />
-                </div>
-                <div className="mt-3 font-display text-lg font-bold">{value}</div>
-                <div className="text-sm font-semibold text-foreground">{label}</div>
-                <p className="mt-1 text-xs text-muted-foreground">Informação a ser cadastrada.</p>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {/* 1 — Página com canto dobrado */}
+            <div className="relative overflow-hidden rounded-2xl bg-white p-6 shadow-md" style={{ border: "2px solid var(--brand-blue)" }}>
+              <div aria-hidden className="absolute right-0 top-0 h-0 w-0 border-b-[40px] border-l-[40px] border-b-transparent" style={{ borderLeftColor: "var(--brand-blue)" }} />
+              <BookOpen className="h-8 w-8" style={{ color: "var(--brand-blue)" }} />
+              <div className="mt-3 font-display text-3xl font-black" style={{ color: "var(--brand-blue)" }}>+2.400</div>
+              <div className="mt-1 text-sm font-semibold">Livros disponíveis</div>
+              <div className="mt-3 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">Página 01</div>
+            </div>
+            {/* 2 — Marcador grande */}
+            <div className="relative flex overflow-hidden rounded-2xl bg-[var(--surface)] shadow-md">
+              <div aria-hidden className="relative w-14 shrink-0" style={{ backgroundColor: "var(--brand-green)" }}>
+                <div className="absolute inset-x-0 bottom-0 h-6" style={{ backgroundColor: "var(--brand-green)", clipPath: "polygon(0 0, 100% 0, 100% 100%, 50% 60%, 0 100%)" }} />
+                <Users className="absolute top-4 left-1/2 h-6 w-6 -translate-x-1/2 text-white" />
               </div>
-            ))}
+              <div className="flex-1 p-6">
+                <div className="font-display text-3xl font-black" style={{ color: "var(--brand-green)" }}>+850</div>
+                <div className="mt-1 text-sm font-semibold">Leitores cadastrados</div>
+                <div className="mt-2 text-xs text-muted-foreground">Comunidade que já retirou livros no acervo.</div>
+              </div>
+            </div>
+            {/* 3 — Moldura de livro */}
+            <div className="relative overflow-hidden rounded-lg bg-white p-6 shadow-md" style={{ borderTop: "8px solid var(--brand-orange)", borderBottom: "8px solid var(--brand-orange)" }}>
+              <BookMarked className="h-8 w-8" style={{ color: "var(--brand-orange)" }} />
+              <div className="mt-3 font-display text-3xl font-black" style={{ color: "var(--brand-orange)" }}>+3.100</div>
+              <div className="mt-1 text-sm font-semibold">Empréstimos realizados</div>
+              <div className="mt-3 h-px w-full border-t border-dashed" style={{ borderColor: "var(--brand-orange)" }} />
+              <div className="mt-2 text-xs text-muted-foreground">Livros que já saíram para leitura.</div>
+            </div>
+            {/* 4 — Círculo + bloco sobreposto */}
+            <div className="relative overflow-hidden rounded-2xl bg-white p-6 shadow-md border border-border">
+              <div aria-hidden className="absolute -right-8 -top-8 h-32 w-32 rounded-full" style={{ backgroundColor: "var(--brand-red)", opacity: 0.15 }} />
+              <div className="relative">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl text-white shadow-md" style={{ backgroundColor: "var(--brand-red)" }}>
+                  <Sparkles className="h-6 w-6" />
+                </div>
+                <div className="mt-4 font-display text-3xl font-black" style={{ color: "var(--brand-red)" }}>+180</div>
+                <div className="mt-1 text-sm font-semibold">Atividades culturais</div>
+              </div>
+            </div>
+            {/* 5 — Duas camadas (ficha) */}
+            <div className="relative">
+              <div aria-hidden className="absolute -inset-1 rounded-2xl" style={{ backgroundColor: "var(--brand-pink)", opacity: 0.3 }} />
+              <div className="relative rounded-2xl bg-white p-6 shadow-md border border-border">
+                <Heart className="h-8 w-8" style={{ color: "var(--brand-pink)" }} />
+                <div className="mt-3 font-display text-3xl font-black" style={{ color: "var(--brand-pink)" }}>+5.000</div>
+                <div className="mt-1 text-sm font-semibold">Pessoas atendidas</div>
+              </div>
+            </div>
+            {/* 6 — Card lombada */}
+            <div className="relative flex overflow-hidden rounded-r-2xl rounded-l-md bg-white shadow-md" style={{ borderRight: "1px solid var(--border)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
+              <div aria-hidden className="w-4 shrink-0" style={{ backgroundColor: "var(--brand-purple)" }} />
+              <div className="flex-1 p-6">
+                <Handshake className="h-8 w-8" style={{ color: "var(--brand-purple)" }} />
+                <div className="mt-3 font-display text-3xl font-black" style={{ color: "var(--brand-purple)" }}>+25</div>
+                <div className="mt-1 text-sm font-semibold">Comunidades alcançadas</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* COMO A LEITURA SE TRANSFORMA EM IMPACTO */}
+      {/* COMO A LEITURA SE TRANSFORMA EM IMPACTO — sequência editorial */}
       <section className="bg-[var(--surface)]">
         <div className="mx-auto max-w-[1280px] px-4 py-14">
           <div className="max-w-2xl">
-            <h2 className="font-display text-3xl font-bold">Como a leitura se transforma em impacto</h2>
-            <p className="mt-2 text-muted-foreground">Um caminho que começa no acesso aos livros e se estende à participação cultural da comunidade.</p>
+            <div className="text-xs font-semibold uppercase tracking-widest text-primary">Nossa narrativa</div>
+            <h2 className="mt-2 font-display text-3xl font-bold">Como a leitura se transforma em impacto</h2>
+            <p className="mt-2 text-muted-foreground">Um caminho em quatro capítulos — do livro na estante ao leitor no mundo.</p>
           </div>
-          <ol className="relative mt-10 grid gap-6 md:grid-cols-4">
-            {[
-              { n: 1, title: "Acervo acessível", desc: "Organização e disponibilização gratuita de livros para a comunidade.", color: "var(--brand-blue)" },
-              { n: 2, title: "Livros adequados", desc: "Seleção de obras para diferentes faixas etárias, interesses e necessidades.", color: "var(--brand-green)" },
-              { n: 3, title: "Mediação de leitura", desc: "Atividades que aproximam leitores, histórias, educadores e comunidade.", color: "var(--brand-orange)" },
-              { n: 4, title: "Novas possibilidades", desc: "Autonomia, imaginação, repertório e participação cultural.", color: "var(--brand-pink)" },
-            ].map((s) => (
-              <li key={s.n} className="relative rounded-2xl border border-border bg-white p-5">
-                <span className="grid h-10 w-10 place-items-center rounded-xl font-display text-lg font-bold text-white" style={{ backgroundColor: s.color }}>
-                  {s.n}
-                </span>
-                <h3 className="mt-3 font-display text-lg font-semibold">{s.title}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{s.desc}</p>
-              </li>
-            ))}
-          </ol>
+          <div className="relative mt-10">
+            {/* linha conectora */}
+            <div aria-hidden className="absolute left-0 right-0 top-16 hidden h-0.5 border-t-2 border-dashed lg:block" style={{ borderColor: "var(--brand-blue)" }} />
+            <ol className="relative grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {[
+                { n: 1, title: "Acervo acessível", desc: "Organização e disponibilização gratuita de livros para a comunidade.", color: "var(--brand-blue)", icon: Library },
+                { n: 2, title: "Livros adequados", desc: "Seleção de obras para diferentes faixas etárias, interesses e necessidades.", color: "var(--brand-green)", icon: Bookmark },
+                { n: 3, title: "Mediação de leitura", desc: "Atividades que aproximam leitores, histórias, educadores e comunidade.", color: "var(--brand-orange)", icon: MessagesSquare },
+                { n: 4, title: "Novas possibilidades", desc: "Autonomia, imaginação, repertório e participação cultural.", color: "var(--brand-pink)", icon: Sparkles },
+              ].map((st) => (
+                <li key={st.n} className="relative">
+                  {/* numero em círculo grande sobre o card */}
+                  <div className="relative z-10 mx-auto grid h-12 w-12 place-items-center rounded-full text-white shadow-lg ring-4 ring-[var(--surface)] font-display text-lg font-black" style={{ backgroundColor: st.color }}>
+                    {st.n}
+                  </div>
+                  <div className="relative -mt-6 rounded-2xl bg-white p-6 pt-10 shadow-md" style={{ border: `2px solid ${st.color}` }}>
+                    {/* lombada no topo */}
+                    <div aria-hidden className="absolute inset-x-6 top-0 h-1.5 rounded-b-full" style={{ backgroundColor: st.color }} />
+                    <div className="grid h-10 w-10 place-items-center rounded-lg text-white" style={{ backgroundColor: st.color }}>
+                      <st.icon className="h-5 w-5" />
+                    </div>
+                    <div className="mt-3 text-[10px] font-mono uppercase tracking-widest" style={{ color: st.color }}>Capítulo {String(st.n).padStart(2, "0")}</div>
+                    <h3 className="mt-1 font-display text-lg font-bold">{st.title}</h3>
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{st.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </section>
 
