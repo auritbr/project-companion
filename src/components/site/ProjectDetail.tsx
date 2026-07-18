@@ -109,18 +109,22 @@ export function ProjectDetail({ slug }: { slug: ProjectSlug }) {
             </div>
           </div>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {project.objectives.map((o, i) => (
-              <div key={o} className="group relative overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-                <div aria-hidden className="absolute left-0 top-0 h-full w-1.5" style={{ backgroundColor: project.accent }} />
-                <div className="pl-2">
-                  <div className="grid h-9 w-9 place-items-center rounded-lg text-white" style={{ backgroundColor: project.accent }}>
-                    <Target className="h-4 w-4" />
+            {project.objectives.map((o, i) => {
+              const pool = ["var(--brand-blue)","var(--brand-orange)","var(--brand-green)","var(--brand-red)","var(--brand-purple)","var(--brand-pink)"];
+              const c = pool[i % pool.length];
+              return (
+                <div key={o} className="group relative overflow-hidden rounded-2xl bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-lg" style={{ border: `2px solid ${c}` }}>
+                  {/* canto de página dobrado */}
+                  <div aria-hidden className="absolute right-0 top-0 h-0 w-0 border-b-[28px] border-l-[28px] border-b-transparent" style={{ borderLeftColor: c }} />
+                  <div className="grid h-10 w-10 place-items-center rounded-lg text-white shadow-sm" style={{ backgroundColor: c }}>
+                    <Target className="h-5 w-5" />
                   </div>
-                  <div className="mt-3 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Objetivo {i + 1}</div>
-                  <p className="mt-1 text-sm font-medium leading-relaxed">{o}</p>
+                  <div className="mt-3 font-display text-xl font-black" style={{ color: c }}>{String(i + 1).padStart(2, "0")}</div>
+                  <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Objetivo</div>
+                  <p className="mt-2 text-sm font-medium leading-relaxed">{o}</p>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
