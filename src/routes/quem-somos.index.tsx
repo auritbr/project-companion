@@ -101,12 +101,12 @@ function QuemSomos() {
                 </a>
               </div>
             </div>
-            <div className="relative">
-              <div aria-hidden className="absolute -left-4 -top-4 h-24 w-24 rounded-2xl" style={{ backgroundColor: "var(--brand-orange)", opacity: 0.15 }} />
-              <div aria-hidden className="absolute -bottom-4 -right-4 h-28 w-28 rounded-2xl" style={{ backgroundColor: "var(--brand-blue)", opacity: 0.15 }} />
-              <div className="relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
-                <img src={heroImages.nossaHistoria} alt="Livros e leitores da biblioteca comunitária" className="aspect-[4/5] w-full object-cover" />
-                <div className="absolute bottom-4 left-4 rounded-lg bg-white/95 px-3 py-2 text-xs shadow">
+            <div className="relative mx-auto w-full max-w-[320px]">
+              <div aria-hidden className="absolute -left-3 -top-3 h-16 w-16 rounded-2xl" style={{ backgroundColor: "var(--brand-orange)", opacity: 0.2 }} />
+              <div aria-hidden className="absolute -bottom-3 -right-3 h-20 w-20 rounded-2xl" style={{ backgroundColor: "var(--brand-blue)", opacity: 0.2 }} />
+              <div className="relative overflow-hidden rounded-2xl border-2 bg-white shadow-lg" style={{ borderColor: "var(--brand-blue)" }}>
+                <img src={heroImages.nossaHistoria} alt="Livros e leitores da biblioteca comunitária" className="aspect-[3/4] w-full object-cover" />
+                <div className="absolute bottom-3 left-3 rounded-lg bg-white/95 px-2.5 py-1.5 text-[10px] shadow">
                   <div className="font-semibold text-primary">Ponto de Cultura</div>
                   <div className="text-muted-foreground">Biblioteca comunitária</div>
                 </div>
