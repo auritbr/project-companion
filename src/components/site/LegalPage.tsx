@@ -1,9 +1,10 @@
 import { PageHero } from "./PageHero";
+import { heroImages } from "../../lib/site-data";
 
 export function LegalPage({ title, breadcrumb, sections }: { title: string; breadcrumb: string; sections: { heading: string; body: string[] }[] }) {
   return (
     <>
-      <PageHero title={title} description="Conteúdo demonstrativo — será revisado e substituído por texto jurídico definitivo." breadcrumbs={[{ label: breadcrumb }]} />
+      <PageHero title={title} breadcrumbs={[{ label: breadcrumb }]} image={heroImages.legal} />
       <section className="bg-white">
         <div className="mx-auto max-w-[820px] px-4 py-12">
           <div className="rounded-2xl border border-border bg-white p-6 md:p-10">
