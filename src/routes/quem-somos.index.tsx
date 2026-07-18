@@ -367,41 +367,65 @@ function QuemSomos() {
         </div>
       </section>
 
+      {/* CTA final — livro aberto encerrando a leitura */}
       <section className="bg-white">
-        <div className="mx-auto max-w-[1280px] px-4 py-14">
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-[var(--surface)] to-white p-8 md:p-12">
-            <div aria-hidden className="absolute -right-16 -top-16 h-64 w-64 rounded-full" style={{ backgroundColor: "var(--brand-orange)", opacity: 0.1 }} />
-            <div aria-hidden className="absolute -bottom-20 -left-10 h-56 w-56 rounded-full" style={{ backgroundColor: "var(--brand-blue)", opacity: 0.1 }} />
-            <div className="relative grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-semibold text-primary shadow-sm">
-                  <BookMarked className="h-3.5 w-3.5" /> Faça parte
+        <div className="mx-auto max-w-[1280px] px-4 py-16">
+          <div className="relative">
+            <div aria-hidden className="absolute -bottom-3 left-6 right-6 h-6 rounded-full bg-black/15 blur-2xl" />
+            <div className="relative rounded-[28px] p-2 shadow-2xl" style={{ background: "linear-gradient(135deg, var(--brand-blue) 0%, oklch(0.30 0.05 260) 100%)" }}>
+              <div className="relative overflow-hidden rounded-[20px] bg-[oklch(0.985_0.005_85)]">
+                <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "repeating-linear-gradient(0deg, #000 0 1px, transparent 1px 24px)" }} />
+                <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-8 -translate-x-1/2 md:block" style={{ background: "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.12) 45%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.12) 55%, transparent 100%)" }} />
+                <div className="grid md:grid-cols-2">
+                  {/* Página esquerda — mensagem */}
+                  <div className="p-8 md:p-12 md:pr-14">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] shadow-sm" style={{ color: "var(--brand-blue)" }}>
+                      <BookMarked className="h-3.5 w-3.5" /> Última página
+                    </div>
+                    <h2 className="mt-4 font-display text-3xl font-black leading-tight md:text-4xl">
+                      Cada página desta história continua sendo escrita <span style={{ color: "var(--brand-red)" }}>com a comunidade</span>
+                    </h2>
+                    <div aria-hidden className="mt-4 h-1 w-16 rounded-full" style={{ backgroundColor: "var(--brand-blue)" }} />
+                    <p className="mt-5 max-w-md text-muted-foreground leading-relaxed">
+                      A biblioteca segue viva por meio de leitores, parceiros, projetos e encontros que fortalecem
+                      o território.
+                    </p>
+                    <div className="mt-7 flex flex-wrap gap-3">
+                      <Link to="/projetos" className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-md hover:brightness-110" style={{ backgroundColor: "var(--brand-blue)" }}>
+                        Conheça os projetos <ArrowRight className="h-4 w-4" />
+                      </Link>
+                      <Link to="/como-doar" className="inline-flex items-center gap-2 rounded-full border-2 bg-white px-5 py-3 text-sm font-semibold hover:bg-muted" style={{ borderColor: "var(--brand-red)", color: "var(--brand-red)" }}>
+                        <Heart className="h-4 w-4" /> Apoie a biblioteca
+                      </Link>
+                    </div>
+                    <div aria-hidden className="mt-10 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/60">— fim do capítulo —</div>
+                  </div>
+                  {/* Página direita — estante */}
+                  <div className="relative min-h-[300px] md:min-h-[440px] p-6 md:p-10">
+                    <div className="absolute inset-4 md:inset-6 overflow-hidden rounded-xl bg-gradient-to-br from-[var(--surface)] to-white">
+                      {/* estante */}
+                      <div className="flex h-full flex-col justify-end gap-3 p-5">
+                        {[
+                          [{ c: "var(--brand-blue)", w: 30, h: 100 }, { c: "var(--brand-orange)", w: 22, h: 120 }, { c: "var(--brand-green)", w: 26, h: 90 }, { c: "var(--brand-red)", w: 20, h: 130 }, { c: "var(--brand-yellow)", w: 28, h: 110 }, { c: "var(--brand-purple)", w: 24, h: 105 }],
+                          [{ c: "var(--brand-red)", w: 26, h: 110 }, { c: "var(--brand-blue)", w: 22, h: 130 }, { c: "var(--brand-pink)", w: 30, h: 95 }, { c: "var(--brand-green)", w: 24, h: 120 }, { c: "var(--brand-orange)", w: 28, h: 100 }],
+                        ].map((row, r) => (
+                          <div key={r}>
+                            <div className="flex items-end gap-1.5">
+                              {row.map((b, i) => (
+                                <div key={i} className="relative rounded-t-md shadow-md" style={{ backgroundColor: b.c, width: b.w, height: b.h }}>
+                                  <div className="absolute inset-x-1 top-2 h-0.5 rounded-full bg-white/40" />
+                                  <div className="absolute inset-x-1 top-4 h-0.5 rounded-full bg-white/30" />
+                                </div>
+                              ))}
+                            </div>
+                            <div aria-hidden className="mt-0 h-2 rounded-sm shadow-inner" style={{ backgroundColor: "oklch(0.55 0.08 40)" }} />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div aria-hidden className="absolute bottom-4 right-6 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/60">— estante viva —</div>
+                  </div>
                 </div>
-                <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">Uma biblioteca viva se constrói com a comunidade</h2>
-                <p className="mt-4 max-w-xl text-muted-foreground">
-                  Conheça nossos projetos, acompanhe nossas ações e descubra como apoiar este espaço de leitura,
-                  cultura e encontro.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Link to="/projetos/leitura-em-comunidade" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-sm hover:brightness-110">
-                    Conheça os projetos <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <Link to="/como-doar" className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-semibold hover:bg-muted">
-                    Como apoiar
-                  </Link>
-                </div>
-              </div>
-              <div aria-hidden className="hidden items-end justify-center gap-1 md:flex">
-                {[
-                  { c: "var(--brand-blue)", h: 120 },
-                  { c: "var(--brand-orange)", h: 150 },
-                  { c: "var(--brand-green)", h: 110 },
-                  { c: "var(--brand-red)", h: 160 },
-                  { c: "var(--brand-yellow)", h: 130 },
-                  { c: "var(--brand-purple)", h: 145 },
-                ].map((b, i) => (
-                  <div key={i} className="rounded-t-md shadow-sm" style={{ backgroundColor: b.c, height: b.h, width: 22 }} />
-                ))}
               </div>
             </div>
           </div>
