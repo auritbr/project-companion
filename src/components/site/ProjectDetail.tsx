@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHero } from "./PageHero";
-import { projects, projectImages, news, type ProjectSlug } from "../../lib/site-data";
+import { projects, projectImages, type ProjectSlug } from "../../lib/site-data";
 import {
   ArrowRight, Users, MapPin, ChevronLeft, ChevronRight, X,
   BookOpen, Target, Sparkles, Compass, BookMarked, Heart, MessageCircle,
@@ -64,7 +64,7 @@ export function ProjectDetail({ slug }: { slug: ProjectSlug }) {
       {/* Apresentação */}
       <section className="bg-white">
         <div className="mx-auto max-w-[1280px] px-4 py-12">
-          <div className="grid gap-10 md:grid-cols-[1.1fr_1fr] md:items-center">
+          <div className="grid gap-10 md:grid-cols-[1.6fr_1fr] md:items-center">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-border bg-[var(--surface)] px-3 py-1 text-xs font-semibold" style={{ color: project.accent }}>
                 <BookMarked className="h-3.5 w-3.5" /> {project.category}
@@ -87,11 +87,11 @@ export function ProjectDetail({ slug }: { slug: ProjectSlug }) {
                 </div>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative mx-auto w-full max-w-[360px] md:max-w-none">
               <div aria-hidden className="absolute -left-4 -top-4 h-24 w-24 rounded-2xl" style={{ backgroundColor: project.accent, opacity: 0.18 }} />
               <div aria-hidden className="absolute -bottom-4 -right-4 h-28 w-28 rounded-2xl" style={{ backgroundColor: "var(--brand-orange)", opacity: 0.15 }} />
               <div className="relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
-                <img src={projectImages[project.slug]} alt="" className="aspect-[4/5] w-full object-cover" />
+                <img src={projectImages[project.slug]} alt="" className="aspect-[3/4] w-full object-cover" />
                 <div aria-hidden className="absolute left-0 top-0 h-full w-2" style={{ backgroundColor: project.accent }} />
               </div>
             </div>
@@ -302,17 +302,6 @@ export function ProjectDetail({ slug }: { slug: ProjectSlug }) {
             </div>
           </div>
 
-          <div className="mt-8">
-            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Notícias relacionadas</div>
-            <div className="mt-4 grid gap-4 md:grid-cols-3">
-              {news.slice(0, 3).map((n) => (
-                <Link key={n.slug} to={`/noticias/${n.slug}`} className="group overflow-hidden rounded-xl border border-border bg-white p-4 transition hover:shadow-md">
-                  <div className="text-xs text-muted-foreground">{n.tag} · {n.date}</div>
-                  <div className="mt-1 font-display text-sm font-semibold group-hover:text-primary">{n.title}</div>
-                </Link>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
