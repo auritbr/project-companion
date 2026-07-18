@@ -20,7 +20,15 @@ function NotFoundComponent() {
     <>
       <Header />
       <main className="mx-auto flex min-h-[60vh] max-w-[1280px] flex-col items-center justify-center px-4 py-20 text-center">
-        <div className="text-6xl font-display font-bold text-primary">404</div>
+        <div aria-hidden className="flex items-end justify-center gap-1.5">
+          <div className="h-24 w-6 rounded-t-md bg-[var(--brand-blue)]" />
+          <div className="h-32 w-7 rounded-t-md bg-[var(--brand-orange)]" />
+          <div className="h-20 w-6 rounded-t-md bg-[var(--brand-pink)] opacity-40" />
+          <div className="h-28 w-6 rounded-t-md bg-[var(--brand-green)] opacity-40" />
+          <div className="h-24 w-7 rounded-t-md bg-[var(--brand-purple)]" />
+        </div>
+        <div aria-hidden className="mx-auto -mt-px h-2 w-64 rounded-sm bg-[oklch(0.55_0.08_60)]" />
+        <div className="mt-6 text-5xl font-display font-bold text-primary">404</div>
         <h1 className="mt-3 font-display text-2xl font-bold text-foreground">
           Esta página não foi encontrada em nossa estante.
         </h1>
