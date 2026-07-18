@@ -1,78 +1,58 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
 import { PageHero } from "../components/site/PageHero";
-import { projects, projectImages, heroImages } from "../lib/site-data";
-import { ArrowRight } from "lucide-react";
+import { projects, projectImages } from "../lib/site-data";
+import { ArrowRight, BookMarked } from "lucide-react";
 
 export const Route = createFileRoute("/projetos/")({
   component: Projetos,
   head: () => ({
     meta: [
       { title: "Projetos — Biblioteca Comunitária" },
-      { name: "description", content: "Conheça os projetos da biblioteca comunitária: leitura, formação, circulação de livros e ações culturais." },
+      { name: "description", content: "Frentes de atuação da biblioteca comunitária: leitura, formação e circulação de livros." },
     ],
     links: [{ rel: "canonical", href: "/projetos" }],
   }),
 });
 
-const filters = ["todos","leitura","formação","circulação de livros","oficinas","comunidade","projetos em andamento","projetos concluídos"];
-
 function Projetos() {
-  const [filter, setFilter] = useState("todos");
-  const items = useMemo(() => {
-    if (filter === "todos") return projects;
-    if (filter === "projetos em andamento") return projects.filter((p) => p.status === "Em andamento");
-    if (filter === "projetos concluídos") return projects.filter((p) => p.status === "Concluído");
-    return projects.filter((p) => p.category.toLowerCase().includes(filter));
-  }, [filter]);
-
   return (
     <>
-      <PageHero title="Nossos Projetos" breadcrumbs={[{ label: "Projetos" }]} image={heroImages.projetos} />
+      <PageHero title="Projetos" breadcrumbs={[{ label: "Projetos" }]} />
 
       <section className="bg-white">
-        <div className="mx-auto max-w-[1280px] px-4 py-10">
-          <div className="flex flex-wrap gap-2">
-            {filters.map((f) => (
-              <button key={f} onClick={() => setFilter(f)} className={`rounded-full border px-4 py-2 text-sm capitalize ${filter === f ? "border-primary bg-primary text-primary-foreground" : "border-border bg-white hover:bg-muted"}`}>{f}</button>
-            ))}
+        <div className="mx-auto max-w-[1080px] px-4 py-12 text-center">
+          <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-border bg-[var(--surface)] px-3 py-1 text-xs font-semibold text-primary">
+            <BookMarked className="h-3.5 w-3.5" /> Frentes de atuação
           </div>
-
-          <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {items.map((p) => (
-              <article key={p.slug} className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
-                <div className="relative aspect-[4/3] overflow-hidden" style={{ backgroundColor: p.accent }}>
-                  <img src={projectImages[p.slug]} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
-                  <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold">{p.category}</span>
-                  <span className="absolute right-4 top-4 rounded-full bg-black/60 px-3 py-1 text-xs font-semibold text-white">{p.status}</span>
-                </div>
-                <div className="p-5">
-                  <h3 className="font-display text-xl font-bold">{p.name}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{p.summary}</p>
-                  <div className="mt-3 grid gap-1 text-xs text-muted-foreground">
-                    <div><span className="font-semibold text-foreground">Público:</span> {p.audience}</div>
-                    <div><span className="font-semibold text-foreground">Período:</span> {p.period}</div>
-                  </div>
-                  <Link to={`/projetos/${p.slug}`} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">Ver projeto <ArrowRight className="h-4 w-4" /></Link>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          {items.length === 0 && (
-            <div className="mt-10 rounded-2xl border border-dashed border-border bg-[var(--surface)] p-10 text-center text-muted-foreground">Nenhum projeto encontrado para este filtro.</div>
-          )}
+          <h2 className="mt-4 font-display text-3xl font-bold">Três frentes que sustentam a biblioteca viva</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
+            Cada projeto é uma página do nosso trabalho comunitário — leitura compartilhada, cuidado com o acervo
+            e formação literária caminham juntos para aproximar pessoas dos livros.
+          </p>
         </div>
-      </section>
 
-      <section className="bg-[var(--surface)]">
-        <div className="mx-auto max-w-[1280px] px-4 py-14">
-          <div className="rounded-3xl bg-white border border-border p-8 md:p-10 md:flex md:items-center md:justify-between md:gap-8">
-            <div>
-              <h2 className="font-display text-2xl font-bold">Vamos construir parcerias?</h2>
-              <p className="mt-2 max-w-xl text-muted-foreground">Convidamos instituições, empresas e pessoas da comunidade a desenvolver parcerias que ampliem o acesso à leitura e à cultura.</p>
-            </div>
-            <Link to="/contato" className="mt-4 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground md:mt-0">Entrar em contato <ArrowRight className="h-4 w-4" /></Link>
+        <div className="mx-auto max-w-[1280px] px-4 pb-16">
+          <div className="grid gap-6 md:grid-cols-3">
+            {projects.map((p) => (
+              <Link
+                key={p.slug}
+                to={`/projetos/${p.slug}`}
+                className="group relative overflow-hidden rounded-2xl border border-border bg-white transition hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div aria-hidden className="absolute left-0 top-0 h-full w-1.5" style={{ backgroundColor: p.accent }} />
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img src={projectImages[p.slug]} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                </div>
+                <div className="p-6">
+                  <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: p.accent }}>{p.category}</div>
+                  <h3 className="mt-1 font-display text-xl font-bold">{p.name}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground line-clamp-3">{p.summary}</p>
+                  <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                    Conheça o projeto <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
