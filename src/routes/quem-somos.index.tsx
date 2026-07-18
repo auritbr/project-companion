@@ -124,19 +124,60 @@ function QuemSomos() {
             <h2 className="mt-2 font-display text-3xl font-bold">Indicadores de impacto</h2>
             <p className="mt-2 text-muted-foreground">Números demonstrativos — serão atualizados pelo painel administrativo.</p>
           </div>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {indicators.map((k) => (
-              <div key={k.label} className="relative overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm">
-                <div aria-hidden className="absolute -right-6 -top-6 h-20 w-20 rounded-full" style={{ backgroundColor: k.color, opacity: 0.12 }} />
-                <div className="relative">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl text-white" style={{ backgroundColor: k.color }}>
-                    <k.icon className="h-6 w-6" />
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {indicators.map((k, i) => {
+              // 4 formatos diferentes
+              if (i === 0) {
+                // Página com canto dobrado
+                return (
+                  <div key={k.label} className="relative overflow-hidden rounded-2xl bg-white p-5 shadow-md" style={{ border: `2px solid ${k.color}` }}>
+                    <div aria-hidden className="absolute right-0 top-0 h-0 w-0 border-b-[36px] border-l-[36px] border-b-transparent" style={{ borderLeftColor: k.color }} />
+                    <k.icon className="h-8 w-8" style={{ color: k.color }} />
+                    <div className="mt-3 font-display text-xl font-black" style={{ color: k.color }}>{k.value}</div>
+                    <div className="text-sm font-semibold">{k.label}</div>
                   </div>
-                  <div className="mt-3 font-display text-2xl font-bold">{k.value}</div>
-                  <div className="text-sm font-semibold text-foreground">{k.label}</div>
+                );
+              }
+              if (i === 1) {
+                // Marcador grande
+                return (
+                  <div key={k.label} className="relative flex overflow-hidden rounded-2xl bg-white shadow-md border border-border">
+                    <div aria-hidden className="relative w-14 shrink-0" style={{ backgroundColor: k.color }}>
+                      <div className="absolute inset-x-0 bottom-0 h-6" style={{ backgroundColor: k.color, clipPath: "polygon(0 0, 100% 0, 100% 100%, 50% 60%, 0 100%)" }} />
+                      <k.icon className="absolute top-4 left-1/2 h-6 w-6 -translate-x-1/2 text-white" />
+                    </div>
+                    <div className="flex-1 p-5">
+                      <div className="font-display text-xl font-black" style={{ color: k.color }}>{k.value}</div>
+                      <div className="mt-1 text-sm font-semibold">{k.label}</div>
+                    </div>
+                  </div>
+                );
+              }
+              if (i === 2) {
+                // Moldura de livro (top/bottom)
+                return (
+                  <div key={k.label} className="relative bg-white p-5 shadow-md" style={{ borderTop: `8px solid ${k.color}`, borderBottom: `8px solid ${k.color}` }}>
+                    <k.icon className="h-8 w-8" style={{ color: k.color }} />
+                    <div className="mt-3 font-display text-xl font-black" style={{ color: k.color }}>{k.value}</div>
+                    <div className="text-sm font-semibold">{k.label}</div>
+                    <div className="mt-3 h-px border-t border-dashed" style={{ borderColor: k.color }} />
+                  </div>
+                );
+              }
+              // Círculo + bloco sobreposto
+              return (
+                <div key={k.label} className="relative overflow-hidden rounded-2xl bg-white p-5 shadow-md border border-border">
+                  <div aria-hidden className="absolute -right-8 -top-8 h-28 w-28 rounded-full" style={{ backgroundColor: k.color, opacity: 0.18 }} />
+                  <div className="relative">
+                    <div className="grid h-12 w-12 place-items-center rounded-2xl text-white shadow-md" style={{ backgroundColor: k.color }}>
+                      <k.icon className="h-6 w-6" />
+                    </div>
+                    <div className="mt-4 font-display text-xl font-black" style={{ color: k.color }}>{k.value}</div>
+                    <div className="text-sm font-semibold">{k.label}</div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
