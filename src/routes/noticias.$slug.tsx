@@ -107,13 +107,13 @@ function NoticiaDetalhe() {
           <div className="mt-6 grid gap-6 md:grid-cols-3">
             {related.map((n) => (
               <article key={n.slug} className="overflow-hidden rounded-2xl border border-border bg-white">
-                <Link to={`/noticias/${n.slug}`} className="block aspect-[16/10] overflow-hidden bg-[oklch(0.94_0.02_240)]">
+                <Link to="/noticias/$slug" params={{ slug: n.slug }} className="block aspect-[16/10] overflow-hidden bg-[oklch(0.94_0.02_240)]">
                   <img src={n.image} alt="" loading="lazy" className="h-full w-full object-cover" />
                 </Link>
                 <div className="p-5">
                   <div className="text-xs text-muted-foreground">{n.tag} · {n.date}</div>
                   <h3 className="mt-2 font-display text-base font-semibold">{n.title}</h3>
-                  <Link to={`/noticias/${n.slug}`} className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">Leia mais <ArrowRight className="h-4 w-4" /></Link>
+                  <Link to="/noticias/$slug" params={{ slug: n.slug }} className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">Leia mais <ArrowRight className="h-4 w-4" /></Link>
                 </div>
               </article>
             ))}
