@@ -62,7 +62,7 @@ function Noticias() {
             <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {pageItems.map((n) => (
                 <article key={n.slug} className="overflow-hidden rounded-2xl border border-border bg-white">
-                  <Link to={`/noticias/${n.slug}`} className="block aspect-[16/10] overflow-hidden bg-[oklch(0.94_0.02_240)]">
+                  <Link to="/noticias/$slug" params={{ slug: n.slug }} className="block aspect-[16/10] overflow-hidden bg-[oklch(0.94_0.02_240)]">
                     <img src={n.image} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
                   </Link>
                   <div className="p-5">
@@ -72,7 +72,7 @@ function Noticias() {
                     </div>
                     <h3 className="mt-3 font-display text-lg font-semibold">{n.title}</h3>
                     <p className="mt-1 text-sm text-muted-foreground">{n.excerpt}</p>
-                    <Link to={`/noticias/${n.slug}`} className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">Leia mais <ArrowRight className="h-4 w-4" /></Link>
+                    <Link to="/noticias/$slug" params={{ slug: n.slug }} className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">Leia mais <ArrowRight className="h-4 w-4" /></Link>
                   </div>
                 </article>
               ))}

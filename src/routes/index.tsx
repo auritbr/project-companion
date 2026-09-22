@@ -387,7 +387,7 @@ function Home() {
                   </div>
                   <h3 className="mt-3 font-display text-lg font-semibold">{n.title}</h3>
                   <p className="mt-1 text-sm text-muted-foreground">{n.excerpt}</p>
-                  <Link to={`/noticias/${n.slug}`} className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+                  <Link to="/noticias/$slug" params={{ slug: n.slug }} className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
                     Leia mais <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
